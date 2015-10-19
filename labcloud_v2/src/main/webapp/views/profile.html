@@ -1,0 +1,24 @@
+<lab-header></lab-header>
+<div class="container">
+    <div class="info-main-container">
+        <div class="avatar" height="100" width="100">
+            <img ng-src="{{currentUser.iconPath}}"  style="width:100%;height:100%;"/>
+        </div>
+        <div class="name">
+           {{currentUser.name}}
+        </div>
+        <div class="major-group">
+            <span style="color:#e5004f;">{{currentUser.number}}</span>&nbsp;&nbsp;&nbsp;<span style="color:#969696;">{{currentUser.role | role}}</span>
+        </div>
+
+        <div class="btnGroup" style="width: 310px;">
+            <button class="btn cdi-btn-default" ng-file-select ng-file-change="upload($files)">上传新头像
+             </button>
+            <button class="btn cdi-btn-default" ng-click="editProfile()">编辑个人信息</button>
+            <button class="btn cdi-btn-default" ng-click="resetPassword()">修改密码</button>
+        </div>
+    </div>
+
+</div>
+
+<lab-footer></lab-footer>

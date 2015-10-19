@@ -1,0 +1,89 @@
+<div id="pageHeader">
+    <!-- ngIf: isPublic -->
+    <div class="ng-scope">
+        <nav class="navbar manage">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#/home" style="padding-top:5px;">
+                        <img src="images/bg/s-logo.png"></a>
+                </div>
+                <div class="navbar-collapse" style="position:relative;float:left;width:874px;left:70px;">
+                    <ul class="nav navbar-nav">
+                        <li ng-if="currentUser.show_role == 'STUDENT'">
+                            <a ui-sref="student-reservation" class="project" style="padding-right: 15px;">我的实验</a>
+                            <ul style="display: none; height: 179px; padding: 0px 0px 20px; margin: 0px; width: 170px; opacity: 1;">
+                                <li class="main">
+                                    <a href="javascript:void(0);">我的实验</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li ng-if="currentUser.show_role == 'TEACHER'">
+                            <a ui-sref="teacher-reservation" class="lab" style="padding-right: 15px;">课程管理</a>
+                            <ul style="min-width: 200px; display: none; height: 305px; padding: 0px 0px 20px; margin: 0px; width: 200px; opacity: 1;">
+                                <li class="main">
+                                    <a href="javascript:void(0);">课程管理</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li ng-if="currentUser.show_role == 'ADMINISTRATOR'">
+                            <a ui-sref="usermanage" class="lab" style="padding-right: 15px;">系统管理</a>
+                            <ul style="min-width: 200px; display: none; height: 305px; padding: 0px 0px 20px; margin: 0px; width: 200px; opacity: 1;">
+                                <li class="main">
+                                    <a href="javascript:void(0);">系统管理</a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        <li>
+                            <a ui-sref="help" class="project" style="padding-right: 15px;">帮助中心</a>
+                            <ul style="display: none; height: 179px; padding: 0px 0px 20px; margin: 0px; width: 170px; opacity: 1;">
+                                <li class="main">
+                                    <a>帮助中心</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right" style="position:absolute;right:0;top:0;height:9"
+                     ng-if="currentUser != null">
+
+                        <li style="margin-right:0;" ui-sref="message">
+                            <a class="blackLink theme-1">
+                                <span class="label" style="color:#000; margin:0px;padding-top:5px;padding-right:0;">消息中心</span>
+                                <span class="label label-success" style="margin:0px;">0</span>
+                            </a>
+                        </li>
+
+                        <li style="margin-right:0;" lab-collapse >
+                            <img class="avatar" ng-src="{{currentUser.iconPath}}">
+                            <div class="info">
+                                <span class="name">{{currentUser.name}}</span>
+                                <span class="group theme-1">{{currentUser.number}}</span>
+                            </div>
+                            <ul class="collapse-user"
+                                style="display: none; height: 218px; padding: 0px 0px 20px; margin: 0px; width: 175px; opacity: 1;">
+                                <li style="margin:0;height: 60px;padding: 0 15px;">
+                                    <div>
+                                        <img class="avatar" ng-src="{{currentUser.iconPath}}">
+                                        <div class="info">
+                                            <span class="name ng-binding" style="color: #fff;">{{currentUser.name}}</span>
+                                            <span class="group theme-1">{{currentUser.number}}</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a ui-sref="profile" class="theme-1">个人资料</a>
+                                </li>
+                                <li>
+                                    <a ng-click="logout()" class="theme-1">注销</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- end ngIf: isPublic -->
+    <!-- ngIf: isManage -->
+</div>

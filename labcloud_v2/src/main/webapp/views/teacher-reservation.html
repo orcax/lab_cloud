@@ -1,0 +1,351 @@
+<lab-header></lab-header>
+<div class="container">
+    <div class="command-nav-container">
+        <tabset>
+            <tab name="">
+                <tab-heading class="reservation" >
+                    <span class="title">
+                        实验室预约
+                        <!-- <label class="label label-success pull-right" style="margin-top:5px;margin-right:40px;">10</label>
+                    -->
+                </span>
+                <span class="info">管理预约状态</span>
+            </tab-heading>
+            <div class="command-content-container user" style="background-color: #f1f1f1;">
+                <tabset vertical="true" type="pills">
+                    <tab active="true" ng-click="loadCalendar()" ng-if="currentUser.role != 'LAB_TEACHER'">
+                        <tab-heading>
+                            <span class="name">预约实验日程表</span>
+                        </tab-heading>
+                        <div class="tableContainer" style="">
+                            <table class="table">
+                                <thead>
+                                    <tr class="op-tr">
+                                        <th style="width: 15px;"></th>
+                                        <th style="width: 700px;"></th>
+                                        <th style="width: 250px; text-align:right;">
+                                            <button class="btn cdi-btn-default cdi-btn-dark-blue" ng-click="addReservation('class')" style="width:100px;">预约实验 +</button>
+                                        </th>
+
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+
+                        <div class="tableContainer" style="width:900px;">
+                            <table class="table">
+                                <thead>
+                                    <tr class="op-tr">
+                                        <th style="width: 15px;"></th>
+                                        <th style="width: 90px;">
+                                            <input type="checkbox" checked="" readonly="">
+                                            <span class="calendar-label pendding">正在审核</span>
+                                        </th>
+                                        <th style="width: 90px;">
+                                            <input type="checkbox" checked="" readonly="">
+                                            <span class="calendar-label approved">审核通过</span>
+                                        </th>
+                                        <th style="width: 90px;">
+                                            <input type="checkbox" checked="" readonly="">
+                                            <span class="calendar-label rejected">已拒绝的</span>
+                                        </th>
+                                        <th style="width: 525px; text-align:right;"></th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="tableTitle" style="margin-top:20px;">
+
+                            <div class="calendar" ui-calendar="uiConfig.calendar"  ng-model="eventSources" calendar="myCalendar"></div>
+                        </div>
+                    </tab>
+
+                    <tab ng-click="loadLabTeacherCalendar()" ng-if="currentUser.role != 'NOR_TEACHER'">
+                        <tab-heading>
+                            <span class="name">实验课程日程表</span>
+                        </tab-heading>
+                         <div class="tableContainer" style="width:900px;">
+                            <table class="table">
+                                <thead>
+                                    <tr class="op-tr">
+                                        <th style="width: 15px;"></th>
+                                        
+                                        <th style="width: 90px;">
+                                            <input type="checkbox" checked="" readonly="">
+                                            <span class="calendar-label approved">审核通过</span>
+                                        </th>
+                                        <th style="width: 90px;">
+                                            <input type="checkbox" checked="" readonly="">
+                                            <span class="calendar-label rejected">已拒绝的</span>
+                                        </th>
+                                        <th style="width: 525px; text-align:right;"></th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="tableTitle" style="margin-top:20px;">
+                            <div class="calendar" ui-calendar="uiConfig.labTeacherCalendar"  ng-model="labTeacherSources" calendar="myCalendar2"></div>
+                        </div>
+                    </tab>
+                    <tab disabled="true" ng-if="currentUser.role != 'LAB_TEACHER'">
+                        <tab-heading >
+                            <span class="name">我的预约</span>
+                        </tab-heading>
+                    </tab>
+
+                    <tab class="sub"  ng-if="currentUser.role != 'LAB_TEACHER'" ng-click="load('Reservations','PENDING')">
+                        <tab-heading >
+                            <span class="name">未审核预约</span>
+                        </tab-heading>
+                        <div class="tableContainer">
+                            <table class="table ">
+                                <thead>
+                                    <tr class="op-tr">
+                                        <th style="width: 15px;"></th>
+                                        <th style="width: 400px;">
+                                            <!-- <button class="btn cdi-btn-default">取消预约</button>
+                                        -->
+                                    </th>
+                                    <th style="width: 250px;"></th>
+                                    <th></th>
+                                    <th style="width: 10px;"></th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="cdi-pager">
+
+                        <pager total-items="map.Reservations.PENDING.data.totalItemNum" ng-model="map.Reservations.PENDING.data.curPageNum" ng-change="pageChanged('ADMIN')" next-text="下一页" previous-text="上一页" ></pager>
+
+                        <span class="pager-text">
+                            共 {{ map.Reservations.PENDING.data.totalItemNum}} 个预约, &nbsp;当前第 {{ map.Reservations.PENDING.data.curPageNum }} 页  共 {{ map.Reservations.PENDING.data.totalPageNum}}  页
+                        </span>
+
+                    </div>
+                    <div class="tableContainer">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 30px;"></th>
+                                    <th style="width: 90px;">预约号</th>
+                                    <th style="width: 120px;">日期</th>
+                                    <th style="width: 142px;">时间段</th>
+                                    <th style="width: 120px;">实验室</th>
+                                    <th style="width: 150px;">实验任务</th>
+                                    <th style="width: 120px;">状态</th>
+
+                                    <th style="width: 20px;"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="res in map.Reservations.PENDING.data.data">
+                                    <td style="width: 25px; border:none;"></td>
+                                    <td style="width: 90px;">
+                                        <span class="id">{{res.id}}</span>
+                                    </td>
+                                    <td style="width: 120px;">
+                                        <span class="id">{{res.applyDate}}</span>
+                                    </td>
+                                    <td style="width: 133px;">
+                                        <span class="code">{{res.slot.title }}</span>
+                                    </td>
+                                    <td style="width: 120px;">
+                                        <span class="date">{{res.lab.name}}</span>
+                                    </td>
+                                    <td style="width: 150px;">
+                                        <span class="date">{{res.experiment.name}}</span>
+                                    </td>
+                                    <td style="width: 100px;">
+                                        <span class="code">{{res.status | reservationStatus}}</span>
+                                    </td>
+                                    <td style="width: 250px;">
+                                        <button  class="btn cdi-btn-default" ng-click="form(res)"> <i class="icon-pencil"></i>
+                                            详情
+                                        </button>
+                                        <button  class="btn cdi-btn-default" ng-click="cancel(res)">取消</button>
+
+                                    </td>
+
+                                    <td style="width: 20px; border:none;"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </tab>
+                <tab class="sub" ng-click="load('Reservations','APPROVED')" ng-if="currentUser.role != 'LAB_TEACHER'">
+                    <tab-heading>
+                        <span class="name">已成功预约</span>
+                    </tab-heading>
+                    <div class="tableContainer">
+                        <table class="table ">
+                            <thead>
+                                <tr class="op-tr">
+                                    <th style="width: 15px;"></th>
+                                    <th style="width: 400px;">
+                                        <!-- <button class="btn cdi-btn-default">取消预约</button>
+                                    -->
+                                </th>
+                                <th style="width: 250px;"></th>
+                                <th></th>
+                                <th style="width: 10px;"></th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="cdi-pager">
+
+                    <pager total-items="map.Reservations.APPROVED.data.totalItemNum" ng-model="map.Reservations.APPROVED.data.curPageNum" ng-change="pageChanged('ADMIN')" next-text="下一页" previous-text="上一页" ></pager>
+
+                    <span class="pager-text">
+                        共 {{ map.Reservations.APPROVED.data.totalItemNum}} 个预约, &nbsp;当前第 {{ map.Reservations.APPROVED.data.curPageNum }} 页  共 {{ map.Reservations.APPROVED.data.totalPageNum}}  页
+                    </span>
+
+                </div>
+                <div class="tableContainer">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th style="width: 30px;"></th>
+                                <th style="width: 90px;">预约号</th>
+                                <th style="width: 120px;">日期</th>
+                                <th style="width: 142px;">时间段</th>
+                                <th style="width: 120px;">实验室</th>
+                                <th style="width: 150px;">实验任务</th>
+                                <th style="width: 120px;">状态</th>
+
+                                <th style="width: 20px;"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="res in map.Reservations.APPROVED.data.data">
+                                <td style="width: 25px; border:none;"></td>
+                                <td style="width: 90px;">
+                                    <span class="id">{{res.id}}</span>
+                                </td>
+                                <td style="width: 120px;">
+                                    <span class="id">{{res.applyDate}}</span>
+                                </td>
+                                <td style="width: 133px;">
+                                    <span class="code">{{res.slot.title }}</span>
+                                </td>
+                                <td style="width: 120px;">
+                                    <span class="date">{{res.lab.name}}</span>
+                                </td>
+                                <td style="width: 150px;">
+                                    <span class="date">{{res.experiment.name}}</span>
+                                </td>
+                                <td style="width: 100px;">
+                                    <span class="code">{{res.status | reservationStatus}}</span>
+                                </td>
+                                <td style="width: 250px;">
+                                    <button  class="btn cdi-btn-default" ng-click="form(res)"> <i class="icon-pencil"></i>
+                                        详情
+                                    </button>
+
+                                </td>
+
+                                <td style="width: 20px; border:none;"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </tab>
+            <tab class="sub" ng-click="load('Reservations','REJECTED')" ng-if="currentUser.role != 'LAB_TEACHER'">
+                <tab-heading>
+                    <span class="name">失效预约</span>
+                </tab-heading>
+
+                <div class="tableContainer">
+                    <table class="table ">
+                        <thead>
+                            <tr class="op-tr">
+                                <th style="width: 15px;"></th>
+                                <th style="width: 400px;">
+                                    <!--  <button class="btn cdi-btn-default">取消预约</button>
+                                -->
+                            </th>
+                            <th style="width: 250px;"></th>
+                            <th></th>
+                            <th style="width: 10px;"></th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="cdi-pager">
+
+                <pager total-items="map.Reservations.REJECTED.data.totalItemNum" ng-model="map.Reservations.REJECTED.data.curPageNum" ng-change="pageChanged('ADMIN')" next-text="下一页" previous-text="上一页" ></pager>
+
+                <span class="pager-text">
+                    共 {{ map.Reservations.REJECTED.data.totalItemNum}} 个预约, &nbsp;当前第 {{ map.Reservations.REJECTED.data.curPageNum }} 页  共 {{ map.Reservations.REJECTED.data.totalPageNum}}  页
+                </span>
+
+            </div>
+            <div class="tableContainer">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th style="width: 30px;"></th>
+                            <th style="width: 90px;">预约号</th>
+                            <th style="width: 120px;">日期</th>
+                            <th style="width: 142px;">时间段</th>
+                            <th style="width: 120px;">实验室</th>
+                            <th style="width: 150px;">实验任务</th>
+                            <th style="width: 120px;">状态</th>
+
+                            <th style="width: 20px;"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="res in map.Reservations.REJECTED.data.data">
+                            <td style="width: 25px; border:none;"></td>
+                            <td style="width: 90px;">
+                                <span class="id">{{res.id}}</span>
+                            </td>
+                            <td style="width: 120px;">
+                                <span class="id">{{res.applyDate}}</span>
+                            </td>
+                            <td style="width: 133px;">
+                                <span class="code">{{res.slot.title }}</span>
+                            </td>
+                            <td style="width: 120px;">
+                                <span class="date">{{res.lab.name}}</span>
+                            </td>
+                            <td style="width: 150px;">
+                                <span class="date">{{res.experiment.name}}</span>
+                            </td>
+                            <td style="width: 100px;">
+                                <span class="code">{{res.status | reservationStatus}}</span>
+                            </td>
+                            <td style="width: 250px;">
+                                <button  class="btn cdi-btn-default" ng-click="form(res)">
+                                    <i class="icon-pencil"></i>
+                                    详情
+                                </button>
+
+                            </td>
+
+                            <td style="width: 20px; border:none;"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </tab>
+    </tabset>
+</div>
+</tab>
+<tab name=""  ui-sref="teacher-class" ng-if="currentUser.role != 'LAB_TEACHER'">
+<tab-heading class="spaces myclass">
+    <span class="title">
+        我的班级
+        <!-- <label class="label label-success pull-right" style="margin-top:5px;margin-right:40px;">10</label>
+    -->
+</span>
+<span class="info">班级和课程管理</span>
+</tab-heading>
+</tab>
+
+</tabset>
+</div>
+</div>
+
+<lab-footer></lab-footer>

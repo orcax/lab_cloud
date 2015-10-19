@@ -1,0 +1,44 @@
+<div type="user-info-dialog">
+    <div class="btnGroup">
+        <button class="btn cdi-btn-default left" ng-click="cancel()">取消</button>
+        <div class="title">学生名单</div>
+    </div>
+    <div >
+        <div class="content user-info" style="margin-top:10px;">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th style="width: 10px;"></th>
+                        <th style="width: 100px;">学号</th>
+                        <th style="width: 100px;">姓名</th>
+                        <th style="width: 100px;">专业</th>
+                        <th style="width: 10px;"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="st in studentList">
+                        <td style="width: 10px; border:none;"></td>
+                        <td style="width: 100px;">{{st.number}}</td>
+                        <td style="width: 100px;">{{st.name}}</td>
+                        <td style="width: 100px;">{{st.major}}</td>
+                        <td style="width: 20px; border:none;"></td>
+                    </tr>
+
+                    
+
+                </tbody>
+            </table>
+
+            <div class="paginationContainer">
+                <pagination direction-links="false" total-items="config.allCount" ng-model="config.currentPage" ng-change="loadList()" items-per-page="8"></pagination>
+            </div>
+
+            <div class="pagerContainer2">
+                <pager total-items="config.allCount" ng-model="config.currentPage" items-per-page="8"
+                       ng-change="loadList()" previous-text="<" next-text=">"></pager>
+            </div>
+        </div>
+        <div class="slider2" style="margin-top: 16px;"></div>
+
+    </div>
+</div>

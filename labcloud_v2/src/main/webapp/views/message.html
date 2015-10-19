@@ -1,0 +1,237 @@
+<lab-header></lab-header>
+<div class="container">
+  <div class="command-nav-container">
+    <tabset>
+      <tab name="" active="true">
+        <tab-heading class="spaces inform" >
+          <span class="title">
+            消息中心
+            <label class="label label-success pull-right" style="margin-top:5px;margin-right:40px;">{{totalItemNum}}</label>
+          </span>
+          <span class="info">我的课程和资源</span>
+        </tab-heading>
+        <div class="command-content-container user" style="background-color: #f1f1f1;">
+          <tabset vertical="true" type="pills">
+            <tab>
+              <tab-heading>
+                <span class="name">所有通知</span>
+              </tab-heading>
+              <div class="tableTitle">共 {{totalItemNum}} 个通知</div>
+              <div class="tableContainer">
+                <table class="table filterTable">
+                  <thead>
+                    <tr class="op-tr">
+                      <th style="width: 15px;"></th>
+                      <th style="width: 400px;">
+                        <button class="btn cdi-btn-default">取消预约</button>
+                      </th>
+                      <th style="width: 250px;"></th>
+                      <th></th>
+                      <th style="width: 10px;"></th>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+              <div class="tableContainer">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th style="width: 30px;"></th>
+                      <th style="width: 140px;">日期</th>
+                      <th style="width: 142px;">详情</th>
+                      
+                      <th style="width: 120px;">状态</th>
+
+                      <th style="width: 20px;"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="admin in currentUserList">
+                      <td style="width: 25px; border:none;"></td>
+                      <td style="width: 120px;">
+                        <span class="id">{{admin.number}}</span>
+                      </td>
+                      <td style="width: 133px;">
+                        <span class="code">{{admin.name }}</span>
+                      </td>
+                      <td style="width: 220px;">
+                        <span class="date">{{admin.title}}</span>
+                      </td>
+                      
+                      <td style="width: 20px; border:none;"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="paginationContainer">
+                <pagination direction-links="false" total-items="totalItemNum" ng-model="currPageNum.currPageNum" ng-change="pageChanged('Administrator')" items-per-page="8"></pagination>
+              </div>
+
+              <div class="pagerContainer2">
+                <pager total-items="totalItemNum" ng-model="currPageNum.currPageNum" items-per-page="8" ng-change="pageChanged('Administrator')" previous-text="上一页" next-text="下一页"></pager>
+              </div>
+            </tab>
+
+            <tab class="sub">
+              <tab-heading>
+                <span class="name">未读通知</span>
+              </tab-heading>
+
+              <div class="tableTitle">共 {{totalItemNum}} 个通知</div>
+              <div class="tableContainer">
+                <table class="table filterTable">
+                  <thead>
+                    <tr class="op-tr">
+                      <th style="width: 15px;"></th>
+                      <th style="width: 400px;">
+                        <button class="btn cdi-btn-default">取消预约</button>
+                      </th>
+                      <th style="width: 250px;"></th>
+                      <th></th>
+                      <th style="width: 10px;"></th>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+              <div class="tableContainer">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th style="width: 30px;"></th>
+                      <th style="width: 140px;">日期</th>
+                      <th style="width: 142px;">详情</th>
+                      
+                      <th style="width: 120px;">状态</th>
+
+                      <th style="width: 20px;"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="admin in currentUserList">
+                      <td style="width: 25px; border:none;"></td>
+                      <td style="width: 120px;">
+                        <span class="id">{{admin.number}}</span>
+                      </td>
+                      <td style="width: 133px;">
+                        <span class="code">{{admin.name }}</span>
+                      </td>
+                      <td style="width: 220px;">
+                        <span class="date">{{admin.title}}</span>
+                      </td>
+                      <td style="width: 250px;">
+                        <button  class="btn cdi-btn-default" ng-click="adminDetails(admin)"> <i class="icon-pencil"></i>
+                          编辑
+                        </button>
+                        |
+                        <button  class="btn cdi-btn-default" ng-click="removeUser(admin,'admin')">删除</button>
+                        |
+                        <button  class="btn cdi-btn-default" ng-click="resetPassword(admin,'ADMINISTRATOR')">修改密码</button>
+                      </td>
+
+                      <td style="width: 20px; border:none;"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="paginationContainer">
+                <pagination direction-links="false" total-items="totalItemNum" ng-model="currPageNum.currPageNum" ng-change="pageChanged('Administrator')" items-per-page="8"></pagination>
+              </div>
+
+              <div class="pagerContainer2">
+                <pager total-items="totalItemNum" ng-model="currPageNum.currPageNum" items-per-page="8" ng-change="pageChanged('Administrator')" previous-text="上一页" next-text="下一页"></pager>
+              </div>
+            </tab>
+
+            <tab class="sub">
+              <tab-heading>
+                <span class="name">系统通知</span>
+              </tab-heading>
+
+              <div class="tableTitle">共 {{totalItemNum}} 个通知</div>
+              <div class="tableContainer">
+                <table class="table filterTable">
+                  <thead>
+                    <tr class="op-tr">
+                      <th style="width: 15px;"></th>
+                      <th style="width: 400px;">
+                        <button class="btn cdi-btn-default">取消预约</button>
+                      </th>
+                      <th style="width: 250px;"></th>
+                      <th></th>
+                      <th style="width: 10px;"></th>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+              <div class="tableContainer">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th style="width: 30px;"></th>
+                      <th style="width: 140px;">日期</th>
+                      <th style="width: 142px;">详情</th>
+                      
+                      <th style="width: 120px;">状态</th>
+
+                      <th style="width: 20px;"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="admin in currentUserList">
+                      <td style="width: 25px; border:none;"></td>
+                      <td style="width: 120px;">
+                        <span class="id">{{admin.number}}</span>
+                      </td>
+                      <td style="width: 133px;">
+                        <span class="code">{{admin.name }}</span>
+                      </td>
+                      <td style="width: 220px;">
+                        <span class="date">{{admin.title}}</span>
+                      </td>
+                      <td style="width: 250px;">
+                        <button  class="btn cdi-btn-default" ng-click="adminDetails(admin)">
+                          <i class="icon-pencil"></i>
+                          编辑
+                        </button>
+                        |
+                        <button  class="btn cdi-btn-default" ng-click="removeUser(admin,'admin')">删除</button>
+                        |
+                        <button  class="btn cdi-btn-default" ng-click="resetPassword(admin,'ADMINISTRATOR')">修改密码</button>
+                      </td>
+
+                      <td style="width: 20px; border:none;"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="paginationContainer">
+                <pagination direction-links="false" total-items="totalItemNum" ng-model="currPageNum.currPageNum" ng-change="pageChanged('Administrator')" items-per-page="8"></pagination>
+              </div>
+
+              <div class="pagerContainer2">
+                <pager total-items="totalItemNum" ng-model="currPageNum.currPageNum" items-per-page="8" ng-change="pageChanged('Administrator')" previous-text="上一页" next-text="下一页"></pager>
+              </div>
+            </tab>
+            
+          </tabset>
+        </div>
+      </tab>
+      
+
+      <!-- <tab name="" ui-sref="help">
+        <tab-heading class="users" >
+          <span class="title">
+            帮助中心
+            <label class="label label-success pull-right" style="margin-top:5px;margin-right:40px;">10</label>
+          </span>
+          <span class="info">系统帮助</span>
+        </tab-heading>  
+      </tab> -->
+      
+
+
+    </tabset>
+  </div>
+</div>
+
+<lab-footer></lab-footer>

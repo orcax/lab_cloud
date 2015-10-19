@@ -1,0 +1,81 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd"
+	default-lazy-init="true">
+
+	<context:component-scan base-package="com.prj.entity" />
+	<context:component-scan base-package="com.prj.controller" />
+	<context:component-scan base-package="com.prj.daoImpl" />
+	<context:component-scan base-package="com.prj.serviceImpl" />
+	<context:component-scan base-package="com.prj.util" />
+	<context:component-scan base-package="com.prj.aspect" />
+	
+	<!-- freemarker config -->
+<!--  	<bean id="freemarkerConfig"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+		<property name="templateLoaderPath" value="/" />
+	</bean> 
+
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.freemarker.FreeMarkerView" />
+		<property name="cache" value="true" />
+		<property name="prefix" value="" />
+		<property name="suffix" value=".html" />
+		<property name="contentType" value="text/html;charset=utf-8"></property>
+	</bean>  -->
+
+ 	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<bean
+				class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>text/plain;charset=utf-8</value>
+						<value>text/html;charset=utf-8</value>
+						<value>text/json;charset=utf-8</value>
+						<value>application/json;charset=utf-8</value>
+					</list>
+				</property>
+			</bean>
+		</property>
+	</bean> 
+	
+    <bean id="multipartResolver"
+        class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+         <!-- setting maximum upload size -->
+        <property name="maxUploadSize" value="10000000" />
+        <property name="defaultEncoding" value="utf-8" />
+    </bean>
+ 
+	<!--JSON配置-->
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<!-- 该类只有org.springframework.web-3.1.2.RELEASE.jar及以上版本才有 使用该配置后，才可以使用JSON相关的一些注解 -->
+				<bean
+					class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+					<property name="objectMapper">
+						<bean class="com.fasterxml.jackson.databind.ObjectMapper" />
+					</property>
+				</bean>
+			</list>
+		</property>
+	</bean> 
+	
+	<!-- <mvc:interceptors> <mvc:interceptor> <mvc:mapping path="/**" /> <bean 
+		class="com.tj.kpi.interceptor.LoginInterceptor"> </bean> </mvc:interceptor> 
+		</mvc:interceptors> -->
+	<mvc:annotation-driven />
+	<mvc:default-servlet-handler />
+
+</beans>

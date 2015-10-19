@@ -1,0 +1,88 @@
+<div type="user-info-dialog">
+    <div class="btnGroup">
+        <button class="btn cdi-btn-default left" ng-click="cancel()">取消</button>
+        <div class="title">实验配置</div>
+    </div>
+    <div >
+        <div class="content user-info" style="margin-top:10px;">
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;">课程编号</div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <input disabled="disabled" type="text" name="name" ng-model="data.courseNumber" class="right form-control"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;">课程名称</div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <input disabled="disabled" type="text" ng-model="data.courseName" class="right form-control"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;">开课单位</div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                   <input disabled="disabled" type="text" ng-model="data.department" class="right form-control"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 45px;">开课年份</div>
+                <div class="cell" style="width: 63%;height: 45px;">
+                    <input disabled="disabled" type="date" ng-model="data.startYear" class="right form-control"/>
+                </div>
+            </div>
+            
+            
+        </div>
+        <div class="slider2" style="margin-top: 16px;"></div>
+        
+        <div class="content">
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;"></div>
+                <div class="tableContainer ng-scope">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th style="width: 25px;"></th>
+                                <th style="width: 70px;">实验编号
+                                </th>
+                                <th style="width: 142px;">实验名
+                                </th>
+                                <th>
+                                    <div class="btn-group-head">
+                                        <div style="width: 5px;height: 25px;float: right;"></div>
+                                        <!-- <button class="btn cdi-btn-default">查找</button> -->
+                                    </div>
+                                </th>
+                                <th style="width: 20px;"></th>
+                            </tr>
+                        </thead>
+                            <tr ng-repeat="exp in data.courseExperiment">
+                                <td style="width: 25px; border:none;"></td>
+                                <td style="width: 70px;">
+                                    <span class="id">{{exp.experimentNumber}}</span>
+                                </td>
+                                <td style="width: 142px;">
+                                    <span class="code">{{exp.experimentName}}</span>
+                                </td>
+                                <td>
+                                    <div class="optionContainer" style="padding: 0;">
+                                        <button class="btn cdi-btn-grey btn-danger" ng-click="removeExperimentOfCourse(data, exp)">移除</button>
+                                    </div>
+                                </td>
+                                <td style="width: 20px; border:none;"></td>
+                            </tr>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="btn-group-head">
+                    <button class="btn cdi-btn-default" ng-click="addExperimentForCourse(data)">添加实验</button>
+                    <div style="width: 5px;height: 25px;float: right;"></div>
+                    <select id="experiments-select" style="float:right;">
+                        <option expid="{{instance.id}}" expno="{{instance.experimentNumber}}" expna="{{instance.experimentName}}" ng-repeat="instance in currentExperimentList">实验{{instance.experimentNumber}}: {{instance.experimentName}}</option>
+                    </select>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+</div>

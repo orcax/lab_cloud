@@ -1,0 +1,102 @@
+<lab-header></lab-header>
+<div class="container">
+  <div class="command-nav-container">
+    <tabset>
+      <tab name="">
+        <tab-heading class="users" ui-sref="usermanage">
+          <span class="title">用户账户</span>
+          <span class="info">管理用户权限和资料</span>
+        </tab-heading>
+      </tab>
+      <tab name="">
+        <tab-heading class="spaces" ui-sref="labmanage">
+          <span class="title">实验资源</span>
+          <span class="info">实验/实验室/课程</span>
+        </tab-heading>
+      </tab>
+
+      <tab name="">
+        <tab-heading class="spaces class" ui-sref="semestermanage">
+          <span class="title">学期班级</span>
+          <span class="info">学期设置和班级开设</span>
+        </tab-heading>
+      </tab>
+
+      <tab name="" active="true">
+        <tab-heading class="reservation" ui-sref="coursemanage">
+          <span class="title">实验日程计划</span>
+          <span class="info">实验计划日程表</span>
+        </tab-heading>
+        <div class="command-content-container user" style="background-color: #f1f1f1;">
+          <tabset vertical="true" type="pills nav-calendar">
+
+            <tab>
+              <tab-heading>
+                <span class="name">日程总表</span>
+              </tab-heading>
+              <div class="tableContainer" style="width:900px;">
+                <table class="table">
+                  <thead>
+                    <tr class="op-tr">
+                      <th style="width: 15px;"></th>
+                      <th style="width: 720px;">
+                      </th>
+                      <th style="width: 250px; text-align:right;">
+                        <!-- <input type="text" class="form-control" placeholder="请输入预约号"/> -->
+                        <button class="btn cdi-btn-default cdi-btn-dark-blue" ng-click="addReservation('class')" style="width:110px;">添加教师预约 +</button>
+                        <button class="btn cdi-btn-default cdi-btn-dark-blue" ng-click="addReservation('student')" style="width:110px;">添加学生预约 +</button>
+                      </th>
+                      
+                    
+                  </tr>
+                </thead>
+              </table>
+            </div>
+            <div class="tableContainer" style="width:900px;">
+                <table class="table">
+                  <thead>
+                    <tr class="op-tr">
+                      <th style="width: 15px;">
+                      </th>
+                      <th style="width: 90px;">
+                        <input type="checkbox" checked="" readonly=""><span class="calendar-label pendding">正在审核</span>
+                      </th>
+                      <th style="width: 90px;">
+                        <input type="checkbox" checked="" readonly=""><span class="calendar-label approved">审核通过</span>
+                      </th>
+                      
+                      <th style="width: 90px;">
+                        <input type="checkbox" checked="" readonly=""><span class="calendar-label student">学生预约</span>
+                      </th>
+                      <th style="width: 90px;">
+                        <input type="checkbox" checked="" readonly=""><span class="calendar-label rejected">已拒绝的</span>
+                      </th>
+                      <th style="width: 525px; text-align:right;">
+                      </th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+            <div class="tableTitle" style="margin-top:20px;width:880px;">
+
+              <div class="calendar" ui-calendar="uiConfig.calendar"  ng-model="eventSources" calendar="myCalendar"></div>
+            </div>
+
+          </tab>
+
+        </tabset>
+      </div>
+    </tab>
+
+    <tab>
+      <tab-heading class="cdiweb verify" ui-sref="applymanage">
+        <span class="title">预约审批</span>
+        <span class="info">实验预约审批</span>
+      </tab-heading>
+    </tab>
+  </tabset>
+</div>
+
+</div>
+
+<lab-footer></lab-footer>

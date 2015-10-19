@@ -1,0 +1,86 @@
+<div type="user-info-dialog">
+    <div class="btnGroup">
+        <button class="btn cdi-btn-default left" ng-click="cancel()">取消</button>
+        <button class="btn cdi-btn-blue right btn-save" ng-click="save()" ng-if="!is_approve">确认</button>
+        <div class="title">编辑实验</div>
+    </div>
+    <div >
+        <div class="content user-info" style="margin-top:10px;" ng-if="is_approve">
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;">预约编号</div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <input type="text" name="name" value="{{slotClassReservation.classReservationNumber}}" class="right form-control" readonly="" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;">实验名称</div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <input type="text" name="name" value="{{slotExperiment.experimentName}}" class="right form-control" readonly="" />
+                </div>
+            </div>
+             <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;">实验班级</div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <input type="text" name="name" value="{{slotClassReservation.clazz.classHour}} {{slotClassReservation.clazz.classRoom}}" class="right form-control" readonly="" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;">实验员</div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <input type="text" name="name" value="{{slotClassReservation.reserver.name}}" class="right form-control" readonly="" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;">预约人数</div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <input type="number" value="{{slotExperiment.maximumStudent}}" class="right form-control" readonly="" />
+                </div>
+            </div>
+        </div>
+        <div class="content user-info" style="margin-top:10px;" ng-if="!is_approve">
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;">预约编号</div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <input type="text" name="name" value="{{slotClassReservation.classReservationNumber}}" class="right form-control" readonly="" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;">实验名称</div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                     <select name="" class="right form-control" id="">
+                        <option value="1">{{slotExperiment.experimentName}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;">实验班级</div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <select name="" class="right form-control" id="">
+                        <option value="1">{{slotClassReservation.clazz.classHour}} {{slotClassReservation.clazz.classRoom}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;">实验员</div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <input type="text" name="name" value="{{slotClassReservation.reserver.name}}" class="right form-control"  />
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;">预约人数</div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <input type="number" value="{{slotExperiment.maximumStudent}}" class="right form-control"  />
+                </div>
+            </div>
+        </div>
+        <div class="slider2" style="margin-top: 16px;"></div>
+        <div class="content">
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;"></div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <span class="red">{{message}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+@font-face {
+  font-family: Lantinghei;
+  src: url('fonts/Lantinghei/Lantinghei.eot');
+  src: url('fonts/Lantinghei/Lantinghei.eot?#iefix') format('embedded-opentype'), url('fonts/Lantinghei/Lantinghei.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: HelveticaNeue Light;
+  src: url('fonts/HelveticaNeue/Helvetica Neue Light.eot');
+  src: url('fonts/HelveticaNeue/Helvetica Neue Light.eot?#iefix') format('embedded-opentype'), url('fonts/HelveticaNeue/Helvetica Neue Light.woff') format('woff'), url('fonts/HelveticaNeue/Helvetica Neue Light.ttf') format('truetype');
+  font-weight: bolder;
+  font-style: normal;
+}
+@font-face {
+  font-family: HelveticaNeue;
+  src: url('fonts/HelveticaNeue/Helvetica Neue.eot');
+  src: url('fonts/HelveticaNeue/Helvetica Neue.eot?#iefix') format('embedded-opentype'), url('fonts/HelveticaNeue/Helvetica Neue.woff') format('woff'), url('fonts/HelveticaNeue/Helvetica Neue.ttf') format('truetype');
+  font-weight: bolder;
+  font-style: normal;
+}
+@font-face {
+  font-family: Helvetica;
+  src: url('fonts/Helvetica/Helvetica.eot');
+  src: url('fonts/Helvetica/Helvetica.eot?#iefix') format('embedded-opentype'), url('fonts/Helvetica/Helvetica.woff') format('woff'), url('fonts/Helvetica/Helvetica.ttf') format('truetype');
+  font-weight: bolder;
+}

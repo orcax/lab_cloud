@@ -1,0 +1,135 @@
+<div type="user-info-dialog">
+    <div class="btnGroup">
+        <button class="btn cdi-btn-default left" ng-click="cancel()">取消</button>
+        <button class="btn cdi-btn-blue right btn-save" ng-click="save()" >保存</button>
+        <div class="title">实验详情</div>
+    </div>
+    <div >
+        <div class="content user-info" style="margin-top:10px;">
+
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;">日期</div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <input type="text" ng-model="data.applyDate" class="right form-control" readonly/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;">实验任务</div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <input type="text" ng-model="data.experiment.name" class="right form-control" readonly/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;">实验室</div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <input type="text" ng-model="data.lab.name" class="right form-control" readonly/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;">实验时段</div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <input type="text" value="{{data.slot.title}}" class="right form-control" readonly/>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;">班级</div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <input type="text" ng-model="data.clazz.number" class="right form-control" readonly/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;">课程</div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <input type="text" ng-model="data.clazz.course.name" class="right form-control" readonly/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;">申请人数</div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <input type="text" ng-model="data.count" class="right form-control" readonly/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;">备注</div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <textarea type="text" ng-model="data.remark" class="right form-control" readonly>
+                    </textarea>
+                </div>
+            </div>
+
+            <div class="row" >
+                <div class="cell title" style="width: 37%;height: 50px;">审核结果</div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <select name="" class="right form-control" id="" ng-model="data.status"
+                        ng-options="item.value for item in filters track by item.status" >
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="slider2" style="margin-top: 16px;"></div>
+            
+        <div class="content" ng-show="data.status.status=='APPROVED'">
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;"></div>
+                <div class="tableContainer ng-scope">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th style="width: 25px;"></th>
+                                <th style="width: 142px;">编号
+                                </th>
+                                <th style="width: 142px;">姓名
+                                </th>
+                                <th>
+                                    <div class="btn-group-head">
+                                        <div style="width: 5px;height: 25px;float: right;"></div>
+                                        <!-- <button class="btn cdi-btn-default">查找</button> -->
+                                    </div>
+                                </th>
+                                <th style="width: 20px;"></th>
+                            </tr>
+                        </thead>
+                            <tr ng-repeat="teachers in selectedTeachers">
+                                <td style="width: 25px; border:none;"></td>
+                                <td style="width: 70px;">
+                                    <span class="id">{{teachers.number}}</span>
+                                </td>
+                                <td style="width: 142px;">
+                                    <span class="code">{{teachers.name}}</span>
+                                </td>
+                                <td>
+                                    <div class="optionContainer" style="padding: 0;">
+                                        <button class="btn cdi-btn-grey btn-danger" ng-click="remove(teachers)">移除</button>
+                                    </div>
+                                </td>
+                                <td style="width: 20px; border:none;"></td>
+                            </tr>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="btn-group-head">
+                    <button class="btn cdi-btn-default" style="width:115px;" ng-click="add()">添加实验教师</button>
+                    <div style="width: 5px;height: 25px;float: right;"></div>
+                     <select name=""  id="lab-experiments-select" style="float:right;" id="" ng-model="data.teacher"
+                        ng-options="(item.number + '-' + item.name)  for item in teachers track by item.id">
+                    </select>
+                </div>
+                <br>
+            </div>
+        </div>
+        <div class="content">
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;"></div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <span class="red">{{message}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

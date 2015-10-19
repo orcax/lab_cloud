@@ -1,0 +1,223 @@
+<lab-header></lab-header>
+<div class="container">
+<div class="command-nav-container">
+<tabset>
+<tab name="">
+    <tab-heading class="users" >
+        <span class="title">用户管理</span>
+        <span class="info">管理用户权限和资料</span>
+    </tab-heading>
+     <div class="command-content-container user" style="background-color: #f1f1f1;">
+        <tabset vertical="true" type="pills">
+            <tab disabled="true">
+                <tab-heading>
+                    <span class="name">用户分类查询</span>
+                </tab-heading>
+            </tab>
+
+            <tab class="sub" ng-click="loadUser('Teacher')" active="tabStatus.tab1">
+                <tab-heading>
+                    <span class="name">实验中心教师</span>
+                </tab-heading>
+
+                <div class="tableTitle">该分类共 {{totalItemNum}} 个教师用户</div>
+                <div class="tableTitle">
+                    <select ng-options="entity.role for entity in teacherRoles track by entity.value" ng-model="selectedTeacherRole.role" ng-change="pageChanged('Teacher')"></select>
+                </div>
+                <div class="tableContainer">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th style="width: 25px;"></th>
+                            <th style="width: 100px;">用户ID</th>
+                            <th style="width: 110px;">用户姓名</th>
+                            <th style="width: 130px;">角色</th>
+                            <th style="width: 70px;">性别</th>
+                            <th style="width: 250px;">&nbsp;&nbsp;&nbsp;&nbsp;用户管理</th>
+                            <th>
+                                <div class="btn-group-head">
+                                    <button class="btn cdi-btn-default" ng-click="addTeacher()">添加教师</button>
+                                </div>
+                            </th>
+                            <th style="width: 20px;"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="teacher in currentUserList">
+                            <td style="width: 25px; border:none;"></td>
+                            <td style="width: 100px;">
+                                <span class="id">{{teacher.number}}</span>
+                            </td>
+                            <td style="width: 110px;">
+                                <span class="code">{{teacher.name }}</span>
+                            </td>
+                            <td style="width: 130px;">
+                                <span class="code">{{teacher.role | teacherRole }}</span>
+                            </td>
+                            <td style="width: 70px;">
+                                
+                                <span class="name">{{teacher.gender | genderFilter}}</span>
+                            </td>
+                               <td style="width: 250px;">
+                               <button  class="btn cdi-btn-default" ng-click="teacherDetails(teacher)"><i class="icon-pencil"></i>编辑</button> | <button  class="btn cdi-btn-default" ng-click="removeUser(teacher,'Teacher')">删除</button> | <button  class="btn cdi-btn-default" ng-click="resetPassword(teacher,'TEACHER')">修改密码</button>
+                                
+                            </td>
+                            <td>
+                 
+                            </td>
+                            <td style="width: 20px; border:none;"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="paginationContainer">
+                    <pagination direction-links="false" total-items="totalItemNum" ng-model="currPageNum.currPageNum" ng-change="pageChanged('Teacher')" items-per-page="8"></pagination>
+                </div>
+
+                <div class="pagerContainer2">
+                    <pager total-items="totalItemNum" ng-model="currPageNum.currPageNum" items-per-page="8" ng-change="pageChanged('Teacher')" previous-text="上一页" next-text="下一页"></pager>
+                </div>
+            </tab>
+            <tab class="sub" ng-click="loadUser('Student')" active="tabStatus.tab2">
+                <tab-heading>
+                    <span class="name">实验中心学生</span>
+                </tab-heading>
+
+                <div class="tableTitle">共 {{totalItemNum}} 个学生用户</div>
+                <div class="tableContainer">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th style="width: 25px;"></th>
+                            <th style="width: 100px;">学号</td>
+                            <th style="width: 142px;">姓名</td>
+                            <th style="width: 106px;">年级</td>
+                            <th style="width: 106px;">专业</td>
+                            <th style="width: 220px;">邮箱</td>
+                             <th style="width: 250px;">&nbsp;&nbsp;&nbsp;&nbsp;用户管理</td>
+                            <th>
+                                <div class="btn-group-head">
+                                    <button class="btn cdi-btn-default" ng-click="addStudent()">添加学生</button>
+                                </div>
+                            </th>
+                            <th style="width: 20px;"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="stu in currentUserList">
+                            <td style="width: 30px; border:none;"></td>
+                            <td style="width: 100px;">
+                                <span class="id">{{stu.number}}</span>
+                            </td>
+                            <td style="width: 142px;">
+                                <span class="code">{{stu.name }}</span>
+                            </td>
+                              <td style="width: 106px;">
+                                <span class="date">{{stu.grade }}</span>
+                            </td>
+                              <td style="width: 106px;">
+                                <span class="date">{{stu.major }}</span>
+                            </td>
+                            <td style="width: 220px;">
+                                <span class="tel"> {{stu.email}}</span>
+                            </td>
+                          <td style="width: 250px;">
+                               <button  class="btn cdi-btn-default" ng-click="studentDetails(stu)"><i class="icon-pencil"></i>编辑</button> | <button  class="btn cdi-btn-default" ng-click="removeUser(stu,'Student')">删除</button> |
+                                
+                            </td>
+                            <td><button  class="btn cdi-btn-default" ng-click="resetPassword(stu, 'STUDENT')">修改密码</button></td>
+                            <td style="width: 20px; border:none;"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+              <div class="paginationContainer">
+                    <pagination direction-links="false" total-items="totalItemNum" ng-model="currPageNum.currPageNum" ng-change="pageChanged('Student')" items-per-page="8"></pagination>
+                </div>
+
+                <div class="pagerContainer2">
+                    <pager total-items="totalItemNum" ng-model="currPageNum.currPageNum" items-per-page="8" ng-change="pageChanged('Student')" previous-text="上一页" next-text="下一页"></pager>
+                </div>
+            </tab>
+            <tab class="sub" ng-click="loadUser('Administrator')" active="tabStatus.tab3">
+                <tab-heading>
+                    <span class="name">系统管理员</span>
+                </tab-heading>
+
+                <div class="tableTitle">共 {{totalItemNum}} 个管理员用户</div>
+                <div class="tableContainer">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th style="width: 25px;"></th>
+                            <th style="width: 120px;">用户账号</td>
+                            <th style="width: 142px;">用户名称</td>
+                            <th style="width: 220px;">用户角色</td>
+                            
+                            <th>
+                                <span style="line-height:28px;">&nbsp;&nbsp;&nbsp;&nbsp;用户管理</span>
+                                <div class="btn-group-head">
+
+                                    <button class="btn btn-default" ng-click="addAdministrator()">添加管理员</button>
+                                </div>
+                            </th>
+                            <th style="width: 20px;"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="admin in currentUserList">
+                            <td style="width: 25px; border:none;"></td>
+                            <td style="width: 120px;">
+                                <span class="id">{{admin.number}}</span>
+                            </td>
+                            <td style="width: 133px;">
+                                <span class="code">{{admin.name }}</span>
+                            </td>
+                            <td style="width: 220px;">
+                                 <span class="date">{{admin.title}}</span>
+                            </td>
+                          <td style="width: 250px;">
+                               <button  class="btn cdi-btn-default" ng-click="adminDetails(admin)"><i class="icon-pencil"></i>编辑</button> | <button  class="btn cdi-btn-default" ng-click="removeUser(admin,'admin')">删除</button> |
+                                <button  class="btn cdi-btn-default" ng-click="resetPassword(admin,'ADMINISTRATOR')">修改密码</button>
+                            </td>
+                            
+                            <td style="width: 20px; border:none;"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+              <div class="paginationContainer">
+                    <pagination direction-links="false" total-items="totalItemNum" ng-model="currPageNum.currPageNum" ng-change="pageChanged('Administrator')" items-per-page="8"></pagination>
+                </div>
+
+                <div class="pagerContainer2">
+                    <pager total-items="totalItemNum" ng-model="currPageNum.currPageNum" items-per-page="8" ng-change="pageChanged('Administrator')" previous-text="上一页" next-text="下一页"></pager>
+                </div>
+            </tab>
+        </tabset>
+    </div>
+</tab>
+<tab name="">
+    <tab-heading class="spaces" ng-click="tabHref('/lab-manage')">
+        <span class="title">实验课程管理</span>
+        <span class="info">配置实验和课程关系</span>
+    </tab-heading>
+</tab>
+
+<tab name="">
+    <tab-heading class="reservation" ng-click="tabHref('/lab-course-arrangement')"> 
+        <span class="title">实验课程排布</span>
+        <span class="info">配置课程相关实验排列</span>
+    </tab-heading>
+</tab>
+
+<tab>
+    <tab-heading class="cdiweb" ng-click="tabHref('/lab-apply-manage')">
+        <span class="title">申请审核</span>
+        <span class="info">审核实验室预定申请</span>
+    </tab-heading>
+    
+</tab>
+</tabset>
+</div>
+</div>

@@ -1,0 +1,71 @@
+<div class="alert alert-warning top-fix-warn" role="alert">
+	新版系统处于测试阶段,功能尚未稳定,可
+	<a ng-click="toOld()" class="alert-link pointer-element" >回到旧版</a>
+</div>
+<div class="portal-header">
+	<div class="portal-header-wrapper">
+		<div class="portal-header-logo">
+			<a href="#/portal/home">
+				<img src="images/portal/header/portal-header-logo.png" width="120" style="margin-top:-15px;" />
+			</a>
+		</div>
+		<ul ng-if="userType == 'STUDENT'" class="portal-header-nav">
+			<li ng-class="{'active': path == 'home'}">
+				<a href="#/portal/home">我的实验</a>
+			</li>
+			<li ng-class="{'active': path == 'course'}">
+				<a href="#/portal/course">我的课程</a>
+			</li>
+			<li ng-class="{'active': path == 'calendar'}">
+				<a href="#/portal/calendar">实验日历</a>
+			</li>
+			<li ng-class="{'active': path == 'notification'}">
+				<a href="#/portal/notification">消息</a>
+			</li>
+		</ul>
+
+		<ul ng-if="userType == 'TEACHER'" class="portal-header-nav">
+			<li ng-class="{'active': path == 'home'}">
+				<a href="#/portal/home">我的预约</a>
+			</li>
+			<li ng-class="{'active': path == 'class'}">
+				<a href="#/portal/class">我的班级</a>
+			</li>
+			<li ng-class="{'active': path == 'calendar'}">
+				<a href="#/portal/calendar">实验日历</a>
+			</li>
+			<li ng-class="{'active': path == 'notification'}">
+				<a href="#/portal/notification">消息</a>
+			</li>
+		</ul>
+
+		<div class="portal-header-option">
+			<ul class="portal-header-nav">
+				<li>
+					<a href="#/portal/reservation">+&nbsp;我要预约</a>
+				</li>
+				<li class="line"></li>
+				<li class="avatar" dropdown>
+					<a id="avatar-button" href="javascript:;" dropdown-toggle></a>
+					<ul class="dropdown-menu" aria-labelledby="avatar-button">
+						<div class="dropdown-triangle"></div>
+						<li class="info">
+							<img class="avatar" ng-src="{{currentUser.iconPath}}">
+							<span class="name">用户A</span>
+							<span class="number">用户学号</span>
+						</li>
+						<li>
+							<a href="#/portal/setting">个人设置</a>
+						</li>
+						<li class="line"></li>
+						<li ng-click="logout()" style="cursor:pointor;">
+							<a>退出登录</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+
+</div>

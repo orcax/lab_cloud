@@ -1,0 +1,263 @@
+@import 'portal-header';
+@import 'portal-footer';
+@import 'portal-home';
+@import 'portal-reservation';
+@import 'portal-experiment';
+@import 'portal-setting';
+@import 'portal-calendar';
+@import 'portal-notification';
+@import 'portal-course';
+@import 'portal-course-detail';
+@import 'portal-class';
+@import 'portal-class-detail';
+@import 'portal-student';
+
+.portal-page-wrapper {
+	width: 100%;
+	.portal-page-content {
+		width: 640px;
+		margin: 0 auto;
+		padding: 80px 0;
+		position: relative;
+		.portal-page-title {
+			line-height: 36px;
+			font-size: 18px;
+			color: #606060;
+			text-align: center;
+		}
+		.portal-page-sub-title {
+			line-height: 24px;
+			font-size: 13px;
+			color: #b2b2b2;
+			text-align: center;
+		}
+		.portal-page-options {
+			position: absolute;
+			width: 100%;
+			&.home {
+				&.teacher {
+					top: 215px;
+					padding: 10px;
+					border-bottom: 1px solid #ebebeb;
+					.select-container {
+						float: left;
+					}
+					.checkbox-container {
+						float: right;
+						font-size: 14px;
+						color: #b2b2b2;
+						.checkbox {
+							margin: 7px 0;
+						}
+					}
+				}
+			}
+		}
+		.portal-page-tabs {
+			text-align: center;
+			&.home {
+				.nav-tabs {
+					> li {
+						a {
+							min-width: 150px;
+						}
+					}
+				}
+				.tab-content {
+					margin-top: 90px;
+				}
+			}
+			&.notification {
+				.nav-tabs {
+					> li {
+						a {
+							min-width: 110px;
+						}
+					}
+				}
+				.tab-content {
+					margin-top: 70px;
+				}
+			}
+			&.course-status {
+				text-align: left;
+				.nav-tabs {
+					width: 100%;
+					border-bottom: 1px solid #ebebeb;
+					> li {
+						background-color: #fff;
+						border-bottom: 2px solid transparent;
+						margin: 0 10px;
+						a {
+							border-right: none;
+							background-color: #fff;
+							color: #b2b2b2;
+							line-height: 25px;
+							margin: 0;
+							padding: 10px 15px;
+							&:hover {
+								background-color: #fff;
+								border: none;
+							}
+						}
+						&.active {
+							border-bottom: 2px solid #727f8e;
+							a {
+								color: #606060;
+								background-color: #fff;
+							}
+						}
+					}
+				}
+				.tab-content {
+					margin-top: 10px;
+				}
+			}
+			&.course-item {
+				text-align: left;
+				.nav-tabs {
+					width: auto;
+					border-bottom: none;
+					> li {
+						border-bottom: none;
+						margin: 0 10px 0 0;
+						&:last-child {
+							margin-right: 0;
+						}
+						a {
+							color: #606060;
+							border: 1px solid #606060;
+							margin: 0;
+							line-height: 24px;
+							padding: 0 18px;
+							border-radius: 12px;
+							min-width: auto;
+							&:hover {
+								color: #fff;
+								background-color: #2c3f55;
+								border: 1px solid #2c3f55;
+							}
+						}
+						&.active {
+							border-bottom: none;
+							a {
+								color: #fff;
+								background-color: #2c3f55;
+								border: 1px solid #2c3f55;
+							}
+						}
+					}
+				}
+				.tab-content {
+					margin-top: 30px;
+				}
+				&.teacher {
+					.nav-tabs {
+						width: 100%;
+						padding-bottom: 10px;
+						border-bottom: 1px solid #ebebeb;
+					}
+					.tab-content {
+						margin-top: 10px;
+					}
+				}
+			}
+			.nav-tabs {
+				border-bottom: none;
+				display: inline-block;
+				overflow: hidden;
+				> li {
+					margin: 0;
+					background-color: #f5f5f5;
+					&:last-child {
+						margin-right: -1px;
+					}
+					a {
+						color: #b2b2b2;
+						font-size: 14px;
+						line-height: 20px;
+						border: none;
+						background-color: #f5f5f5;
+						margin-right: 0;
+						border-radius: 0;
+						padding: 0;
+						margin: 10px 0;
+						&:hover {
+							background-color: #f5f5f5;
+							border: none;
+							border-right: 1px solid #b2b2b2;
+						}
+						border-right: 1px solid #b2b2b2;
+					}
+					&.active {
+						a {
+							color: #2c3f55;
+							background-color: #f5f5f5;
+						}
+					}
+				}
+			}
+		}
+		.portal-page-buttons {
+			padding: 60px 0;
+			text-align: center;
+		}
+		.portal-page-line {
+			height: 1px;
+			width: 100%;
+			background-color: #ebebeb;
+		}
+	}
+}
+
+.portal-button,
+.portal-button-default {
+	display: inline-block;
+	font-size: 14px;
+	color: #606060;
+	border: 1px solid #606060;
+	line-height: 30px;
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	padding: 0 18px;
+	&:hover, &:active, &:focus {
+		outline: none;
+		color: #fb7c55;
+		border: 1px solid #fb7c55;
+		text-decoration: none;
+	}
+}
+
+.portal-button-primary {
+	color: #fff;
+	background-color: #4a6a8f;
+	-webkit-border-radius: 14px;
+	-moz-border-radius: 14px;
+	border-radius: 14px;
+	line-height: 26px;
+	padding: 0 27px;
+	&:hover, &:active, &:focus {
+		outline: none;
+		text-decoration: none;
+		border: 1px solid #4a6a8f;
+		color: #fff;
+	}
+}
+
+.portal-button-cancel {
+	color: #606060;
+	background-color: #fff;
+	border: 1px solid #606060;
+	-webkit-border-radius: 14px;
+	-moz-border-radius: 14px;
+	border-radius: 14px;
+	line-height: 26px;
+	padding: 0 27px;
+	&:hover, &:active, &:focus {
+		outline: none;
+		text-decoration: none;
+		border: 1px solid #606060;
+		color: #606060;
+	}
+}

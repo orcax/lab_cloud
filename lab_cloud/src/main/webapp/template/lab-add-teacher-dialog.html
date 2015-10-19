@@ -1,0 +1,68 @@
+<div type="user-info-dialog">
+    <div class="btnGroup">
+        <button class="btn cdi-btn-default left" ng-click="cancel()">取消</button>
+        <button class="btn cdi-btn-blue right btn-save" ng-click="save()">保存</button>
+        <div class="title">教师信息</div>
+    </div>
+    <div >
+        <div class="content user-info" style="margin-top:10px;">
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;">真实姓名</div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <input type="text" name="name" ng-model="data.name" class="right form-control"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;">学工号</div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <input type="text" ng-model="data.number" class="right form-control"/>
+                </div>
+            </div>
+            <div class="row" ng-if="showPassword">
+                <div class="cell title" style="width: 37%;height: 50px;">密码</div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <input type="text" ng-model="data.initialPassword" class="right form-control"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;">角色</div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                       <select class="form-control right" style="width: 185px;" ng-model="data.role" >
+                        <option value="NORMAL" selected="">普通教师</option>
+                        <option value="LAB" >实验教师</option>
+                         <option value="ALL" >教师兼实验教师</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;">性别</div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                       <select class="form-control right" style="width: 185px;" ng-model="data.gender" >
+                        <option value="0" >男</option>
+                         <option value="1" >女</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;">用户描述</div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <textarea  class="right form-control" ng-model="data.title">
+                    </textarea> 
+                </div>
+            </div>
+            
+        </div>
+        <div class="slider2" style="margin-top: 16px;"></div>
+
+        <div class="slider2" style="margin-top: 5px;"></div>
+        <div class="content">
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;"></div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <span class="red">{{message}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

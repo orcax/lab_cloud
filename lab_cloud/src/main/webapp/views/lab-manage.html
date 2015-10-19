@@ -1,0 +1,303 @@
+<lab-header></lab-header>
+<div class="container">
+    <div class="command-nav-container">
+        <tabset>
+            <tab name="">
+                <tab-heading class="users" ng-click="tabHref('/lab-user-manage')">
+                    <span class="title">用户管理</span>
+                    <span class="info">管理用户权限和资料</span>
+                </tab-heading>
+            </tab>
+            <tab name="" active="true">
+                <tab-heading class="spaces" >
+                    <span class="title">实验课程管理</span>
+                    <span class="info">配置实验和课程关系</span>
+                </tab-heading>
+                <div class="command-content-container spaces" style="background-color: #f1f1f1;">
+                    <tabset vertical="true" type="pills">
+                        <tab>
+                            <tab-heading>
+                                <span class="name">全部实验室</span>
+                            </tab-heading>
+
+                            <div class="tableTitle">共 {{ itemPageResult.lab.totalItemNum }} 个实验室</div>
+                            <div class="tableContainer">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 25px;"></th>
+                                            <th style="width: 70px;">实验室编号</th>
+                                            <th style="width: 142px;">实验室名</th>
+                                            <th style="width: 106px;">容量</th>
+                                            <th style="width: 106px;">当前状态</th>
+                                            <th style="width: 100px;">基本信息</th>
+                                            <th>
+                                                <div class="btn-group-head">
+                                                    <!--  <button class="btn cdi-btn-default" ng-click="addLab()">添加实验室</button> -->
+                                                    <div style="width: 5px;height: 25px;float: right;"></div> 
+                                                   <!--  <button class="btn cdi-btn-default">查找</button> -->
+                                                </div>
+                                            </th>
+                                            <th style="width: 20px;"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="lab in itemPageResult.lab.selectedList">
+                                            <td style="width: 25px; border:none;"></td>
+                                            <td style="width: 70px;">
+                                                <span class="id">{{lab.labNumber}}</span>
+                                            </td>
+                                            <td style="width: 133px;">
+                                                <span class="code">{{lab.labName}}</span>
+                                            </td>
+                                            <td style="width: 115px;">
+                                                <span class="date">{{lab.capacity}}</span>
+                                            </td>
+                                            <td style="width: 115px;">
+                                                <span class="date label label-{{lab.status | labStatusClassFilter}}" ng-class="" style="width:50px;">{{lab.status | labStatusFilter}}</span>
+                                            </td>
+                                            <td style="width: 100px;">
+                                                <span class="name"></span>
+                                                <span class="tel">{{lab.description}}</span>
+                                            </td>
+                                            <td>
+                                                <div class="optionContainer" style="padding: 0;">
+                                                    <!-- <button class="btn cdi-btn-grey" ng-click="configExperimentForLab(lab)">配置实验</button> -->
+                                                    <div style="width: 13px;height: 25px;float: right;"></div>
+                                                    <button class="btn btn cdi-btn-default" ng-click="editLab(lab)">详细介绍</button>
+                                                   <!--  <button class="btn cdi-btn-grey btn-danger" ng-click="removeLab(lab)">移除</button> -->
+                                                </div>
+                                            </td>
+                                            <td style="width: 20px; border:none;"></td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="paginationContainer">
+                                <pagination direction-links="false" total-items="itemPageResult.lab.totalItemNum" ng-model="itemPageResult.lab.currentPage" ng-change="pageChanged('lab')" items-per-page="10"></pagination>
+                            </div>
+
+                            <div class="pagerContainer2">
+                                <pager total-items="itemPageResult.lab.totalItemNum" ng-model="itemPageResult.lab.currentPage" ng-change="pageChanged('lab')" previous-text="<" next-text=">"></pager>
+                            </div>
+                        </tab>
+                        <tab>
+                            <tab-heading>
+                                <span class="name">全部实验</span>
+                            </tab-heading>
+
+                            <div class="tableTitle">共 {{ itemPageResult.experiment.totalItemNum }} 个实验</div>
+                            <div class="tableContainer">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 25px;"></th>
+                                            <th style="width: 106px;">实验编号</th>
+                                            <th style="width: 180px;">实验名称</th>
+                                            <th style="width: 100px;">是否开放</th>
+                                            <!-- <th style="width: 105px;">基本描述</td> -->
+                                            <th>
+                                                <div class="btn-group-head">
+                                                    <button class="btn cdi-btn-default" ng-click="addExperiment()">添加实验</button>
+                                                    <div style="width: 5px;height: 25px;float: right;"></div>
+                                                    <!-- <button class="btn cdi-btn-default">查找</button> -->
+                                                </div>
+                                            </th>
+                                            <th style="width: 20px;"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="exp in itemPageResult.experiment.selectedList">
+                                            <td style="width: 25px; border:none;"></td>
+                                            <td style="width: 105px;">
+                                                <span class="id">{{exp.experimentNumber}}</span>
+                                            </td>
+                                            <td style="width: 180px;">
+                                                <span class="code">{{exp.experimentName}}</span>
+                                            </td>
+                                            <td style="width: 100px;">
+                                                <span class="date label label-{{exp.isActive | labStatusClassFilter}}" ng-class="" style="width:50px;">{{exp.isActive | labOpenFilter}}</span>
+                                                <!-- <span class="date">{{ | labOpenFilter}}</span> -->
+                                            </td>
+                                            <!-- <td style="width: 105px;">
+                                                <span class="name"></span>
+                                                <span class="tel">电话: fsfas</span>
+                                            </td> -->
+                                            <td>
+                                                <div class="optionContainer" style="padding: 0;">
+                                                    <button class="btn btn cdi-btn-default" style="width:84px" ng-click="configLab(exp)">配置实验室</button>
+                                                    <div style="width: 13px;height: 25px;float: right;"></div>
+                                                    <button class="btn btn cdi-btn-default" ng-click="editExperimentDetails(exp)">详细介绍</button>
+                                                    <div style="width: 13px;height: 25px;float: right;"></div>
+                                                    <!-- <button class="btn cdi-btn-default btn-danger" ng-click="removeExperiment(exp)">移除</button> -->
+                                                </div>
+                                            </td>
+                                            <td style="width: 20px; border:none;"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="paginationContainer">
+                                <pagination direction-links="false" total-items="itemPageResult.experiment.totalItemNum" ng-model="itemPageResult.experiment.currentPage" ng-change="pageChanged('experiment')" items-per-page="10"></pagination>
+                            </div>
+
+                            <div class="pagerContainer2">
+                                <pager total-items="itemPageResult.experiment.totalItemNum" ng-model="itemPageResult.experiment.currentPage" ng-change="pageChanged('experiment')" previous-text="<" next-text=">"></pager>
+                            </div>
+                        </tab>
+                        <tab>
+                            <tab-heading>
+                                <span class="name">全部课程</span>
+                            </tab-heading>
+
+                            <div class="tableTitle">共 {{ itemPageResult.course.totalItemNum }} 门课程</div>
+                            <div class="tableContainer">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 25px;"></th>
+                                            <th style="width: 70px;">课程编号</td>
+                                            <th style="width: 142px;">课程名</td>
+                                            <th style="width: 106px;">是否开课</td>
+                                            <th style="width: 120px;">开课单位</td>
+                                            <th>
+                                                <div class="btn-group-head">
+                                                    <button class="btn cdi-btn-default" ng-click="addCourse()">添加课程</button>
+                                                    <div style="width: 5px;height: 25px;float: right;"></div>
+                                                    <!-- <button class="btn cdi-btn-default">查找</button> -->
+                                                </div>
+                                            </th>
+                                            <th style="width: 20px;"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="course in itemPageResult.course.selectedList">
+                                            <td style="width: 25px; border:none;"></td>
+                                            <td style="width: 70px;">
+                                                <span class="id">{{course.courseNumber}}</span>
+                                            </td>
+                                            <td style="width: 133px;">
+                                                <span class="code">{{course.courseName}}</span>
+                                            </td>
+                                            <td style="width: 115px;">
+                                                <span class="date label label-{{course.isActive | labStatusClassFilter}}" ng-class="" style="width:50px;">{{course.isActive | labOpenFilter}}</span>
+                                            </td>
+                                            <td style="width: 120px;">
+                                                <span class="name">{{course.department}}</span>
+                                                <span class="tel"></span>
+                                            </td>
+                                            <td>
+                                                <div class="optionContainer" style="padding: 0;">
+                                                    <button class="btn cdi-btn-default" ng-click="configExperiment(course)">配置实验</button>
+                                                    <div style="width: 13px;height: 25px;float: right;"></div>
+                                                    <button class="btn btn cdi-btn-default" ng-click="editCourseDetails(course)">详细介绍</button>
+                                                    <div style="width: 13px;height: 25px;float: right;"></div>
+                                                   <!--  <button class="btn cdi-btn-default btn-danger" ng-click="removeCourse(course)">移除</button> -->
+                                                </div>
+                                            </td>
+                                            <td style="width: 20px; border:none;"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="paginationContainer">
+                                <pagination direction-links="false" total-items="itemPageResult.course.totalItemNum" ng-model="itemPageResult.course.currentPage" ng-change="pageChanged('course')" items-per-page="10"></pagination>
+                            </div>
+
+                            <div class="pagerContainer2">
+                                <pager total-items="itemPageResult.course.totalItemNum" ng-model="itemPageResult.course.currentPage" ng-change="pageChanged('course')" previous-text="<" next-text=">"></pager>
+                            </div>
+                        </tab>
+
+                        <tab>
+                            <tab-heading>
+                                <span class="name">本学期班级</span>
+                            </tab-heading>
+                           
+                            <div class="tableTitle">共 {{ itemPageResult.clazz.totalItemNum }} 个班级</div>
+
+                            <div class="tableContainer">
+                                <p class="bg-warning"  ng-if="semester = ''" style="margin-left: 20px;
+                                padding:10px 5px 10px 5px;">你还没有开启本学期！请点击 <a href="" ng-click="setSemester()">添加学期</a> 开启。
+                                </p>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 25px;"></th>
+                                            <th style="width: 90px;">班级编号</td>
+                                            <th style="width: 100px;">课程名</td>
+                                            <th style="width: 80px;">任课教师</td>
+                                            <th style="width: 60px;">学生数</td>
+                                            <th style="width: 200px;">详情</td>
+                                            <th>
+                                                <div class="btn-group-head">
+                                                    <button class="btn cdi-btn-default" ng-click="addClass()">开课</button>
+                                                    <div style="width: 5px;height: 25px;float: right;"></div>
+                                                     <button class="btn cdi-btn-default" ng-click="setSemester()">学期设置</button>
+                                                    <!-- <button class="btn cdi-btn-default">查找</button> -->
+                                                </div>
+                                            </th>
+                                            <th style="width: 20px;"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="class in itemPageResult.clazz.selectedList">
+                                            <td style="width: 25px; border:none;"></td>
+                                            <td style="width: 70px;">
+                                                <span class="id">{{class.classNumber}}</span>
+                                            </td>
+                                            <td style="width: 100px;">
+                                                <span class="code">{{class.course.courseName}}</span>
+                                            </td>
+                                            <td style="width: 80px;">
+                                                <span class="date">{{class.teacher.name}}</span>
+                                            </td>
+                                             <td style="width: 60px; padding-left:10px; cursor:pointer;text-decoration: underline;" ng-click="getClassStudent(class.id)" >
+                                                 <span class="code" >{{class.studentClass.length}}</span>
+                                             </td>
+                                            <td style="width: 200px;">
+                                                <span class="name"></span>
+                                                <span class="tel">{{class.classHour}} {{class.classRoom}}</span>
+                                            </td>
+                                            <td>
+                                                <div class="optionContainer" style="padding: 0;">
+                                                    <button class="btn btn cdi-btn-default" ng-click="editClassDetails(class)">详细介绍</button>
+                                                    <div style="width: 13px;height: 25px;float: right;"></div>
+                                                   <!--  <button class="btn cdi-btn-default btn-danger" ng-click="removeClass(class.id)">移除</button> -->
+                                                </div>
+                                            </td>
+                                            <td style="width: 20px; border:none;"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="paginationContainer">
+                                <pagination direction-links="false" total-items="itemPageResult.clazz.totalItemNum" ng-model="itemPageResult.clazz.currentPage" ng-change="pageChanged('clazz')" items-per-page="10"></pagination>
+                            </div>
+
+                            <div class="pagerContainer2">
+                                <pager total-items="itemPageResult.clazz.totalItemNum" ng-model="itemPageResult.clazz.currentPage" ng-change="pageChanged('clazz')" previous-text="<" next-text=">"></pager>
+                            </div>
+                        </tab>
+                    </tabset>
+                </div>
+            </tab>
+
+            <tab name="">
+                <tab-heading class="reservation" ng-click="tabHref('/lab-course-arrangement')">
+                    <span class="title">实验课程排布</span>
+                    <span class="info">配置课程相关实验排列</span>
+                </tab-heading>
+            </tab>
+
+            <tab>
+                <tab-heading class="cdiweb" ng-click="tabHref('/lab-apply-manage')">
+                    <span class="title">申请审核</span>
+                    <span class="info">审核实验室预定申请</span>
+                </tab-heading>
+
+            </tab>
+        </tabset>
+    </div>
+</div>

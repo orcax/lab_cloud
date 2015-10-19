@@ -1,0 +1,14 @@
+{
+  "name": "is-loading",
+  "homepage": "https://github.com/hekigan/is-loading",
+  "version": "1.0.4",
+  "_release": "1.0.4",
+  "_resolution": {
+    "type": "version",
+    "tag": "1.0.4",
+    "commit": "703b6fbe275a447846bbb6b72b265a4dca76a18b"
+  },
+  "_source": "https://github.com/hekigan/is-loading.git",
+  "_target": "~1.0.4",
+  "_originalSource": "https://github.com/hekigan/is-loading.git"
+}

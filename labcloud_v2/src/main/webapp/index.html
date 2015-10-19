@@ -1,0 +1,183 @@
+<!doctype html>
+<html class="no-js">
+<head>
+<meta charset="utf-8">
+<title>力学实验云平台</title>
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width">
+<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+<!-- build:css(.) styles/vendor.css -->
+<!-- bower:css -->
+<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+<link rel="stylesheet" href="bower_components/angular-inform/dist/angular-inform.css" />
+<link rel="stylesheet" href="bower_components/angular-dialog-service/dialogs.min.css" />
+<link rel="stylesheet" href="bower_components/sweetalert/lib/sweet-alert.css" />
+<link rel="stylesheet" href="bower_components/bootstrap-timepicker/css/bootstrap-timepicker.min.css" />
+<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
+<link rel="stylesheet" href="bower_components/bootstrap-datepicker/css/datepicker.css" />
+<link rel="stylesheet" href="bower_components/bootstrap-datepicker/css/datepicker3.css" />
+<link rel="stylesheet" href="bower_components/select2/select2.css" />
+<link rel="stylesheet" href="bower_components/fullcalendar/fullcalendar.css" />
+<link rel="stylesheet" href="bower_components/angular-datepicker/dist/index.min.css" />
+<!-- endbower -->
+<!-- endbuild -->
+<!-- build:css(.tmp) styles/main.css -->
+ <!--[if lt IE 9]>
+    <script>
+        window.location.href = 'upgrade.html';
+    </script>
+ <![endif]-->
+<link rel="stylesheet" href="/styles/main.css">
+<link rel="stylesheet" href="/styles/portal.css">
+<!-- endbuild -->
+</head>
+<body ng-app="labcloud">
+	<!--[if lt IE 7]>
+  <p class="browsehappy">
+    你使用的浏览器版本太老，请使用最新谷歌浏览器，获得更好的网络体验。
+    <a href="http://browsehappy.com/">upgrade your browser</a>
+    to improve your experience.
+  </p>
+  <![endif]-->
+
+	<div style="min-height: 800px;">
+		<div ui-view></div>
+	</div>
+
+	<!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+	<script>
+		!function(A, n, g, u, l, a, r) {
+			A.GoogleAnalyticsObject = l, A[l] = A[l] || function() {
+				(A[l].q = A[l].q || []).push(arguments)
+			}, A[l].l = +new Date, a = n.createElement(g), r = n
+					.getElementsByTagName(g)[0], a.src = u, r.parentNode
+					.insertBefore(a, r)
+		}(window, document, 'script',
+				'//www.google-analytics.com/analytics.js', 'ga');
+
+		ga('create', 'UA-XXXXX-X');
+		ga('send', 'pageview');
+	</script>
+
+	<!-- build:js(.) /scripts/vendor.js -->
+	<!-- bower:js -->
+	<script src="bower_components/jquery/dist/jquery.js"></script>
+	<script src="bower_components/jsog/lib/JSOG.js"></script>
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+	<script src="bower_components/angular-animate/angular-animate.js"></script>
+	<script src="bower_components/angular-aria/angular-aria.js"></script>
+	<script src="bower_components/angular-cookies/angular-cookies.js"></script>
+	<script src="bower_components/angular-messages/angular-messages.js"></script>
+	<script src="bower_components/angular-resource/angular-resource.js"></script>
+	<script src="bower_components/angular-route/angular-route.js"></script>
+	<script src="bower_components/jquery-ui/jquery-ui.js"></script>
+	<script src="bower_components/angular-ui-sortable/sortable.js"></script>
+	<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+	<script src="bower_components/angular-touch/angular-touch.js"></script>
+	<script src="bower_components/angular-inform/dist/angular-inform.js"></script>
+	<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+	<script src="bower_components/tinymce/tinymce.min.js"></script>
+	<script src="bower_components/angular-ui-tinymce/src/tinymce.js"></script>
+	<script src="bower_components/angular-translate/angular-translate.js"></script>
+	<script src="bower_components/angular-dialog-service/dialogs.min.js"></script>
+	<script src="bower_components/angular-dialog-service/dialogs-default-translations.min.js"></script>
+	<script src="bower_components/sweetalert/lib/sweet-alert.js"></script>
+	<script src="bower_components/angular-sweetalert/SweetAlert.js"></script>
+	<script src="bower_components/ngstorage/ngStorage.js"></script>
+	<script src="bower_components/autotype/index.js"></script>
+	<script src="bower_components/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+	<script src="bower_components/ng-file-upload/angular-file-upload.js"></script>
+	<script src="bower_components/ng-file-upload-shim/angular-file-upload-shim.js"></script>
+	<script src="bower_components/angular-datepicker/dist/index.min.js"></script>
+	<script src="bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+	<script src="bower_components/textAngular/dist/textAngular.min.js"></script>
+	<script src="bower_components/rangy/rangy-core.min.js"></script>
+	<script src="bower_components/rangy/rangy-cssclassapplier.min.js"></script>
+	<script src="bower_components/rangy/rangy-selectionsaverestore.min.js"></script>
+	<script src="bower_components/rangy/rangy-serializer.min.js"></script>
+	<script src="bower_components/select2/select2.js"></script>
+	<script src="bower_components/angular-ui-select2/src/select2.js"></script>
+	<script src="bower_components/angular-ui-date/src/date.js"></script>
+	<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+	<script src="bower_components/oclazyload/dist/ocLazyLoad.min.js"></script>
+	<script src="bower_components/moment/moment.js"></script>
+	<script src="bower_components/angular-moment/angular-moment.js"></script>
+	<script src="bower_components/fullcalendar/fullcalendar.min.js"></script>
+	<script src="bower_components/fullcalendar/lang/zh-cn.js"></script>
+	<script src="bower_components/angular-ui-calendar/src/calendar.js"></script>
+
+	<script src="js/underscore-min.js"></script>
+	<!-- endbower -->
+	<!-- endbuild -->
+
+	<!-- build:js({.tmp,app}) /scripts/scripts.js -->
+	<script src="/scripts/app.js"></script>
+	<script src="/scripts/routes.js"></script>
+	<script src="/scripts/lazyload.js"></script>
+
+
+	<script src="/scripts/directives/lab-collapse.js"></script>
+	<script src="/scripts/directives/lab-header.js"></script>
+	<script src="/scripts/directives/lab-footer.js"></script>
+
+
+	<script src="/scripts/controllers/main.js"></script>
+	<script src="/scripts/controllers/login.js"></script>
+	<script src="/scripts/controllers/user-manage.js"></script>
+	<script src="/scripts/controllers/lab-manage.js"></script>
+	<script src="/scripts/controllers/apply-manage.js"></script>
+	<script src="/scripts/controllers/semester-manage.js"></script>
+	<script src="/scripts/controllers/course-manage.js"></script>
+	<script src="/scripts/controllers/manage-modal.js"></script>
+	<script src="/scripts/controllers/teacher-reservation.js"></script>
+	<script src="/scripts/controllers/student-reservation.js"></script>
+	<script src="/scripts/controllers/teacher-class.js"></script>
+	<script src="/scripts/controllers/student-class.js"></script>
+
+	<script src="/scripts/common/jquery.isloading.min.js"></script>
+	<script src="/scripts/controllers/profile.js"></script>
+	<script src="/scripts/controllers/message.js"></script>
+	<script src="/scripts/controllers/help.js"></script>
+
+	<script src="/scripts/services/general-service.js"></script>
+	<script src="/scripts/services/login-service.js"></script>
+	<script src="/scripts/services/loading.js"></script>
+	<script src="/scripts/services/modal-service.js"></script>
+	<script src="/scripts/services/q-service.js"></script>
+	<script src="/scripts/services/session-service.js"></script>
+
+	<script src="/scripts/factories/token-factory.js"></script>
+	<script src="/scripts/factories/account-factory.js"></script>
+	<script src="/scripts/factories/lab-factory.js"></script>
+	<script src="/scripts/factories/exp-factory.js"></script>
+	<script src="/scripts/factories/course-factory.js"></script>
+	<script src="/scripts/factories/clazz-factory.js"></script>
+	<script src="/scripts/factories/reservation-factory.js"></script>
+	<script src="/scripts/factories/semester-factory.js"></script>
+	<script src="/scripts/factories/studentrecord-factory.js"></script>
+
+	<script src="/scripts/filters/common-filter.js"></script>
+	<script src="/scripts/filters/account-filter.js"></script>
+	<script src="/scripts/filters/reservation-filter.js"></script>
+	
+  <!--portal-->
+  <script src="/scripts/directives/portal/portal-header.js"></script>
+  <script src="/scripts/directives/portal/portal-footer.js"></script>
+  <script src="/scripts/directives/portal/portal-datepicker.js"></script>
+  <script src="/scripts/directives/portal/portal-timepicker.js"></script>
+  <script src="/scripts/controllers/portal/portal-login.js"></script>
+  <script src="/scripts/controllers/portal/portal-home.js"></script>
+  <script src="/scripts/controllers/portal/portal-reservation.js"></script>
+  <script src="/scripts/controllers/portal/portal-experiment.js"></script>
+  <script src="/scripts/controllers/portal/portal-setting.js"></script>
+  <script src="/scripts/controllers/portal/portal-calendar.js"></script>
+  <script src="/scripts/controllers/portal/portal-notification.js"></script>
+  <script src="/scripts/controllers/portal/portal-course.js"></script>
+  <script src="/scripts/controllers/portal/portal-course-detail.js"></script>
+  <script src="/scripts/controllers/portal/portal-class.js"></script>
+  <script src="/scripts/controllers/portal/portal-class-detail.js"></script>
+  <script src="/scripts/controllers/portal/portal-student.js"></script>
+	<!-- endbuild -->
+</body>
+</html>

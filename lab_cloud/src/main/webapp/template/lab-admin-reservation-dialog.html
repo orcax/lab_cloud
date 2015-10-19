@@ -1,0 +1,67 @@
+<div type="user-info-dialog" style="width=700px;">
+    <div class="btnGroup">
+        <button class="btn cdi-btn-default left" ng-click="cancel()">取消</button>
+        <button class="btn cdi-btn-blue right btn-save" ng-click="save()">确认</button>
+        <div class="title">编辑实验</div>
+    </div>
+    <div class="content user-info" style="margin-top:10px;">
+        <div class="row">
+            <div class="cell title" style="width: 37%;height: 50px;">预约时间</div>
+            <div class="cell" style="width: 63%;height: 50px;">
+                <input type="text"  value="{{data.date}} {{slotExpression}}" class="right form-control" readonly="" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="cell title" style="width: 37%;height: 50px;">预约实验室</div>
+            <div class="cell" style="width: 63%;height: 50px;">
+                <input type="text"  ng-model="data.lab.name" class="right form-control" readonly="" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="cell title" style="width: 37%;height: 50px;">教师</div>
+            <div class="cell" style="width: 63%;height: 50px;">
+                <select class="right form-control" ng-options="entity.name for entity in teacherList track by entity.id" ng-model="selected.teacher" ng-change="getClazzList()"></select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="cell title" style="width: 37%;height: 50px;">实验班级</div>
+            <div class="cell" style="width: 63%;height: 50px;">
+                <select class="right form-control" ng-options="entity.name for entity in clazzList track by entity.id" ng-model="selected.clazz" ng-change="getExpList()"></select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="cell title" style="width: 37%;height: 50px;">实验名称</div>
+            <div class="cell" style="width: 63%;height: 50px;">
+                <select class="right form-control" ng-options="entity.name for entity in expList track by entity.id" ng-model="selected.exp"></select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="cell title" style="width: 37%;height: 50px;">预约人数</div>
+            <div class="cell" style="width: 63%;height: 50px;">
+                <input type="number" ng-model="data.count" class="right form-control"/>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="cell title" style="width: 37%;height: 50px;">备注</div>
+            <div class="cell" style="width: 63%;height: 50px;">
+                <textarea type="number" ng-model="data.remark" class="right form-control"></textarea>
+            </div>
+        </div>
+
+    </div>
+    <div class="slider2" style="margin-top: 16px;"></div>
+
+    <div class="content">
+        <div class="row">
+            <div class="cell title" style="width: 37%;height: 50px;"></div>
+            <div class="cell" style="width: 63%;height: 50px;">
+                <span class="red">{{message}}</span>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+<div type="user-info-dialog">
+    <div class="btnGroup">
+        <button class="btn cdi-btn-default left" ng-click="cancel()">取消</button>
+        <button class="btn cdi-btn-blue right btn-save" ng-click="save()">确认添加</button>
+        <div class="title">编辑课程</div>
+    </div>
+    <div >
+        <div class="content user-info" style="margin-top:10px;">
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;">课程编号</div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <input type="text" name="name" ng-model="data.courseNumber" class="right form-control"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;">课程名称</div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <input type="text" ng-model="data.courseName" class="right form-control"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;">开课单位</div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                   <input type="text" ng-model="data.department" class="right form-control"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 45px;">开课年份</div>
+                <div class="cell" style="width: 63%;height: 45px;">
+                   <input type="date" ng-model="data.startYear"  datepicker-popup="{{format}}" class="right form-control" is-open="opened" max-date="'2015-06-22'" datepicker-options="dateOptions" ng-required="true"/>
+                </div>
+            </div>
+            
+        </div>
+        <div class="slider2" style="margin-top: 16px;"></div>
+        
+        <div class="content">
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;"></div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <span class="red">{{message}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

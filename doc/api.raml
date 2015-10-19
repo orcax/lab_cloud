@@ -1,0 +1,1079 @@
+#%RAML 0.8
+
+title: 同济大学力学系实验平台
+protocols: [ HTTP, HTTPS ]
+baseUri: http://localhost:8080/api/
+version: v1
+
+traits:
+  - secured:
+      headers:
+        X-Auth-Token:
+          description: 当前用户token，用于验证权限,从登录返回的header中获取
+          type: string
+          required: true
+          example: "IOC551fea47e4b02dd0ab568b85"
+
+  - loginSecured:
+      headers:
+        X-Username:
+          description: 用户名
+          type: string
+          required: true
+        X-Password:
+          description: 密码
+          type: string
+          required: true
+  - roleParam:
+      queryParameters:
+        userType:
+          type: string
+          description: 用户角色
+          example: |
+            ADMINISTRATOR, STUDENT, ALL_TEACHER, LAB_TEAHCER,
+
+/token:
+  post:
+    description: 用户登录获取token，通过headers返回
+    is: [loginSecured]
+    responses:
+      200:
+        body:
+          application/json:
+            schema: |
+              {
+                "errorCode": "NO_ERROR",
+                "data": {
+                  "@id": "1",
+                  "id": 1,
+                  "account": "system",
+                  "title": null,
+                  "name": "fsadf",
+                  "systemName": null,
+                  "mobilePhone": "fsda",
+                  "workPhone": null,
+                  "role": "MAYOR"
+                },
+                "numPerPage": 0,
+                "curPageNum": 0,
+                "totalItemNum": 0,
+                "totalPageNum": 0
+              }
+  delete:
+    description: |
+      登出用户
+    is: [secured]
+    responses:
+      200:
+        body:
+          application/json:
+            schema: |
+              {
+                "errorCode": "NO_ERROR",
+                "data": "Logout.",
+                "numPerPage": 0,
+                "curPageNum": 0,
+                "totalItemNum": 0,
+                "totalPageNum": 0
+              }
+
+/lab:
+  post:
+    is: [ secured ]
+    description: 添加一个lab
+    queryParameters:
+      data:
+        description: "以json形式传输lab信息，用于新lab"
+        example: |
+          {
+            "number":"1112",
+            "name":"test lab",
+            "description":"fdsa",
+            "active":true,
+            "capacity":0,
+            "machineCount":0
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {"errorCode":"NO_ERROR","data":null,"numPerPage":0,"curPageNum":0,"totalItemNum":0,"totalPageNum":0}
+      507:
+        body:
+          application/json:
+            schema: |
+              {
+                "code": 507,
+                "message": "添加记录失败，请联系管理员"
+              }
+      500:
+        body:
+          application/json:
+            schema: |
+              {
+                "code": 500,
+                "message": "对不起，你没有该权限，请与系统管理员联系"
+              }
+  /{id}:
+    is: [ secured ]
+    get:
+      description: 获取ID为{id}的lab基本信息
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {"errorCode":"NO_ERROR","data":{"@id":"1","id":4,"number":"1112","name":"test lab","description":null,"active":true,"capacity":0,"machineCount":0,"status":"OPEN","creator":{"@id":"2","id":1,"number":"091111","initialPassword":null,"role":"ADMINISTRATOR","active":false,"passwordChanged":false,"iconPath":null,"name":null,"title":"FDSAFA","email":null,"grade":"发送","major":null},"updater":null},"numPerPage":0,"curPageNum":0,"totalItemNum":0,"totalPageNum":0}
+        404:
+          body:
+            application/json:
+              schema: |
+                {
+                  "code": 404,
+                  "message": "找不到对象"
+                }
+        500:
+          body:
+            application/json:
+              schema: |
+                {
+                  "code": 500,
+                  "message": "对不起，你没有该权限，请与系统管理员联系"
+                }
+    put:
+      description: 更新lab信息
+      queryParameters:
+        data:
+          description: "以json形式传输用户信息，用于更新lab信息"
+          example: |
+            {"@id":"1","id":0,"number":"1112","name":"lab2","description":null,"active":true,"capacity":0,"machineCount":0,"status":null,"creator":{"@id":"2","id":1,"number":"091111","initialPassword":null,"role":"ADMINISTRATOR","active":false,"passwordChanged":false,"iconPath":null,"name":null,"title":"FDSAFA","email":null,"grade":"发送","major":null},"updater":null,"experiments":[]}
+
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {"errorCode":"NO_ERROR","data":null,"numPerPage":0,"curPageNum":0,"totalItemNum":0,"totalPageNum":0}
+        404:
+          body:
+            application/json:
+              schema: |
+                {
+                  "code": 404,
+                  "message": "找不到对象"
+                }
+        500:
+          body:
+            application/json:
+              schema: |
+                {
+                  "code": 500,
+                  "message": "对不起，你没有该权限，请与系统管理员联系"
+                }
+    delete:
+      description: 删除该lab
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {"errorCode":"NO_ERROR","data":null,"numPerPage":0,"curPageNum":0,"totalItemNum":0,"totalPageNum":0}
+        404:
+          body:
+            application/json:
+              schema: |
+                {
+                  "code": 404,
+                  "message": "找不到对象"
+                }
+        500:
+          body:
+            application/json:
+              schema: |
+                {
+                  "code": 500,
+                  "message": "对不起，你没有该权限，请与系统管理员联系"
+                }
+  /list:
+    /all:
+      get:
+        description: 获取所有的实验室
+        responses:
+          200:
+            body:
+              application/json:
+                schema: |
+                  {
+
+                  }
+
+/experiment:
+  post:
+    is: [ secured ]
+    description: 添加一个experiment
+    queryParameters:
+      data:
+        description: "以json形式传输用户信息，用于创建新experiment"
+        example: |
+          {
+            "number":"21134",
+            "name":"experiment",
+            "minGrpStuCnt":20,
+            "maxGrpStuCnt":100,
+            "active":true
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {"errorCode":"NO_ERROR","data":null,"numPerPage":0,"curPageNum":0,"totalItemNum":0,"totalPageNum":0}
+      507:
+        body:
+          application/json:
+            schema: |
+              {
+                "code": 507,
+                "message": "添加记录失败，请联系管理员"
+              }
+      500:
+        body:
+          application/json:
+            schema: |
+              {
+                "code": 500,
+                "message": "对不起，你没有该权限，请与系统管理员联系"
+              }
+  /{id}:
+    is: [ secured ]
+    get:
+      description: 获取基本信息
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {"errorCode":"NO_ERROR","data":{"@id":"1","id":2,"number":"21134","name":"experiment","minGrpStuCnt":20,"maxGrpStuCnt":100,"active":true},"numPerPage":0,"curPageNum":0,"totalItemNum":0,"totalPageNum":0}
+        404:
+          body:
+            application/json:
+              schema: |
+                {
+                  "code": 404,
+                  "message": "找不到对象"
+                }
+        500:
+          body:
+            application/json:
+              schema: |
+                {
+                  "code": 500,
+                  "message": "对不起，你没有该权限，请与系统管理员联系"
+                }
+    put:
+      description: 更新experiment
+      queryParameters:
+        data:
+          description: "以json形式传输experiment信息，用于更新experiment"
+          example: |
+            {"@id":"1","id":0,"number":"21134","name":"experiment","minGrpStuCnt":50,"maxGrpStuCnt":100,"active":true}
+
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {"errorCode":"NO_ERROR","data":null,"numPerPage":0,"curPageNum":0,"totalItemNum":0,"totalPageNum":0}
+        404:
+          body:
+            application/json:
+              schema: |
+                {
+                  "code": 404,
+                  "message": "找不到对象"
+                }
+        500:
+          body:
+            application/json:
+              schema: |
+                {
+                  "code": 500,
+                  "message": "对不起，你没有该权限，请与系统管理员联系"
+                }
+    delete:
+      description: 删除该experiment
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {"errorCode":"NO_ERROR","data":null,"numPerPage":0,"curPageNum":0,"totalItemNum":0,"totalPageNum":0}
+        404:
+          body:
+            application/json:
+              schema: |
+                {
+                  "code": 404,
+                  "message": "找不到对象"
+                }
+        500:
+          body:
+            application/json:
+              schema: |
+                {
+                  "code": 500,
+                  "message": "对不起，你没有该权限，请与系统管理员联系"
+                }
+    /labs:
+      get:
+        description: 获取所有实验室
+        responses:
+          200:
+            body:
+              application/json:
+                example: |
+                  {"errorCode":"NO_ERROR","data":[[5,"test lab"]],"numPerPage":0,"curPageNum":0,"totalItemNum":0,"totalPageNum":0}
+          500:
+            body:
+              application/json:
+                schema: |
+                  {
+                    "code": 500,
+                    "message": "对不起，你没有该权限，请与系统管理员联系"
+                  }
+    /lab:
+      /{labId}:
+        post:
+          description: 将一个实验室配备到一个实验里。
+          responses:
+            200:
+              body:
+                application/json:
+                  example: |
+                    {"errorCode":"NO_ERROR","data":1,"numPerPage":0,"curPageNum":0,"totalItemNum":0,"totalPageNum":0}
+            507:
+              body:
+                application/json:
+                  schema: |
+                    {
+                      "code": 507,
+                      "message": "添加记录失败，请联系管理员"
+                    }
+            500:
+              body:
+                application/json:
+                  schema: |
+                    {
+                      "code": 500,
+                      "message": "对不起，你没有该权限，请与系统管理员联系"
+                    }
+        delete:
+          description: 从experiment中剔除实验室
+          responses:
+            200:
+              body:
+                application/json:
+                  example: |
+                    {"errorCode":"NO_ERROR","data":1,"numPerPage":0,"curPageNum":0,"totalItemNum":0,"totalPageNum":0}
+            404:
+              body:
+                application/json:
+                  schema: |
+                    {
+                      "code": 404,
+                      "message": "找不到对象"
+                    }
+            500:
+              body:
+                application/json:
+                  schema: |
+                    {
+                      "code": 500,
+                      "message": "对不起，你没有该权限，请与系统管理员联系"
+                    }
+
+/course:
+  post:
+    is: [ secured ]
+    description: 添加一门课程
+    queryParameters:
+      data:
+        description: "以json形式传输用户信息，用于创建新experiment"
+        example: |
+          {
+            "number":"2334",
+            "name":"DB2 development",
+            "department":"The finance department",
+            "startYear":"2016",
+            "active":true
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {"errorCode":"NO_ERROR","data":null,"numPerPage":0,"curPageNum":0,"totalItemNum":0,"totalPageNum":0}
+      507:
+        body:
+          application/json:
+            schema: |
+              {
+                "code": 507,
+                "message": "添加记录失败，请联系管理员"
+              }
+      500:
+        body:
+          application/json:
+            schema: |
+              {
+                "code": 500,
+                "message": "对不起，你没有该权限，请与系统管理员联系"
+              }
+  /{id}:
+    is: [ secured ]
+    get:
+      description: 获取课程基本信息
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {"errorCode":"NO_ERROR","data":{"@id":"1","id":2,"number":"2334","name":"DB2 development","department":"The finance department","startYear":"2016","active":true},"numPerPage":0,"curPageNum":0,"totalItemNum":0,"totalPageNum":0}
+        404:
+          body:
+            application/json:
+              schema: |
+                {
+                  "code": 404,
+                  "message": "找不到对象"
+                }
+        500:
+          body:
+            application/json:
+              schema: |
+                {
+                  "code": 500,
+                  "message": "对不起，你没有该权限，请与系统管理员联系"
+                }
+    put:
+      description: 更新课程
+      queryParameters:
+        data:
+          description: "以json形式传输experiment信息，用于更新experiment"
+          example: |
+            {"@id":"1","id":0,"number":"2334","name":"DB2 development course","department":"The finance department","startYear":"2016","active":true}
+
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {"errorCode":"NO_ERROR","data":null,"numPerPage":0,"curPageNum":0,"totalItemNum":0,"totalPageNum":0}
+        404:
+          body:
+            application/json:
+              schema: |
+                {
+                  "code": 404,
+                  "message": "找不到对象"
+                }
+        500:
+          body:
+            application/json:
+              schema: |
+                {
+                  "code": 500,
+                  "message": "对不起，你没有该权限，请与系统管理员联系"
+                }
+    delete:
+      description: 删除一门课程 | 未来需要判断本学期是否有引用
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {"errorCode":"NO_ERROR","data":null,"numPerPage":0,"curPageNum":0,"totalItemNum":0,"totalPageNum":0}
+        404:
+          body:
+            application/json:
+              schema: |
+                {
+                  "code": 404,
+                  "message": "找不到对象"
+                }
+        500:
+          body:
+            application/json:
+              schema: |
+                {
+                  "code": 500,
+                  "message": "对不起，你没有该权限，请与系统管理员联系"
+                }
+    /experiments:
+      get:
+        description: 获取课程所有实验
+        responses:
+          200:
+            body:
+              application/json:
+                example: |
+                  {"errorCode":"NO_ERROR","data":[[3,"experiment"]],"numPerPage":0,"curPageNum":0,"totalItemNum":0,"totalPageNum":0}
+          500:
+            body:
+              application/json:
+                schema: |
+                  {
+                    "code": 500,
+                    "message": "对不起，你没有该权限，请与系统管理员联系"
+                  }
+  /experiment:
+      /{expId}:
+        post:
+          description: 为一个课程配置实验
+          responses:
+            200:
+              body:
+                application/json:
+                  example: |
+                    {"errorCode":"NO_ERROR","data":1,"numPerPage":0,"curPageNum":0,"totalItemNum":0,"totalPageNum":0}
+            507:
+              body:
+                application/json:
+                  schema: |
+                    {
+                      "code": 507,
+                      "message": "添加记录失败，请联系管理员"
+                    }
+            500:
+              body:
+                application/json:
+                  schema: |
+                    {
+                      "code": 500,
+                      "message": "对不起，你没有该权限，请与系统管理员联系"
+                    }
+        delete:
+          description: 删除课程的一门实验
+          responses:
+            200:
+              body:
+                application/json:
+                  example: |
+                    {"errorCode":"NO_ERROR","data":1,"numPerPage":0,"curPageNum":0,"totalItemNum":0,"totalPageNum":0}
+            404:
+              body:
+                application/json:
+                  schema: |
+                    {
+                      "code": 404,
+                      "message": "找不到对象"
+                    }
+            500:
+              body:
+                application/json:
+                  schema: |
+                    {
+                      "code": 500,
+                      "message": "对不起，你没有该权限，请与系统管理员联系"
+                    }
+
+/semester:
+  post:
+    description: 添加一个学期
+    queryParameters:
+      data:
+        description: "以json形式传输信息，用于创建新semester"
+        example: |
+          {"@id":"1","id":0,"name":"2015上半学期","startDate":"2015-05-10","endDate":"2015-05-22","status":"CURRENT","currentDate":null,"weekIndex":null,"totalWeekNumber":null}
+    responses:
+      200:
+          body:
+            application/json:
+              example: |
+                {"errorCode":"NO_ERROR","data":null,"numPerPage":0,"curPageNum":0,"totalItemNum":0,"totalPageNum":0}
+      507:
+          body:
+            application/json:
+              schema: |
+                {
+                  "code": 507,
+                  "message": "添加记录失败，请联系管理员"
+                }
+      500:
+          body:
+            application/json:
+              schema: |
+                {
+                  "code": 500,
+                  "message": "对不起，你没有该权限，请与系统管理员联系"
+                }
+  /{id}:
+    delete:
+      description: 删除一个学期
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {"errorCode":"NO_ERROR","data":null,"numPerPage":0,"curPageNum":0,"totalItemNum":0,"totalPageNum":0}
+        507:
+          body:
+            application/json:
+              schema: |
+                {
+                  "code": 507,
+                  "message": "添加记录失败，请联系管理员"
+                }
+        500:
+          body:
+            application/json:
+              schema: |
+                {
+                  "code": 500,
+                  "message": "对不起，你没有该权限，请与系统管理员联系"
+                }
+  /current:
+    get:
+      description: 获取status为CURRENT的学期信息
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {"errorCode":"NO_ERROR","data":null,"numPerPage":0,"curPageNum":0,"totalItemNum":0,"totalPageNum":0}
+        507:
+          body:
+            application/json:
+              schema: |
+                {
+                  "code": 507,
+                  "message": "添加记录失败，请联系管理员"
+                }
+        500:
+          body:
+            application/json:
+              schema: |
+                {
+                  "code": 500,
+                  "message": "对不起，你没有该权限，请与系统管理员联系"
+                }
+    put:
+      description: "以key value的形式传输信息(?semester=3)，用于改变semester的状态"
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {"errorCode":"NO_ERROR","data":null,"numPerPage":0,"curPageNum":0,"totalItemNum":0,"totalPageNum":0}
+        507:
+          body:
+            application/json:
+              schema: |
+                {
+                  "code": 507,
+                  "message": "添加记录失败，请联系管理员"
+                }
+        500:
+          body:
+            application/json:
+              schema: |
+                {
+                  "code": 500,
+                  "message": "对不起，你没有该权限，请与系统管理员联系"
+                }
+  /list:
+    /all:
+      get:
+        description: 获取所有学期列表
+        responses:
+          200:
+              body:
+                application/json:
+                  example: |
+                    {
+                      "errorCode":"NO_ERROR",
+                      "data":[{"@id":"1","id":3,"name":"2015上半学期","startDate":"2015-05-10","endDate":"2015-05-22","status":"FUTURE","currentDate":null,"weekIndex":null,"totalWeekNumber":null},
+                      {"@id":"2","id":4,"name":"2015上半学期","startDate":"2015-05-10","endDate":"2015-05-22","status":"FUTURE","currentDate":null,"weekIndex":null,"totalWeekNumber":null},
+                      {"@id":"3","id":5,"name":"2015上半学期","startDate":"2015-05-10","endDate":"2015-05-22","status":"FUTURE","currentDate":null,"weekIndex":null,"totalWeekNumber":null},
+                      {"@id":"4","id":6,"name":"2015上半学期","startDate":"2015-05-10","endDate":"2015-05-22","status":"FUTURE","currentDate":null,"weekIndex":null,"totalWeekNumber":null}],
+                      "numPerPage":0,"curPageNum":0,"totalItemNum":0,"totalPageNum":0
+                    }
+          507:
+              body:
+                application/json:
+                  schema: |
+                    {
+                      "code": 507,
+                      "message": "添加记录失败，请联系管理员"
+                    }
+          500:
+              body:
+                application/json:
+                  schema: |
+                    {
+                      "code": 500,
+                      "message": "对不起，你没有该权限，请与系统管理员联系"
+                    }
+
+/class:
+  post:
+    is: [ secured ]
+    description: 添加一个班级 - 需要设置教师/课程/学期
+    queryParameters:
+      data:
+        description: "以json形式传输用户信息，用于创建新experiment"
+        example: |
+          {"@id":"1","id":0,"number":"20151126","clazzHour":"40","clazzroom":"济世楼310","semester":null,"course":null,"teacher":null,"students":[]}
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {"errorCode":"NO_ERROR","data":null,"numPerPage":0,"curPageNum":0,"totalItemNum":0,"totalPageNum":0}
+      507:
+        body:
+          application/json:
+            schema: |
+              {
+                "code": 507,
+                "message": "添加记录失败，请联系管理员"
+              }
+      500:
+        body:
+          application/json:
+            schema: |
+              {
+                "code": 500,
+                "message": "对不起，你没有该权限，请与系统管理员联系"
+              }
+  /{id}:
+    is: [ secured ]
+    get:
+      description: 获取班级基本信息
+      responses:
+        200:
+          body:
+            application/json:
+              schema: |
+                {
+                  "errorCode":"NO_ERROR",
+                  "data":{
+                    "@id":"1",
+                    "id":20,
+                    "number":"20156126",
+                    "clazzHour":"40",
+                    "clazzroom":"济世楼310",
+                    "semester":{"@id":"2","id":3,"name":"2015上半学期","startDate":"2015-05-10","endDate":"2015-05-22","status":"CURRENT","currentDate":null,"weekIndex":null,"totalWeekNumber":null},
+                    "course":{"@id":"3","id":3,"number":"2334","name":"DB2 development","department":"The finance department","startYear":"2016","active":true},
+                    "teacher":{"@id":"4","id":1,"number":"091116","initialPassword":null,"role":"ADMINISTRATOR","active":false,"passwordChanged":false,"iconPath":null,"name":null,"title":"FDSAFA","email":null,"grade":"09","major":null}
+                  },
+                  "numPerPage":0,
+                  "curPageNum":0,
+                  "totalItemNum":0,
+                  "totalPageNum":0
+                }
+        404:
+          body:
+            application/json:
+              schema: |
+                {
+                  "code": 404,
+                  "message": "找不到对象"
+                }
+        500:
+          body:
+            application/json:
+              schema: |
+                {
+                  "code": 500,
+                  "message": "对不起，你没有该权限，请与系统管理员联系"
+                }
+    put:
+      description: 更新班级信息(semester，course，teacher中可以只设置id属性)
+      queryParameters:
+        data:
+          description: "以json形式传输experiment信息，用于更新class"
+          example: |
+            {"errorCode":"NO_ERROR","data":{"@id":"1","id":20,"number":"20156126","clazzHour":"40","clazzroom":"济世楼310","semester":{"@id":"2","id":3,"name":"2015上半学期","startDate":"2015-05-10","endDate":"2015-05-22","status":"CURRENT","currentDate":null,"weekIndex":null,"totalWeekNumber":null},"course":{"@id":"3","id":3,"number":"2334","name":"DB2 development","department":"The finance department","startYear":"2016","active":true},"teacher":{"@id":"4","id":1,"number":"091116","initialPassword":null,"role":"ADMINISTRATOR","active":false,"passwordChanged":false,"iconPath":null,"name":null,"title":"FDSAFA","email":null,"grade":"09","major":null}},"numPerPage":0,"curPageNum":0,"totalItemNum":0,"totalPageNum":0}
+
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {"errorCode":"NO_ERROR","data":null,"numPerPage":0,"curPageNum":0,"totalItemNum":0,"totalPageNum":0}
+        404:
+          body:
+            application/json:
+              schema: |
+                {
+                  "code": 404,
+                  "message": "找不到对象"
+                }
+        500:
+          body:
+            application/json:
+              schema: |
+                {
+                  "code": 500,
+                  "message": "对不起，你没有该权限，请与系统管理员联系"
+                }
+    delete:
+      description: 删除一个班级 | 未来需要判断本学期是否有引用
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {"errorCode":"NO_ERROR","data":null,"numPerPage":0,"curPageNum":0,"totalItemNum":0,"totalPageNum":0}
+        404:
+          body:
+            application/json:
+              schema: |
+                {
+                  "code": 404,
+                  "message": "找不到对象"
+                }
+        500:
+          body:
+            application/json:
+              schema: |
+                {
+                  "code": 500,
+                  "message": "对不起，你没有该权限，请与系统管理员联系"
+                }
+    /list:
+      /{semeterId}/all:
+        get:
+          description: 获取某一个学期下面的所有班级
+          responses:
+            200:
+              body:
+                application/json:
+                  schema: |
+                    {
+                    }
+
+/account:
+  post:
+    description: |
+      添加一个用户
+    queryParameters:
+      data:
+        type: string
+        description: 用户数据 json
+        example: |
+          {"@id":"1","id":1,"number":"091115","initialPassword":"222222","role":"ADMINISTRATOR","active":false,"passwordChanged":false,"iconPath":null,"name":null,"title":"FDSAFA","email":null,"grade":"\u53D1\u9001","major":null}
+    responses:
+      200:
+        body:
+          application/json:
+            schema: |
+              {"errorCode":"NO_ERROR","data":null,"numPerPage":0,"curPageNum":0,"totalItemNum":0,"totalPageNum":0}
+  /{id}:
+    put:
+      description: 更新一个用户,注意这个接口只能更新自己的数据。不需要admin权限。
+      queryParameters:
+        data:
+          type: string
+          description: 用户数据 json
+          example: |
+            {
+              "number":"091115",
+              "active":false,
+              "name":null,
+              "title":"FDSAFA",
+              "email":null,
+              "grade":"MALE",
+              "major":"XXX"
+            }
+      responses:
+        200:
+          body:
+            application/json:
+              schema: |
+                {"errorCode":"NO_ERROR","data":null,"numPerPage":0,"curPageNum":0,"totalItemNum":0,"totalPageNum":0}
+    delete:
+      description: 删除一个用户
+      responses:
+        200:
+          body:
+            application/json:
+              schema: |
+                {"errorCode":"NO_ERROR","data":null,"numPerPage":0,"curPageNum":0,"totalItemNum":0,"totalPageNum":0}
+    get:
+      description: 获取用户详细信息
+      responses:
+        200:
+          body:
+            application/json:
+              schema: |
+                {"errorCode":"NO_ERROR","data":{"@id":"1","id":1,"number":"091116","initialPassword":null,"role":"ADMINISTRATOR","active":false,"passwordChanged":false,"iconPath":null,"name":null,"title":"FDSAFA","email":null,"grade":"09","major":null},"numPerPage":0,"curPageNum":0,"totalItemNum":0,"totalPageNum":0}
+
+    /password:
+      put:
+        description: 用户修改自己的密码
+        queryParameters:
+          data:
+            type: string
+            description: 旧密码和新密码 json格式
+            example:  |
+              {
+                "oldPassword":"1234",
+                "newPassword":"321311"
+              }
+        responses:
+          200:
+            body:
+              application/json:
+                schema: |
+                  {
+                    data:true
+                  }
+
+    /passwordByAdmin:
+      put:
+        description: 管理员修改用户的密码
+        queryParameters:
+          data:
+            type: string
+            description: 新密码 json格式
+            example:  |
+              {
+                "newPassword":"321311"
+              }
+        responses:
+          200:
+            body:
+              application/json:
+                schema: |
+                  {
+                    data:true
+                  }
+  /list:
+    /all:
+      get:
+        is: [roleParam]
+        description: 获取所有用户
+        responses:
+          200:
+            body:
+              application/json:
+                schema: |
+                  {"errorCode":"NO_ERROR","data":[{"@id":"1","id":1,"number":"091116","initialPassword":null,"role":"ADMINISTRATOR","active":false,"passwordChanged":false,"iconPath":null,"name":null,"title":"FDSAFA","email":null,"grade":"09","major":null},{"@id":"2","id":2,"number":"091112","initialPassword":null,"role":"STUDENT","active":false,"passwordChanged":false,"iconPath":null,"name":null,"title":"Title","email":null,"grade":"12","major":null}],"numPerPage":0,"curPageNum":0,"totalItemNum":0,"totalPageNum":0}
+    /page/{pageSize}/{pageNumber}:
+      get:
+        is: [roleParam]
+        description: 分页获取用户
+        responses:
+          200:
+            body:
+              application/json:
+                schema: |
+                  {"errorCode":null,"data":[{"@id":"1","id":1,"number":"091116","initialPassword":null,"role":"ADMINISTRATOR","active":false,"passwordChanged":false,"iconPath":null,"name":null,"title":"FDSAFA","email":null,"grade":"09","major":null},{"@id":"2","id":2,"number":"091112","initialPassword":null,"role":"STUDENT","active":false,"passwordChanged":false,"iconPath":null,"name":null,"title":"Title","email":null,"grade":"12","major":null}],"numPerPage":5,"curPageNum":1,"totalItemNum":2,"totalPageNum":1}
+  /search:
+    get:
+      is: [roleParam]
+      description: 搜索用户
+      queryParameters:
+        key:
+          type: string
+          description: column 名字
+        value:
+          type: string
+          description: value
+      responses:
+        200:
+          body:
+            application/json:
+              schema: |
+                {
+
+                }
+
+/reservation:
+  post:
+    description: |
+      添加一个预约
+      (默认每个实验都是没有预约的，预约类型分为 关闭|学生预约|班级预约 预约状态分为 待审核|通过|拒绝)
+      (关闭和学生预约添加时候是默认就是通过状态，班级预约默认是待审核状态)
+    queryParameters:
+      classId:
+        type: number
+      expId:
+        type: number
+      labId:
+        type: number
+      startTime:
+        type: date
+      endTime:
+        type: date
+      semesterId:
+        type: number
+    responses:
+      200:
+        body:
+          application/json:
+            schema: |
+              {
+
+              }
+
+  /{id}:
+    get:
+      description: 获取一个预约的详细信息
+
+    put:
+      description: |
+        更新一个预约
+        (班级,实验和实验室和学期都不可以更改)
+        (可以更改开始结束时间和描述字段)
+    delete:
+      description: |
+        删除一个预约
+
+    /verify:
+      put:
+        description: |
+          管理员审核预约(班级预约)
+        queryParameters:
+          status:
+            type: string
+            description: 通过|拒绝
+          labTeachers:
+            type: string
+            description: 配置的实验教师ID list 如[1,2,3,4]，审核状态通过的时候才需要
+
+
+  /semester/{semesterId}:
+    /lab/{labId}:
+      get:
+        queryParameters:
+          type:
+            type: string
+            description: 查询过滤条件 (全部|待审核|通过|拒绝)
+        description: 列出一个指定学期内某实验室下的所有预约
+    /teacher/{accountId}:
+      get:
+        queryParameters:
+          type:
+            type: string
+            description: 查询过滤条件 (全部|待审核|通过|拒绝)
+        description: 列出指定学期内某一老师的所有预约
+    /labTeacher/{accountId}:
+      get:
+        description: 列出指定学期内某一实验老师被安排的所有预约，只有审核通过的预约才会出现在这里
+    /student/{accountId}:
+      get:
+        queryParameters:
+          type:
+            type: string
+            description: 查询过滤条件 (全部|待审核|通过|拒绝)
+          reservationType:
+            type: string
+            description: 查询过滤条件 (全部|班级预约|学生预约)
+        description: |
+          列出指定学期内学生的所有预约
+          (如果班级预约被审核通过，那么班级的学生直接被include进入预约)
+          (学生可以抢购管理员开放的学生预约)

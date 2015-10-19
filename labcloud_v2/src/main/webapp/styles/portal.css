@@ -1,0 +1,766 @@
+.portal-header {
+  background-color: #2c3f55;
+  height: 60px;
+}
+.portal-header .portal-header-wrapper {
+  width: 1024px;
+  margin: 0 auto;
+}
+.portal-header .portal-header-wrapper .portal-header-logo {
+  float: left;
+  width: 175px;
+  height: 60px;
+  padding-top: 19px;
+}
+.portal-header .portal-header-wrapper .portal-header-nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.portal-header .portal-header-wrapper .portal-header-nav li {
+  float: left;
+  margin: 0;
+  padding: 0;
+}
+.portal-header .portal-header-wrapper .portal-header-nav li.active a {
+  background-color: #032b47;
+}
+.portal-header .portal-header-wrapper .portal-header-nav li a {
+  color: #fff;
+  font-size: 14px;
+  line-height: 20px;
+  padding: 20px 30px;
+  display: inline-block;
+}
+.portal-header .portal-header-wrapper .portal-header-nav li a:hover,
+.portal-header .portal-header-wrapper .portal-header-nav li a:focus {
+  text-decoration: none;
+}
+.portal-header .portal-header-wrapper .portal-header-option {
+  float: right;
+}
+.portal-header .portal-header-wrapper .portal-header-option .portal-header-nav li.line {
+  width: 1px;
+  height: 30px;
+  background-color: #fff;
+  margin-top: 15px;
+}
+.portal-header .portal-header-wrapper .portal-header-option .portal-header-nav li.avatar {
+  margin-top: 15px;
+  margin-left: 20px;
+  position: relative;
+}
+.portal-header .portal-header-wrapper .portal-header-option .portal-header-nav li.avatar a {
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  background-color: #fff;
+  border-radius: 50%;
+}
+.portal-header .portal-header-wrapper .portal-header-option .portal-header-nav li.avatar .dropdown-menu {
+  top: 60px;
+  width: 160px;
+  height: 137px;
+  min-width: 160px;
+  left: -100px;
+  background-color: #fff;
+  -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+  border: none;
+}
+.portal-header .portal-header-wrapper .portal-header-option .portal-header-nav li.avatar .dropdown-menu .dropdown-triangle {
+  position: absolute;
+  top: -10px;
+  left: 110px;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 10px solid #2c3f55;
+}
+.portal-header .portal-header-wrapper .portal-header-option .portal-header-nav li.avatar .dropdown-menu li {
+  width: 100%;
+  padding: 0 13px;
+}
+.portal-header .portal-header-wrapper .portal-header-option .portal-header-nav li.avatar .dropdown-menu li.info {
+  height: 56px;
+  background-color: #2c3f55;
+  padding-top: 8px;
+}
+.portal-header .portal-header-wrapper .portal-header-option .portal-header-nav li.avatar .dropdown-menu li.info .avatar {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  line-height: 0;
+  font-size: 0;
+  float: left;
+}
+.portal-header .portal-header-wrapper .portal-header-option .portal-header-nav li.avatar .dropdown-menu li.info .name {
+  display: block;
+  font-size: 16px;
+  line-height: 20px;
+  color: #fff;
+  margin-top: 2px;
+  margin-left: 50px;
+}
+.portal-header .portal-header-wrapper .portal-header-option .portal-header-nav li.avatar .dropdown-menu li.info .number {
+  display: block;
+  font-size: 12px;
+  color: #fff;
+  margin-left: 50px;
+}
+.portal-header .portal-header-wrapper .portal-header-option .portal-header-nav li.avatar .dropdown-menu li.line {
+  width: 100%;
+  height: 1px;
+  background-color: #f1f1f1;
+  margin: 0;
+}
+.portal-header .portal-header-wrapper .portal-header-option .portal-header-nav li.avatar .dropdown-menu li a {
+  width: 100%;
+  padding: 10px 0;
+  line-height: 20px;
+  height: 40px;
+  font-size: 12px;
+  color: #2c3f55;
+}
+.portal-header .portal-header-wrapper .portal-header-option .portal-header-nav li a {
+  padding: 20px;
+}
+.portal-footer {
+  background-color: #f5f5f5;
+  height: 190px;
+}
+.portal-footer .portal-footer-wrapper {
+  width: 1024px;
+  margin: 0 auto;
+}
+.portal-footer .portal-footer-wrapper .portal-footer-nav {
+  float: left;
+  list-style: none;
+  margin: 25px 0 0 70px;
+  padding: 0;
+  height: 190px;
+}
+.portal-footer .portal-footer-wrapper .portal-footer-nav li {
+  margin: 0;
+  padding: 0;
+  color: #6c6c6c;
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: bold;
+}
+.portal-footer .portal-footer-wrapper .portal-footer-nav li a {
+  color: #b2b2b2;
+  line-height: 16px;
+}
+.portal-footer .portal-footer-wrapper .portal-footer-nav li a:focus,
+.portal-footer .portal-footer-wrapper .portal-footer-nav li a:hover {
+  text-decoration: none;
+}
+.portal-footer .portal-footer-wrapper .portal-footer-name {
+  color: #6c6c6c;
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: bold;
+  float: right;
+  margin-top: 130px;
+}
+.portal-footer .portal-footer-wrapper .portal-footer-copyright {
+  color: #b2b2b2;
+  font-size: 12px;
+  line-height: 20px;
+  float: right;
+  clear: right;
+}
+.portal-exp-item {
+  text-align: left;
+  height: 100px;
+  padding: 15px 20px;
+  font-size: 14px;
+  line-height: 20px;
+  color: #b2b2b2;
+  cursor: pointer;
+  position: relative;
+}
+.portal-exp-item:hover {
+  background-color: #f5f5f5;
+}
+.portal-exp-item .exp-title {
+  font-size: 18px;
+  line-height: 28px;
+  color: #606060;
+}
+.portal-exp-item .exp-date {
+  background-position: center left;
+  background-image: url(../images/portal/icon/icon-calender.png);
+  background-repeat: no-repeat;
+  padding-left: 25px;
+  display: inline-block;
+}
+.portal-exp-item .exp-week {
+  color: #fb7c55;
+}
+.portal-exp-item .exp-class-number {
+  background-position: center left;
+  background-image: url(../images/portal/icon/icon-people.png);
+  background-repeat: no-repeat;
+  padding-left: 25px;
+  display: inline-block;
+}
+.portal-exp-item .exp-link {
+  position: absolute;
+  right: 20px;
+  top: 65px;
+}
+.portal-exp-item .exp-link a {
+  color: #b2b2b2;
+}
+.portal-exp-item .exp-link a:hover,
+.portal-exp-item .exp-link a:focus {
+  text-decoration: none;
+}
+.portal-exp-item .exp-link.cancel {
+  top: 40px;
+}
+.portal-exp-item .exp-link.cancel a {
+  color: #fb7c55;
+}
+.portal-reservation-item {
+  margin-bottom: 35px;
+}
+.portal-reservation-item .reservation-name {
+  font-size: 15px;
+  line-height: 40px;
+  color: #606060;
+  border-bottom: 1px solid #ebebeb;
+  text-align: center;
+  margin-bottom: 15px;
+}
+.portal-reservation-item .reservation-item {
+  height: 75px;
+  cursor: pointer;
+  padding: 15px 20px;
+  color: #606060;
+  font-size: 14px;
+  line-height: 20px;
+  position: relative;
+}
+.portal-reservation-item .reservation-item:hover {
+  background-color: #f5f5f5;
+}
+.portal-reservation-item .reservation-item .reservation-week {
+  color: #fb7c55;
+}
+.portal-reservation-item .reservation-item .reservation-place {
+  color: #b2b2b2;
+  background-position: center left;
+  background-image: url(../images/portal/icon/icon-position.png);
+  background-repeat: no-repeat;
+  padding-left: 25px;
+  display: inline-block;
+  line-height: 30px;
+}
+.portal-reservation-item .reservation-item .reservation-status {
+  line-height: 30px;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+.portal-reservation-item .reservation-item .reservation-button {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+.portal-reservation-table {
+  width: 400px;
+  margin: 0 auto;
+}
+.portal-reservation-table .reservation-label {
+  text-align: right;
+  width: 124px;
+  font-size: 16px;
+  padding-right: 40px;
+}
+.portal-reservation-table .reservation-input.people-num {
+  display: inline-block;
+  width: 250px;
+}
+.portal-reservation-table .reservation-tip {
+  font-size: 14px;
+  color: #b2b2b2;
+  line-height: 30px;
+}
+.portal-reservation-table tbody tr {
+  height: 50px;
+}
+.portal-experiment-item .experiment-title {
+  font-size: 16px;
+  line-height: 50px;
+  color: #606060;
+  border-bottom: 1px solid #ebebeb;
+  text-align: center;
+  margin: 55px 0 30px;
+}
+.portal-experiment-item .experiment-table {
+  width: 470px;
+  margin: 0 auto;
+  font-size: 14px;
+  line-height: 34px;
+  color: #606060;
+}
+.portal-experiment-item .experiment-table .experiment-label {
+  color: #b2b2b2;
+}
+.portal-experiment-item .experiment-table .experiment-week {
+  color: #fb7c55;
+}
+.portal-setting-table {
+  width: 400px;
+  margin: 0 auto;
+}
+.portal-setting-table .setting-label {
+  text-align: right;
+  width: 124px;
+  font-size: 16px;
+  padding-right: 40px;
+}
+.portal-setting-table tbody tr {
+  height: 50px;
+}
+.portal-notification-item {
+  padding: 20px 155px 20px 10px;
+  border-bottom: 1px solid #ebebeb;
+  color: #606060;
+  font-size: 15px;
+  text-align: left;
+  position: relative;
+}
+.portal-notification-item .notification-time {
+  color: #9b9b9b;
+  background-position: center left;
+  background-image: url(../images/portal/icon/icon-clock.png);
+  background-repeat: no-repeat;
+  padding-left: 25px;
+  display: inline-block;
+  line-height: 30px;
+  position: absolute;
+  right: 10px;
+  top: 15px;
+}
+.portal-course-item {
+  border-bottom: 1px solid #f6f6f6;
+}
+.portal-course-item .course-title {
+  font-size: 15px;
+  line-height: 30px;
+  color: #606060;
+  text-align: left;
+}
+.portal-course-item .course-status {
+  color: #bbb;
+  font-size: 14px;
+  line-height: 32px;
+  float: left;
+}
+.portal-course-item .course-status .commit {
+  color: #21e558;
+}
+.portal-course-item .course-status .uncommit {
+  color: #fd866b;
+}
+.portal-course-item .course-buttons {
+  float: right;
+}
+.portal-course-item .course-buttons .portal-button {
+  margin-left: 15px;
+}
+.portal-course-item .course-result {
+  background-color: #f0f0f0;
+  margin: 17px 0;
+  padding: 12px;
+  font-size: 14px;
+  color: #808080;
+}
+.portal-course-detail-item {
+  margin-top: 45px;
+}
+.portal-course-detail-item .info-title {
+  font-size: 15px;
+  line-height: 40px;
+  color: #606060;
+  border-bottom: 1px solid #ebebeb;
+  text-align: center;
+  margin-bottom: 15px;
+}
+.portal-course-detail-item .info-table {
+  width: 490px;
+  margin: 0 auto;
+  font-size: 14px;
+  line-height: 34px;
+  color: #606060;
+}
+.portal-course-detail-item .info-table tr {
+  vertical-align: top;
+}
+.portal-course-detail-item .info-table .info-label {
+  color: #b2b2b2;
+  width: 80px;
+  text-align: right;
+  padding-right: 20px;
+}
+.portal-course-detail-item .info-table .comment-content {
+  margin-top: 7px;
+  width: 410px;
+  line-height: 20px;
+}
+.portal-course-detail-item .info-list {
+  font-size: 14px;
+  color: #606060;
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+}
+.portal-course-detail-item .info-list li a {
+  margin-left: 15px;
+  color: #fb7c55;
+}
+.portal-course-detail-item .info-img img {
+  margin-bottom: 3px;
+}
+.portal-course-detail-item .course-table {
+  font-size: 14px;
+  color: #606060;
+}
+.portal-course-detail-item .course-table tr td.comment {
+  width: 230px;
+}
+.portal-course-detail-item .course-table tr td .commit {
+  color: #21e558;
+}
+.portal-course-detail-item .course-table tr td .uncommit {
+  color: #fd866b;
+}
+.portal-course-detail-item .course-table .comment-block {
+  text-align: left;
+  width: 230px;
+}
+.portal-class-item .student-num {
+  float: left;
+  line-height: 32px;
+}
+.portal-class-item .student-num a {
+  color: #5ac6ff;
+}
+.portal-class-item .student-num a:hover,
+.portal-class-item .student-num a:focus,
+.portal-class-item .student-num a:active {
+  color: #5ac6ff;
+}
+.portal-class-item .student-import {
+  float: right;
+}
+.portal-class-detail-item {
+  padding: 10px;
+  cursor: pointer;
+}
+.portal-class-detail-item:hover {
+  background-color: #f5f5f5;
+}
+.portal-class-detail-item .course-title {
+  font-size: 15px;
+  line-height: 20px;
+  color: #606060;
+}
+.portal-class-detail-item .course-title .reservation {
+  color: #fb7c55;
+}
+.portal-class-detail-item .course-status {
+  font-size: 14px;
+  line-height: 32px;
+  color: #bbb;
+  float: left;
+}
+.portal-class-detail-item .course-status .commit {
+  color: #21e558;
+}
+.portal-class-detail-item .course-status .uncommit {
+  color: #fd866b;
+}
+.portal-class-detail-item .course-statistic {
+  float: right;
+}
+.portal-class-detail-item .course-statistic .statistic-label {
+  display: inline-block;
+  font-size: 14px;
+  color: #bbb;
+  margin-right: 10px;
+}
+.portal-class-detail-item .course-statistic .statistic-num {
+  display: inline-block;
+  font-size: 22px;
+  color: #2c3f55;
+}
+.portal-student-table {
+  width: 400px;
+  margin: 0 auto;
+  padding: 0 150px;
+  text-align: center;
+  color: #606060;
+  font-size: 16px;
+  line-height: 35px;
+}
+.portal-page-sub-title .course-name,
+.portal-page-sub-title .print-list {
+  padding: 0 10px;
+}
+.portal-page-sub-title .student-num {
+  display: inline-block;
+  padding: 0 10px;
+  border-left: 1px solid #b2b2b2;
+  border-right: 1px solid #b2b2b2;
+}
+.portal-page-sub-title .print-list a {
+  color: #b2b2b2;
+}
+.portal-page-wrapper {
+  width: 100%;
+}
+.portal-page-wrapper .portal-page-content {
+  width: 640px;
+  margin: 0 auto;
+  padding: 80px 0;
+  position: relative;
+}
+.portal-page-wrapper .portal-page-content .portal-page-title {
+  line-height: 36px;
+  font-size: 18px;
+  color: #606060;
+  text-align: center;
+}
+.portal-page-wrapper .portal-page-content .portal-page-sub-title {
+  line-height: 24px;
+  font-size: 13px;
+  color: #b2b2b2;
+  text-align: center;
+}
+.portal-page-wrapper .portal-page-content .portal-page-options {
+  position: absolute;
+  width: 100%;
+}
+.portal-page-wrapper .portal-page-content .portal-page-options.home.teacher {
+  top: 215px;
+  padding: 10px;
+  border-bottom: 1px solid #ebebeb;
+}
+.portal-page-wrapper .portal-page-content .portal-page-options.home.teacher .select-container {
+  float: left;
+}
+.portal-page-wrapper .portal-page-content .portal-page-options.home.teacher .checkbox-container {
+  float: right;
+  font-size: 14px;
+  color: #b2b2b2;
+}
+.portal-page-wrapper .portal-page-content .portal-page-options.home.teacher .checkbox-container .checkbox {
+  margin: 7px 0;
+}
+.portal-page-wrapper .portal-page-content .portal-page-tabs {
+  text-align: center;
+}
+.portal-page-wrapper .portal-page-content .portal-page-tabs.home .nav-tabs > li a {
+  min-width: 150px;
+}
+.portal-page-wrapper .portal-page-content .portal-page-tabs.home .tab-content {
+  margin-top: 90px;
+}
+.portal-page-wrapper .portal-page-content .portal-page-tabs.notification .nav-tabs > li a {
+  min-width: 110px;
+}
+.portal-page-wrapper .portal-page-content .portal-page-tabs.notification .tab-content {
+  margin-top: 70px;
+}
+.portal-page-wrapper .portal-page-content .portal-page-tabs.course-status {
+  text-align: left;
+}
+.portal-page-wrapper .portal-page-content .portal-page-tabs.course-status .nav-tabs {
+  width: 100%;
+  border-bottom: 1px solid #ebebeb;
+}
+.portal-page-wrapper .portal-page-content .portal-page-tabs.course-status .nav-tabs > li {
+  background-color: #fff;
+  border-bottom: 2px solid transparent;
+  margin: 0 10px;
+}
+.portal-page-wrapper .portal-page-content .portal-page-tabs.course-status .nav-tabs > li a {
+  border-right: none;
+  background-color: #fff;
+  color: #b2b2b2;
+  line-height: 25px;
+  margin: 0;
+  padding: 10px 15px;
+}
+.portal-page-wrapper .portal-page-content .portal-page-tabs.course-status .nav-tabs > li a:hover {
+  background-color: #fff;
+  border: none;
+}
+.portal-page-wrapper .portal-page-content .portal-page-tabs.course-status .nav-tabs > li.active {
+  border-bottom: 2px solid #727f8e;
+}
+.portal-page-wrapper .portal-page-content .portal-page-tabs.course-status .nav-tabs > li.active a {
+  color: #606060;
+  background-color: #fff;
+}
+.portal-page-wrapper .portal-page-content .portal-page-tabs.course-status .tab-content {
+  margin-top: 10px;
+}
+.portal-page-wrapper .portal-page-content .portal-page-tabs.course-item {
+  text-align: left;
+}
+.portal-page-wrapper .portal-page-content .portal-page-tabs.course-item .nav-tabs {
+  width: auto;
+  border-bottom: none;
+}
+.portal-page-wrapper .portal-page-content .portal-page-tabs.course-item .nav-tabs > li {
+  border-bottom: none;
+  margin: 0 10px 0 0;
+}
+.portal-page-wrapper .portal-page-content .portal-page-tabs.course-item .nav-tabs > li:last-child {
+  margin-right: 0;
+}
+.portal-page-wrapper .portal-page-content .portal-page-tabs.course-item .nav-tabs > li a {
+  color: #606060;
+  border: 1px solid #606060;
+  margin: 0;
+  line-height: 24px;
+  padding: 0 18px;
+  border-radius: 12px;
+  min-width: auto;
+}
+.portal-page-wrapper .portal-page-content .portal-page-tabs.course-item .nav-tabs > li a:hover {
+  color: #fff;
+  background-color: #2c3f55;
+  border: 1px solid #2c3f55;
+}
+.portal-page-wrapper .portal-page-content .portal-page-tabs.course-item .nav-tabs > li.active {
+  border-bottom: none;
+}
+.portal-page-wrapper .portal-page-content .portal-page-tabs.course-item .nav-tabs > li.active a {
+  color: #fff;
+  background-color: #2c3f55;
+  border: 1px solid #2c3f55;
+}
+.portal-page-wrapper .portal-page-content .portal-page-tabs.course-item .tab-content {
+  margin-top: 30px;
+}
+.portal-page-wrapper .portal-page-content .portal-page-tabs.course-item.teacher .nav-tabs {
+  width: 100%;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ebebeb;
+}
+.portal-page-wrapper .portal-page-content .portal-page-tabs.course-item.teacher .tab-content {
+  margin-top: 10px;
+}
+.portal-page-wrapper .portal-page-content .portal-page-tabs .nav-tabs {
+  border-bottom: none;
+  display: inline-block;
+  overflow: hidden;
+}
+.portal-page-wrapper .portal-page-content .portal-page-tabs .nav-tabs > li {
+  margin: 0;
+  background-color: #f5f5f5;
+}
+.portal-page-wrapper .portal-page-content .portal-page-tabs .nav-tabs > li:last-child {
+  margin-right: -1px;
+}
+.portal-page-wrapper .portal-page-content .portal-page-tabs .nav-tabs > li a {
+  color: #b2b2b2;
+  font-size: 14px;
+  line-height: 20px;
+  border: none;
+  background-color: #f5f5f5;
+  margin-right: 0;
+  border-radius: 0;
+  padding: 0;
+  margin: 10px 0;
+  border-right: 1px solid #b2b2b2;
+}
+.portal-page-wrapper .portal-page-content .portal-page-tabs .nav-tabs > li a:hover {
+  background-color: #f5f5f5;
+  border: none;
+  border-right: 1px solid #b2b2b2;
+}
+.portal-page-wrapper .portal-page-content .portal-page-tabs .nav-tabs > li.active a {
+  color: #2c3f55;
+  background-color: #f5f5f5;
+}
+.portal-page-wrapper .portal-page-content .portal-page-buttons {
+  padding: 60px 0;
+  text-align: center;
+}
+.portal-page-wrapper .portal-page-content .portal-page-line {
+  height: 1px;
+  width: 100%;
+  background-color: #ebebeb;
+}
+.portal-button,
+.portal-button-default {
+  display: inline-block;
+  font-size: 14px;
+  color: #606060;
+  border: 1px solid #606060;
+  line-height: 30px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+  padding: 0 18px;
+}
+.portal-button:hover,
+.portal-button-default:hover,
+.portal-button:active,
+.portal-button-default:active,
+.portal-button:focus,
+.portal-button-default:focus {
+  outline: none;
+  color: #fb7c55;
+  border: 1px solid #fb7c55;
+  text-decoration: none;
+}
+.portal-button-primary {
+  color: #fff;
+  background-color: #4a6a8f;
+  -webkit-border-radius: 14px;
+  -moz-border-radius: 14px;
+  border-radius: 14px;
+  line-height: 26px;
+  padding: 0 27px;
+}
+.portal-button-primary:hover,
+.portal-button-primary:active,
+.portal-button-primary:focus {
+  outline: none;
+  text-decoration: none;
+  border: 1px solid #4a6a8f;
+  color: #fff;
+}
+.portal-button-cancel {
+  color: #606060;
+  background-color: #fff;
+  border: 1px solid #606060;
+  -webkit-border-radius: 14px;
+  -moz-border-radius: 14px;
+  border-radius: 14px;
+  line-height: 26px;
+  padding: 0 27px;
+}
+.portal-button-cancel:hover,
+.portal-button-cancel:active,
+.portal-button-cancel:focus {
+  outline: none;
+  text-decoration: none;
+  border: 1px solid #606060;
+  color: #606060;
+}

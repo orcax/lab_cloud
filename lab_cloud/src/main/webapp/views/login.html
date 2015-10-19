@@ -1,0 +1,78 @@
+<header></header>
+
+<div class="loginBannerContainer">
+  <div class="loginBannerBack">
+  	<div width="2000" height="800" style="width:100%;height:600px;">
+  		<img src="images/bg/login-banner.png"/>
+  	</div>
+  </div>
+  <div class="loginFormBack">
+	  <div class="container">
+	  	<div class="login-title-container">
+	  		<div class="title">实验平台</div>
+	  		<div class="sub-title">打造更好地实验平台。</div>
+	  	</div>
+	    <div class="login-form-container" ng-show="user==false">
+	      <lab-login-form class="login-form">
+	      	<form method="GET">
+		        <h4 class="login-form-heading">登录</h4>
+		        <input name="userName" type="text" class="form-control login-input" placeholder="登录名" autofocus="" ng-model="accountNumber">
+		        <input name="userPWD" type="password" class="form-control login-input" placeholder="密码" ng-model="accountPassword">
+		        <label class="checkbox" style="width: 150px;margin-left:0px; padding-left:0px;">
+		          选择角色&nbsp;
+		          <select ng-model="accountCharacter" class="form-control">
+		          	
+		          	<option value="TEACHER">
+		          		教师
+		          	</option>
+		          	<option value="ADMINISTRATOR">
+		          		管理员
+		          	</option>
+		          	<option value="STUDENT">
+		          		学生
+		          	</option>
+		          	
+		          	 	
+		          </select>
+
+		        </label>
+		        <div>
+		        	<span class="red">{{message}}</span>
+		        </div>
+		        <button class="btn btn-primary login-btn theme-1" ng-click="login()">登录</button>
+		        <a href="#/register" class="{{themeColor}}">查看帮助&nbsp;<span class="plus">+</span></a>
+	    	</form>
+	      </lab-login-form>
+	    </div>
+	  </div>
+  </div>
+</div>
+
+<div class="container">
+	<div class="login-content-container">
+	  <div class="login-title">在这里, 你将可以</div>
+	  <div class="login-tile first">
+	    <i class="fa fa-cloud-download fa-3"></i>
+	    <span class="name">管理实验资源</span>
+	    <span class="info">通过在线平台，上传实验数据，获取实验材料</span>
+	  </div>
+	  <div class="login-tile">
+	    <i class="fa fa-calendar fa-3"></i>
+	    <span class="name">预约实验室</span>
+	    <span class="info">不管你是教师还是学生，实验平台都可以让你方便地预约实验室</span>
+	  </div>
+	  <div class="login-tile">
+	    <i class="fa fa-users fa-3"></i>
+	    <span class="name">线上实验交流</span>
+	    <span class="info">开放线上功能，</span>
+	    <span class="ticket">顶顶顶顶</span>
+	  </div>
+	  <div class="login-tile last">
+	    <i class="fa fa-twitch fa-3"></i>
+	    <span class="name">反馈和意见</span>
+	    <span class="info">在线为实验室建设提供宝贵意见和建议</span>
+	    <span class="ticket">顶顶顶顶</span>
+	  </div>
+	  <div class="clear"></div>
+	</div>
+</div>

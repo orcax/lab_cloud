@@ -1,0 +1,73 @@
+<div is-public="true" id="pageHeader">
+    <!-- ngIf: isPublic -->
+    <div class="ng-scope">
+        <nav class="navbar manage">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#/home">
+                        <img src="images/bg/logo.png">
+                    </a>
+                </div>
+                <div class="navbar-collapse" style="position:relative;float:left;width:874px;">
+                    <ul class="nav navbar-nav">
+                    
+                        <li ng-if="character=='STUDENT'">
+                            <a href="#/my-experiment" class="project" style="padding-right: 15px;">我的实验</a>
+                            <ul style="display: none; height: 179px; padding: 0px 0px 20px; margin: 0px; width: 170px; opacity: 1;">
+                                <li class="main"><a href="javascript:void(0);">我的实验</a></li>
+                            </ul>
+                        </li>
+                        <li ng-if="character=='TEACHER'">
+                            <a href="#/my-class" class="lab" style="padding-right: 15px;">课程管理</a>
+                            <ul style="min-width: 200px; display: none; height: 305px; padding: 0px 0px 20px; margin: 0px; width: 200px; opacity: 1;">
+                                <li class="main"><a href="javascript:void(0);">课程管理</a></li>
+                            </ul>
+                        </li>
+                        <li ng-if="character=='ADMINISTRATOR'">
+                            <a href="#/lab-user-manage" class="lab" style="padding-right: 15px;">系统管理</a>
+                            <ul style="min-width: 200px; display: none; height: 305px; padding: 0px 0px 20px; margin: 0px; width: 200px; opacity: 1;">
+                                <li class="main"><a href="javascript:void(0);">系统管理</a></li>
+
+                            </ul>
+                        </li>
+
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right" style="position:absolute;right:0;top:0;height:9"
+                     ng-if="loginUser">
+
+                        <!-- <li style="margin-right:0;">
+                            <a class="blackLink theme-1" href="#/login">注册或登录&nbsp;&nbsp;&nbsp;
+                                <span class="plus"></span></a>
+                        </li> -->
+                        <!-- <li style="margin-right:0;" lab-collapse ng-if="user"> -->
+                        <li style="margin-right:0;" lab-collapse >
+                            <img class="avatar" ng-src="{{loginUser.iconPath}}">
+                            <div class="info">
+                                <span class="name">{{loginUser.number}}</span>
+                                <span class="group theme-1">{{loginUser.name}}</span>
+                            </div>
+                            <ul class="collapse-user"
+                                style="display: none; height: 218px; padding: 0px 0px 20px; margin: 0px; width: 175px; opacity: 1;">
+                                <li style="margin:0;height: 60px;padding: 0 15px;">
+                                    <div>
+                                        <img class="avatar" ng-src="{{loginUser.iconPath}}">
+
+                                        <div class="info">
+                                            <span class="name ng-binding" style="color: #fff;">{{loginUser.number}}</span>
+                                            <span class="group theme-1">{{loginUser.name}}</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li><a href="#/profile" class="theme-1">个人资料</a></li>
+
+                                <li><a ng-click="logout()" class="theme-1">注销</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- end ngIf: isPublic -->
+    <!-- ngIf: isManage -->
+</div>

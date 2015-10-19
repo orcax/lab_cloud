@@ -1,0 +1,52 @@
+<div type="user-info-dialog">
+    <div class="btnGroup">
+        <button class="btn cdi-btn-default left" ng-click="cancel()">取消</button>
+        <button class="btn cdi-btn-blue right btn-save" ng-click="save()">提交申请</button>
+        <div class="title">编辑实验</div>
+    </div>
+    <div >
+        <div class="content user-info" style="margin-top:10px;">
+
+             <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;">预约时间</div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <input type="text"  value="{{data.date}} {{slotExpression}}" class="right form-control" readonly="" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;">实验</div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <select class="right form-control" ng-options="entity.experimentName for entity in expListResults track by entity.id" ng-model="selectedItem.experiment" ng-change="">
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;">开放人数</div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <input type="text"  class="right form-control"  ng-model="openNumber"/>
+                </div>
+            </div>
+            
+
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;">备注</div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <textarea type="number" ng-model="remark" class="right form-control">
+                    </textarea>
+                </div>
+            </div>
+
+        </div>
+        <div class="slider2" style="margin-top: 16px;"></div>
+        
+        <div class="content">
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;"></div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <span class="red">{{message}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

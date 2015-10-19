@@ -1,0 +1,250 @@
+<lab-header></lab-header>
+<div class="container">
+  <div class="command-nav-container">
+    <tabset>
+      <tab name="">
+        <tab-heading class="reservation" ui-sref="teacher-reservation" >
+          <span class="title">
+            实验室预约
+            <label class="label label-success pull-right" style="margin-top:5px;margin-right:40px;"></label>
+          </span>
+          <span class="info">管理预约状态</span>
+        </tab-heading>
+      </tab>
+      <tab name="" active="true">
+        <tab-heading class="spaces myclass">
+          <span class="title">
+            我的班级
+            <label class="label label-success pull-right" style="margin-top:5px;margin-right:40px;"></label>
+          </span>
+          <span class="info">班级和课程管理</span>
+        </tab-heading>
+
+        <div class="command-content-container user" style="background-color: #f1f1f1;">
+          <tabset vertical="true" type="pills">
+            <tab disabled="true">
+              <tab-heading>
+                <span class="name">我的班级</span>
+              </tab-heading>
+            </tab>
+            <tab class="sub" ng-repeat="class in classes" active="class.active" ng-click="view_exp(class.id)">
+              <tab-heading>
+                <span class="name">{{class.number}} &nbsp; {{class.course.name}}</span>
+              </tab-heading>
+
+              <div ng-if="list_name=='student'">
+                
+                <div class="tableContainer">
+                  <table class="table">
+                    <thead>
+                      <tr class="op-tr">
+                        <th style="width: 15px;"></th>
+                        <th style="width: 400px;">
+                          <button class="btn cdi-btn-default" ng-click="back()">返回</button> 
+                        </th>
+                        <th style="width: 250px; text-align:right;">
+                           <button class="btn cdi-btn-default cdi-btn-dark-blue" style="width:130px;" ng-click="addStudent(class.id)">添加学生 +</button>
+                          <button class="btn cdi-btn-grey btn-danger" style="width:130px;" ng-click="clearStudents(class.id)">清空该班级学生 -</button>
+                        </th>
+                        
+                      </tr>
+                    </thead>
+                  </table>
+                </div>
+                <div class="cdi-pager">
+
+                    <pager total-items="students.totalItemNum" ng-model="students.curPageNum" ng-change="page_student()" next-text="下一页" previous-text="上一页" ></pager>
+
+                    <span class="pager-text">
+                        共 {{ student_totalNumber}} 个学生, &nbsp;当前第 {{ cur_student_page }} 页  共 {{total_student_page}}  页
+                    </span>
+
+                </div>
+                <div class="tableContainer" >
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th style="width: 25px;"></th>
+                        <th style="width: 100px;">学号</th>
+                        <th style="width: 100px;">姓名</th>
+                        <th style="width: 150px;">专业</th>
+                        <th style="width: 100px;">操作</th>
+                        <th style="width: 20px;"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="student in students.data">
+                        <td style="width: 25px; border:none;"></td>
+                        <td style="width: 70px;">
+                          <span class="id">{{student.number}}</span>
+                        </td>
+                        <td style="width: 133px;">
+                          <span class="code">{{student.name}}</span>
+                        </td>
+                        <td style="width: 133px;">
+                          <span class="code">{{student.major}}</span>
+                        </td>
+                        <td style="width: 133px;">
+                          <button class="btn cdi-btn-grey btn-danger" ng-click="removeStudent(student.id,class.id)">移除</button>
+                        </td>
+                        <td style="width: 20px; border:none;"></td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+                </div>
+
+              </div>
+
+              <div ng-if="list_name=='exp_detail'">
+                    <div class="tableTitle">
+                        共 {{records.length}} 个记录
+                        <br>
+                        <!-- 上课时间：周三 3，4 --> </div>
+                    <div class="cdi-pager">
+
+                      <pager total-items="record_totalNumber" ng-model="cur_record_page" ng-change="page_student()" next-text="下一页" previous-text="上一页" ></pager>
+
+                      <span class="pager-text">
+                          共 {{ record_totalNumber}} 个记录, &nbsp;当前第 {{ cur_record_page }} 页  共 {{total_record_page}}  页
+                      </span>
+
+                    </div>
+                    <div class="tableContainer" >
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 25px;"></th>
+                                    <th style="width: 100px;">学号</th>
+                                    <th style="width: 100px;">姓名</th>
+                                    <th style="width: 142px;">实验报告</th>
+                                    <th style="width: 50px;">分数</th>
+                                    <th style="width: 130px;">意见</th>
+                                    <th>
+                                        <div class="btn-group-head">
+                                            <!--  <button class="btn cdi-btn-default">查找</button>
+                                        -->
+                                    </div>
+                                </th>
+                                <th style="width: 20px;"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="record in records">
+                                <td style="width: 25px; border:none;"></td>
+                                <td style="width: 70px;">
+                                    <span class="id">{{record.student.number}}</span>
+                                </td>
+                                <td style="width: 133px;">
+                                    <span class="code">{{record.student.name}}</span>
+                                </td>
+                                <td style="width: 115px;">
+                                     <label class="label label-success" ng-if="record.status=='COMPLETED'">{{record.status|reportStatus}}</label>
+                                     <label class="label label-warning" ng-if="record.status=='SUBMITTED'">{{record.status|reportStatus}}</label>
+                                     <label class="label label-info" ng-if="record.status=='IN_PROGRESS'">{{record.status|reportStatus}}</label>
+                                </td>
+                                
+                                <td style="width: 100px;">
+                                    <span class="id" ng-if="record.status=='COMPLETED'">{{record.experimentRecord}}</span>
+                                </td>
+                                <td style="width: 100px;">
+                                    <span class="tel" ng-if="record.status=='COMPLETED'">{{record.experimentComment}}</span>
+                                </td>
+
+                                <td>
+                                    <div class="optionContainer" style="padding: 0;">
+
+                                        <button class="btn btn cdi-btn-default" ng-click="exp_detail(record);">详情</button>
+                                    </div>
+                                </td>
+                                <td style="width: 20px; border:none;"></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+              <div ng-if="list_name=='class'">
+                
+                <div class="tableContainer">
+                  <table class="table">
+                    <thead>
+                      <tr class="op-tr">
+                        <th style="width: 15px;"></th>
+                        <th style="width: 400px;">
+                          <p style="font-size:17px;padding-top: 10px;">共 {{exps.data.length}} 个实验</p>
+                        </th>
+                        <th style="width: 250px; text-align:right;">
+                           <button class="btn cdi-btn-default cdi-btn-dark-blue" ng-file-select ng-file-change="uploadStuList($files,class.id)" style="width:130px;">导入学生列表 +</button>
+                          <button class="btn cdi-btn-default cdi-btn-dark-blue" style="width:130px;" ng-click="view_student(class.id,cur_student_page)">查看学生名单</button>
+                        </th>
+                        
+                      </tr>
+                    </thead>
+                  </table>
+                </div>
+                
+                <div class="tableContainer" >
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th style="width: 25px;"></th>
+                        <th style="width: 180px;">实验名称</th>
+                        <th style="width: 120px;">实验完成率</th>
+                        <th style="width: 120px;">实验批改率</th>
+                        <th style="width: 90px;">预约情况</th>
+                        <th style="width: 90px;">已预约人数</th>
+                        <th>
+                          <div class="btn-group-head"></div>
+                        </th>
+                        <th style="width: 20px;"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="exp in exps.data">
+                        <td style="width: 25px; border:none;"></td>
+                        <td style="width: 180px;">
+                          <span class="id">{{exp.experimentName}}</span>
+                        </td>
+                        <td style="width: 120px;">
+                          <span class="code">{{exp.submittedNumber}} / {{exp.totalNumber}}</span>
+                        </td>
+                        <td style="width: 120px;">
+                          <span class="code">{{exp.completedNumber}} / {{exp.totalNumber}}</span>
+                        </td>
+                        <td style="width: 90px;">
+                          <span class="id">{{exp.status | reserveStatus}}</span>
+                        </td>
+                        <td style="width: 90px;">
+                          <span class="id">{{exp.reservCount}}</span>
+                        </td>
+                        <td>
+                          <div class="optionContainer" style="padding: 0;">
+
+                            <button class="btn btn cdi-btn-default" ng-click="view_record(class.id,exp.experimentId,cur_record_page)" ng-if="exp.status!=null">查看详情</button>
+                            &nbsp;
+                            <!-- <button class="btn btn cdi-btn-default" ng-if="exp.classReservationId == null">预约</button>
+                          -->
+                        </div>
+                      </td>
+                      <td style="width: 20px; border:none;"></td>
+                    </tr>
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            
+          </tab>
+
+        </tabset>
+      </div>
+    </tab>
+
+  </tabset>
+</div>
+</div>
+
+<lab-footer></lab-footer>

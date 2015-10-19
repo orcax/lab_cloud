@@ -1,0 +1,424 @@
+<lab-header></lab-header>
+<div class="container">
+    <div class="command-nav-container">
+        <tabset>
+            <tab name="">
+                <tab-heading class="users" style="background-image: url(../images/command/command_spaces.png);">
+                    <span class="title">实验预约</span>
+                    <span class="info">本学期实验室预约</span>
+                </tab-heading>
+                <div class="command-content-container user" style="background-color: #f1f1f1;">
+                    <tabset vertical="true" type="pills">
+                        <tab ng-if="(loginUser.role | isNormalTeacher)">
+                            <tab-heading>
+                                <span class="name">实验预约记录</span>
+                            </tab-heading>
+
+                            <div class="tableTitle">当前共 {{teacherReservationCount}} 个预约记录</div>
+                            <div class="tableTitle">
+                                <select name="" id="" ng-options="entity.name for entity in reservationTypes track by entity.value" ng-model="selectedReservationType.selected" ng-change="loadReservation()"></select>
+                            </div>
+
+                            <div style="padding: 0; padding-left:10px;">
+                                <!-- <button class="btn btn cdi-btn-default">预约申请</button>
+                            -->
+                        </div>
+                        <div class="tableContainer">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 25px;"></th>
+                                        <th style="width: 140px;">日期</th>
+                                        <th style="width: 142px;">时间段</th>
+                                        <th style="width: 106px;">课程</th>
+                                        <th style="width: 210px;">班级</th>
+                                        <th style="width: 210px;">实验室</th>
+                                        <th style="width: 210px;">实验任务</th>
+                                        <th style="width: 120px;">状态</th>
+
+                                        <th style="width: 20px;"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="entity in teacherReservations">
+                                        <td style="width: 25px; border:none;"></td>
+                                        <td style="width: 70px;">
+                                            <span class="date">{{entity.date | date:'yyyy-MM-dd'}}</span>
+                                        </td>
+                                        <td style="width: 133px;">
+                                            <span class="name">{{entity.slot | labSlotFilter}}</span>
+                                        </td>
+                                        <td style="width: 115px;">
+                                            <span class="name">{{entity.course}}</span>
+                                        </td>
+                                        <td style="width: 115px;">
+                                            <!-- <span class="name">{{listItem.name}}</span>
+                                        <span class="tel">电话: {{listItem.phone}}</span>
+                                        -->
+                                        <span class="name">{{entity.class}}</span>
+                                    </td>
+
+                                    <td style="width: 115px;">
+                                        <span class="name">{{entity.labName}}</span>
+                                    </td>
+                                    <td style="width: 115px;">
+
+                                        <span class="name">{{entity.experimentName}}</span>
+                                    </td>
+                                    <td style="width: 120px;">
+                                        <span class="label label-success" ng-if="entity.status == 'APPROVED'">已通过</span>
+                                        <span class="label label-danger" ng-if="entity.status == 'REJECTED'">被拒绝</span>
+                                        <span class="label label-warning" ng-if="entity.status == 'PENDING'">待审核</span>
+                                    </td>
+
+                                    <th style="width: 20px;"></th>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="paginationContainer">
+                        <pagination direction-links="false" total-items="teacherReservationCount" ng-model="reservationPage.currPageNum" ng-change="loadReservation()"
+                    items-per-page="8"></pagination>
+                    </div>
+
+                    <div class="pagerContainer2">
+                        <pager total-items="teacherReservationCount" ng-model="reservationPage.currPageNum" items-per-page="8" ng-change="loadReservation()"
+               previous-text="<" next-text=">"></pager>
+                    </div>
+                </tab>
+                <tab ng-if="(loginUser.role | isLabTeacher)">
+                    <tab-heading>
+                        <span class="name">实验任务</span>
+                    </tab-heading>
+
+                    <div class="tableTitle">当前共 {{labTeacherReservationCount}} 个预约记录</div>
+
+                    <div class="tableContainer">
+                        <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 25px;"></th>
+                                        <th style="width: 140px;">日期</th>
+                                        <th style="width: 142px;">时间段</th>
+                                        <th style="width: 106px;">课程</th>
+                                        <th style="width: 210px;">班级</th>
+                                        <th style="width: 210px;">实验室</th>
+                                        <th style="width: 210px;">实验任务</th>
+                                        <th style="width: 120px;">状态</th>
+
+                                        <th style="width: 20px;"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="entity in labTeacherReservations">
+                                        <td style="width: 25px; border:none;"></td>
+                                        <td style="width: 70px;">
+                                            <span class="date">{{entity.date | date:'yyyy-MM-dd'}}</span>
+                                        </td>
+                                        <td style="width: 133px;">
+                                            <span class="name">{{entity.slot | labSlotFilter}}</span>
+                                        </td>
+                                        <td style="width: 115px;">
+                                            <span class="name">{{entity.course}}</span>
+                                        </td>
+                                        <td style="width: 115px;">
+                                            <!-- <span class="name">{{listItem.name}}</span>
+                                        <span class="tel">电话: {{listItem.phone}}</span>
+                                        -->
+                                        <span class="name">{{entity.class}}</span>
+                                    </td>
+
+                                    <td style="width: 115px;">
+                                        <span class="name">{{entity.labName}}</span>
+                                    </td>
+                                    <td style="width: 115px;">
+
+                                        <span class="name">{{entity.experimentName}}</span>
+                                    </td>
+                                    <td style="width: 120px;">
+                                        <span class="label label-success" ng-if="entity.status == 'APPROVED'">已通过</span>
+                                        <span class="label label-danger" ng-if="entity.status == 'REJECTED'">被拒绝</span>
+                                        <span class="label label-warning" ng-if="entity.status == 'PENDING'">待审核</span>
+                                    </td>
+
+                                    <th style="width: 20px;"></th>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div class="paginationContainer">
+                        <pagination direction-links="false" total-items="labTeacherReservationCount" ng-model="labTeacherRvPage.current" ng-change="changeLabTeacherReservation()"
+                    items-per-page="8"></pagination>
+                    </div>
+
+                    <div class="pagerContainer2">
+                        <pager total-items="labTeacherReservationCount" ng-model="labTeacherRvPage.current" items-per-page="8" ng-change="changeLabTeacherReservation()"
+               previous-text="<" next-text=">"></pager>
+                    </div>
+                </tab>
+            </tabset>
+        </div>
+    </tab>
+
+    <tab name="" ng-if="(loginUser.role | isNormalTeacher)">
+        <tab-heading class="users" style="background-image: url(../images/command/command_reservation.png);">
+            <span class="title">本学期课程</span>
+            <span class="info">查看本学期课程情况</span>
+        </tab-heading>
+        <div class="command-content-container user" style="background-color: #f1f1f1;">
+            <tabset vertical="true" type="pills">
+                <tab disabled="true">
+                    <tab-heading>
+                        <span class="name">本学期班级</span>
+                    </tab-heading>
+                </tab>
+
+                <tab class="sub" ng-repeat="class in copiedClassList" ng-click="view_exp(class.id)" active="class.active">
+                    <tab-heading >
+                        <span class="name">{{class.courseName}} {{class.classNumber}}</span>
+                    </tab-heading>
+                    <!-- <ol class="breadcrumb">
+                    <li>
+                        <a href="" ng-click="view_exp()">普通物理</a>
+                    </li>
+                    <li>
+                        <a href="" ng-click="view_exp()">力学 1 班</a>
+                    </li>
+                    <li class="active">力学 一 班</li>
+                </ol>
+                -->
+                <div ng-if="is_class">
+                    <div class="tableTitle">
+                        共 {{studentList.length}} 个学生
+                        <br>
+                        <!-- 上课时间：周三 3，4 --> </div>
+                    <div class="tableTitle">
+                        <button class="btn btn cdi-btn-default" ng-click="view_exp(class.id)">返回</button>
+                    </div>
+                    <div class="tableContainer" >
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 25px;"></th>
+                                    <th style="width: 100px;">学号</th>
+                                    <th style="width: 100px;">姓名</th>
+                                    <th style="width: 142px;">实验状态</th>
+                                    <th style="width: 50px;">分数</th>
+                                    <th style="width: 130px;">意见</th>
+                                    <th>
+                                        <div class="btn-group-head">
+                                            <!--  <button class="btn cdi-btn-default">查找</button>
+                                        -->
+                                    </div>
+                                </th>
+                                <th style="width: 20px;"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="student in studentList">
+                                <td style="width: 25px; border:none;"></td>
+                                <td style="width: 70px;">
+                                    <span class="id">{{student.student.number}}</span>
+                                </td>
+                                <td style="width: 133px;">
+                                    <span class="code">{{student.student.name}}</span>
+                                </td>
+                                <td style="width: 115px;">
+                                     <label class="label {{student | stExpStatusClass}}">{{student | stExpStatus}}</label>
+                                </td>
+                                
+                                <td style="width: 100px;">
+                                    <span class="id">{{student.experimentRecord}}</span>
+                                </td>
+                                <td style="width: 100px;">
+                                    <span class="tel">{{student.experimentComment}}</span>
+                                </td>
+
+                                <td>
+                                    <div class="optionContainer" style="padding: 0;">
+
+                                        <button class="btn btn cdi-btn-default" ng-click="view_exp_details(student);">详情</button>
+                                    </div>
+                                </td>
+                                <td style="width: 20px; border:none;"></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+            <div ng-if="is_class == false">
+
+                <div class="tableTitle">共 {{teacherExpList.length}} 个实验</div>
+                <div class="tableContainer" >
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th style="width: 25px;"></th>
+                                <th style="width: 180px;">实验名</th>
+                                <th style="width: 120px;">实验完成情况</th>
+                                <th style="width: 120px;">实验批改情况</th>
+                                <th style="width: 90px;">预约状态</th>
+                                <th>
+                                    <div class="btn-group-head">
+                                        <button class="btn cdi-btn-default" ng-file-select ng-file-change="uploadStList($files,class.id)" style="width:100px;">导入学生名单</button>
+                                    </div>
+                                </th>
+                                <th style="width: 20px;"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="exp in teacherExpList">
+                                <td style="width: 25px; border:none;"></td>
+                                <td style="width: 180px;">
+                                    <span class="id">{{exp.experimentName}}</span>
+                                </td>
+                                <td style="width: 120px;">
+                                    <span class="code">{{exp.submittedNumber}} / {{exp.totalNumber}}</span>
+                                </td>
+                                <td style="width: 120px;">
+                                    <span class="code">{{exp.completedNumber}} / {{exp.totalNumber}}</span>
+                                </td>
+                                <td style="width: 90px;">
+                                    <span class="id">{{exp.classReservationId | reservationStatusFilter}}</span>
+                                </td>
+                                <td>
+                                    <div class="optionContainer" style="padding: 0;">
+
+                                        <button class="btn btn cdi-btn-default" ng-click="view_class(class.id,exp.experimentId)" ng-if="true">班级列表</button>
+                                        &nbsp;
+                                        <!-- <button class="btn btn cdi-btn-default" ng-if="exp.classReservationId == null">预约</button> -->
+
+                                    </div>
+                                </td>
+                                <td style="width: 20px; border:none;"></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="paginationContainer">
+                <pagination direction-links="false" total-items="stCount" ng-model="stPage.stPage"
+                            ng-change="view_st()" items-per-page="8"></pagination>
+            </div>
+
+            <div class="pagerContainer2">
+                <pager total-items="stCount" ng-model="stPage.stPage" items-per-page="8"
+                       ng-change="view_st()" previous-text="<" next-text=">"></pager>
+            </div>
+        </tab>
+
+    </tabset>
+</div>
+</tab>
+<tab name="" ng-if="(loginUser.role | isNormalTeacher)">
+<tab-heading class="spaces">
+    <span class="title">预约申请</span>
+    <span class="info">快速申请实验</span>
+</tab-heading>
+<div class="command-content-container spaces" style="background-color: #f1f1f1;">
+    <tabset vertical="true" type="pills nav-calendar">
+        <tab class="sub">
+            <tab-heading>
+                <span class="name">预约日历</span>
+            </tab-heading>
+            <div class="tableTitle calendarTitle">
+                <span>
+                    <!--  <select>
+                    <option value="1" selected>选择日期</option>
+                </select>
+                -->
+            </span>
+            <span>
+                <!-- <select id="lab-select">
+                <option ng-repeat="lab in currentLabList" labid="{{lab.id}}">{{lab.labNumber}}: {{lab.labName}}</option>
+            </select>
+            -->
+            <select id="lab-select" ng-options="entity.labName for entity in currentLabList" ng-model="selectedLab.lab"
+                             ng-change="changeLab()"></select>
+        </span>
+        <span style="float:right">
+            <button class="btn cdi-btn-default" ng-click="lastWeek()">上一周</button>
+            第
+            <select ng-model="weekConfig.selected" ng-options="m.week for m in weeks" ng-change="toSelectedWeek()"></select>
+            周
+            <button class="btn cdi-btn-default" ng-click="nextWeek()">下一周</button>
+        </span>
+    </div>
+    <div class="tableContainer calendarContainer">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th style="width: 25px;"></th>
+                    <th style="width: 40px;"></th>
+                    <th ng-repeat="day in currentWeekList" style="text-align: center; width: 100px;">
+                        {{day.date.getMonth() + 1}}月{{day.date.getDate()}}日 {{day.date.getDay()|weekDayFilter}}
+                    </th>
+                    <th style="width: 20px;"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="slots in slotList">
+                    <td style="width: 5px; border:none;"></td>
+                    <td style="width: 40px;border-bottom:1px solid #cecece;">
+                        <span class="name">{{slots.slot}}</span>
+                    </td>
+                    <td ng-repeat="entity in slots.list" style="width: 100px;height:140px;border:1px solid #cecece;" 
+                class="{{entity.status | calendarTdClass}}" >
+                        <div ng-if="(entity.status)=='OPEN'">
+                            <button class="btn btn-link" ng-click="order(entity.dayIndex, entity.slotIndex)">可供预定</button>
+                            <br>
+                            <div class="order-details">
+                                <span>点击预订...</span>
+                            </div>
+                        </div>
+                        <div ng-if="(entity.status)=='APPROVED'">
+                            <button class="btn btn-link" ng-click="order_details(entity.reservation,entity.experiment)" ng-if="(entity.status)=='PENDING'">已提交预约</button>
+                            <button class="btn btn-link" ng-click="order_details(entity.reservation,entity.experiment)" ng-if="(entity.status)=='APPROVED'">已成功预约</button>
+                            <br>
+                            <div class="order-details">
+                                <span>
+                                    {{entity.reservation.clazz.course.courseName}}-
+                            {{entity.reservation.clazz.classNumber}}
+                                </span>
+                                <br>
+                                <span>{{entity.reservation.reserver.name}}</span>
+                                <br>
+
+                                <span>{{entity.experiment.experimentName}}</span>
+                            </div>
+                        </div>
+                        <div ng-if="(entity.status)=='PENDING'">
+                            <button class="btn btn-link" ng-click="order_details(entity.reservation,entity.experiment)" ng-if="(entity.status)=='PENDING'">已提交预约</button>
+                            <br>
+                            <div class="order-details">
+                                <span>
+                                    {{entity.reservation.clazz.course.courseName}}-
+                            {{entity.reservation.clazz.classNumber}}
+                                </span>
+                                <br>
+                                <span>{{entity.reservation.reserver.name}}</span>
+                                <br>
+                                <span>{{entity.experiment.experimentName}}</span>
+                            </div>
+                        </div>
+                        <div ng-if="(entity.status)=='CLOSED'"></div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</tab>
+</tabset>
+</div>
+</tab>
+
+</tabset>
+</div>
+</div>

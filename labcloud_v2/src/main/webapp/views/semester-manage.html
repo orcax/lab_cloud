@@ -1,0 +1,226 @@
+<lab-header></lab-header>
+<div class="container">
+    <div class="command-nav-container">
+        <tabset>
+            <tab name="">
+                <tab-heading class="users" ui-sref="usermanage">
+                    <span class="title">用户账户</span>
+                    <span class="info">管理用户权限和资料</span>
+                </tab-heading>
+            </tab>
+            <tab name="">
+                <tab-heading class="spaces" ui-sref="labmanage">
+                    <span class="title">实验资源</span>
+                    <span class="info">实验/实验室/课程</span>
+                </tab-heading>
+            </tab>
+
+            <tab name=""  active="true">
+                <tab-heading class="spaces class" >
+                    <span class="title">学期班级</span>
+                    <span class="info">学期设置和班级开设</span>
+                </tab-heading>
+                <div class="command-content-container user" style="background-color: #f1f1f1;">
+                    <tabset vertical="true" type="pills">
+                        <tab ng-click="loadObjects('clazz')">
+                            <tab-heading>
+                                <span class="name">已开设班级</span>
+                            </tab-heading>
+
+                            <div ng-show="semester == undefined">
+                                <p class="bg-warning"   style="margin-left: 5px;
+                                padding:10px 0px 10px 15px; font-size:13px;">你还没有开启本学期！请进入学期配置开启。</p>
+                            </div>
+                            <div class="tableContainer">
+                                <table class="table filterTable">
+                                    <thead>
+                                        <tr class="op-tr">
+                                            <th style="width: 15px;"></th>
+                                            <th style="width: 400px;">
+                                                <!--  <button class="btn cdi-btn-default">删除选中</button>
+                                            -->
+                                        </th>
+                                        <th style="width: 250px;">
+                                            <!-- <input type="text" class="form-control" placeholder="请输入工号"/>
+                                            -->
+                                        </th>
+                                        <th>
+                                            <!-- <div class="btn-group-head">
+                                            <button class="btn cdi-btn-default" >工号搜索</button>
+                                        </div>
+                                        -->
+                                    </th>
+                                    <th style="width: 10px;"></th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="cdi-pager">
+
+                        <pager total-items="dataMap.clazz.totalItemNum" ng-model="dataMap.clazz.currPage" ng-change="pageChanged('clazz')" next-text="下一页" previous-text="上一页" ></pager>
+
+                        <span class="pager-text">
+                            共 {{ dataMap.clazz.totalItemNum}} 个班级, &nbsp;当前第 {{ dataMap.clazz.currPage }} 页  共 {{ dataMap.clazz.totalPageNum}}  页
+                        </span>
+
+                    </div>
+                    <div class="tableContainer">
+
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 25px;"></th>
+                                    <th style="width: 90px;">班级编号</th>
+                                    <th style="width: 100px;">课程名</th>
+                                    <th style="width: 80px;">任课教师</th>
+                                    <th style="width: 60px;">授课时段</th>
+                                    <th style="width: 200px;">说明</th>
+                                    <th style="width: 230px;">
+                                        <div class="btn-group-head">
+                                            <button class="btn cdi-btn-default" ng-click="form()">添加班级</button>
+                                        </div>
+                                    </th>
+
+                                    <th style="width: 20px;"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="class in dataMap.clazz.currList">
+                                    <td style="width: 25px; border:none;"></td>
+                                    <td style="width: 100px;">
+                                        <span class="id">{{class.number}}</span>
+                                    </td>
+                                    <td style="width: 80px;">
+                                        <span class="code">{{class.course.name}}</span>
+                                    </td>
+                                    <td style="width: 80px;">
+                                        <span class="date">{{class.teacher.name}}</span>
+                                    </td>
+                                    <td style="width: 160px;" >
+                                        <span class="code" >{{class.clazzHour}}</span>
+                                    </td>
+                                    <td style="width: 200px;">
+                                        <span class="name"></span>
+                                        <span class="tel">{{class.description}}</span>
+                                    </td>
+                                    <td>
+                                        <div class="optionContainer" style="padding: 0;">
+                                            <button class="btn btn cdi-btn-default" ng-click="form(class)">配置</button>
+                                            <div style="width: 13px;height: 25px;float: right;"></div>
+                                            <button class="btn cdi-btn-default btn-danger" ng-click="deleteClass(class)">移除</button>
+                                        </div>
+                                    </td>
+                                    <td style="width: 20px; border:none;"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </tab>
+                <tab ng-click="loadObjects('semester')">
+                    <tab-heading>
+                        <span class="name">配置新学期</span>
+                    </tab-heading>
+
+                    <div class="tableContainer">
+                        <table class="table filterTable">
+                            <thead>
+                                <tr class="op-tr">
+                                    <th style="width: 15px;"></th>
+                                    <th style="width: 400px;">
+                                        <!--  <button class="btn cdi-btn-default">删除选中</button>
+                                    -->
+                                </th>
+                                <th style="width: 250px;">
+                                    <!-- <input type="text" class="form-control" placeholder="请输入工号"/>
+                                    -->
+                                </th>
+                                <th>
+                                    <!-- <div class="btn-group-head">
+                                    <button class="btn cdi-btn-default" >工号搜索</button>
+                                </div>
+                                -->
+                            </th>
+                            <th style="width: 10px;"></th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="cdi-pager">
+
+                <pager total-items="dataMap.semester.totalItemNum" ng-model="dataMap.semester.currPage" ng-change="pageChanged('semester')" next-text="下一页" previous-text="上一页" ></pager>
+
+                <span class="pager-text">
+                    共 {{ dataMap.semester.totalItemNum}} 个学期, &nbsp;当前第 {{ dataMap.semester.currPage }} 页  共 {{ dataMap.semester.totalPageNum}}  页
+                </span>
+
+            </div>
+            <div class="tableContainer">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th style="width: 25px;"></th>
+                            <th style="width: 150px;">学期编号</th>
+                            <th style="width: 180px;">开始日期</th>
+                            <th style="width: 190px;">结束如期</th>
+                            <th style="width: 100px;">当前激活</th>
+                            <th>
+                                <div class="btn-group-head">
+                                    <button class="btn cdi-btn-default" ng-click="addSemeter()">添加学期</button>
+                                    <div style="width: 5px;height: 25px;float: right;"></div>
+                                </div>
+                            </th>
+                            <th style="width: 20px;"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="semester in dataMap.semester.currList">
+                            <td style="width: 25px; border:none;"></td>
+                            <td style="width: 150px;">
+                                <span class="id">{{semester.name}}</span>
+                            </td>
+                            <td style="width: 180px;">
+                                <span class="code">{{semester.startDate}}</span>
+                            </td>
+                            <td style="width: 180px;">
+                                <span class="code">{{semester.endDate}}</span>
+                            </td>
+                            <td style="width: 100px;">
+                                <span class="code">{{semester.status}}</span>
+                            </td>
+                            <td style="width: 300px;">
+                                <div class="optionContainer" style="padding: 0;">
+                                    <button class="btn btn cdi-btn-default" style="width:84px" ng-click="" >置为当前</button>
+                                    <div style="width: 13px;height: 25px;float: right;"></div>
+
+                                    <button class="btn cdi-btn-default btn-danger" ng-click="deleteSemester(semester)">移除</button>
+                                </div>
+                            </td>
+                            <td style="width: 20px; border:none;"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+        </tab>
+
+    </tabset>
+</div>
+</tab>
+<tab name="">
+<tab-heading class="reservation" ui-sref="coursemanage">
+    <span class="title">实验日程计划</span>
+    <span class="info">实验计划日程表</span>
+</tab-heading>
+</tab>
+<tab>
+<tab-heading class="cdiweb verify" ui-sref="applymanage">
+    <span class="title">预约审批</span>
+    <span class="info">实验预约审批</span>
+</tab-heading>
+</tab>
+</tabset>
+</div>
+</div>
+
+<lab-footer></lab-footer>

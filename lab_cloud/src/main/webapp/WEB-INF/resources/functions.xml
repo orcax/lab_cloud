@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FunctionManager xmlVersion="20140501" releaseVersion="7.1.1">
+<FunctionDefList>
+<FunctionDef name="gauthority">
+<Class className="com.fr.test.gauthority"/>
+<Description>
+<![CDATA[]]></Description>
+</FunctionDef>
+<FunctionDef name="FUNCTIONGRAPH">
+<Class className="com.fr.function.FUNCTIONGRAPH"/>
+<Description>
+<![CDATA[]]></Description>
+</FunctionDef>
+</FunctionDefList>
+</FunctionManager>

@@ -1,0 +1,864 @@
+<lab-header></lab-header>
+<div class="container">
+<div class="command-nav-container">
+<tabset>
+<tab name="">
+
+    <tab-heading class="users">
+        <span class="title">用户管理</span>
+        <span class="info">管理用户权限和资料</span>
+    </tab-heading>
+    <div class="command-content-container user" style="background-color: #f1f1f1;">
+        <tabset vertical="true" type="pills">
+            <tab>
+                <tab-heading>
+                    <span class="name">全部用户</span>
+                </tab-heading>
+
+                <div class="tableTitle">共 个注册用户</div>
+
+                <div class="tableContainer">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th style="width: 25px;"></th>
+                            <th style="width: 70px;">用户ID
+                            </td>
+                            <th style="width: 142px;">用户类型
+                            </td>
+                            <th style="width: 106px;">注册日期
+                            </td>
+                            <th style="width: 220px;">基本信息
+                            </td>
+                            <th>
+                                <div class="btn-group-head">
+                                    <button class="btn cdi-btn-default" ng-click="addUser()">添加用户</button>
+                                    <div style="width: 5px;height: 25px;float: right;"></div>
+                                    <button class="btn cdi-btn-default">查找</button>
+
+                                </div>
+                            </th>
+                            <th style="width: 20px;"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="user in currentUserList">
+                            <td style="width: 25px; border:none;"></td>
+                            <td style="width: 70px;">
+                                <span class="id">{{user.accountNumber}}</span>
+                            </td>
+                            <td style="width: 133px;">
+                                <span class="code">{{user.accountName}}</span>
+                            </td>
+                            <td style="width: 115px;">
+                                <span class="date">{{user.role}}</span>
+                            </td>
+                            <td style="width: 220px;">
+                                <span class="name"></span>
+                                <span class="tel">电话: {{user.accountEmail}}</span>
+                            </td>
+                            <td>
+                                <div class="optionContainer" style="padding: 0;">
+                                    <button class="btn btn cdi-btn-default" ng-click="userDetails(1)">详细介绍</button>
+                                    <div style="width: 13px;height: 25px;float: right;"></div>
+
+                                </div>
+                            </td>
+                            <td style="width: 20px; border:none;"></td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="paginationContainer">
+                <pagination direction-links="false" total-items="currentNumber" ng-model="currentPage" ng-change="pageChanged()" items-per-page="10"></pagination>
+                </div>
+
+                <div class="pagerContainer2">
+                <pager total-items="currentNumber" ng-model="currentPage" items-per-page="10" ng-change="pageChanged()" previous-text="<" next-text=">"></pager>
+                </div>
+            </tab>
+
+            <tab class="sub">
+                <tab-heading>
+                    <span class="name">实验中心教师</span>
+                </tab-heading>
+
+                <div class="tableTitle">共 100 个注册用户</div>
+                <div class="tableContainer">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th style="width: 25px;"></th>
+                            <th style="width: 70px;">用户ID</td>
+                            <th style="width: 142px;">用户类型</td>
+                            <th style="width: 106px;">注册日期</td>
+                            <th style="width: 220px;">基本信息</td>
+                            <th>
+                                <div class="btn-group-head">
+                                    <button class="btn cdi-btn-default">查找</button>
+                                </div>
+                            </th>
+                            <th style="width: 20px;"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td style="width: 25px; border:none;"></td>
+                            <td style="width: 70px;">
+                                <span class="id">{{listItem.id}}</span>
+                            </td>
+                            <td style="width: 133px;">
+                                <span class="code">{{listItem.userGroup }}</span>
+                            </td>
+                            <td style="width: 115px;">
+                                <span class="date">2014-10-10</span>
+                            </td>
+                            <td style="width: 220px;">
+                                <span class="name">{{listItem.name}}</span>
+                                <span class="tel">电话: {{listItem.phone}}</span>
+                            </td>
+                            <td>
+                                <div class="optionContainer" style="padding: 0;">
+                                    <button class="btn cdi-btn-default" ng-click="userDetails(1)">详细介绍</button>
+                                    <div style="width: 13px;height: 25px;float: right;"></div>
+
+                                </div>
+                            </td>
+                            <td style="width: 20px; border:none;"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="paginationContainer">
+                    <pagination direction-links="false" total-items="currentNumber" ng-model="currentPage" ng-change="pageChanged()" items-per-page="10"></pagination>
+                </div>
+
+                <div class="pagerContainer2">
+                    <pager total-items="currentNumber" ng-model="currentPage" items-per-page="10" ng-change="pageChanged()" previous-text="<" next-text=">"></pager>
+                </div>
+            </tab>
+            <tab class="sub">
+                <tab-heading>
+                    <span class="name">实验中心学生</span>
+                </tab-heading>
+
+                <div class="tableTitle">共 100 个注册用户</div>
+                <div class="tableContainer">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th style="width: 25px;"></th>
+                            <th style="width: 70px;">用户ID</td>
+                            <th style="width: 142px;">用户类型</td>
+                            <th style="width: 106px;">注册日期</td>
+                            <th style="width: 220px;">基本信息</td>
+                            <th>
+                                <div class="btn-group-head">
+                                    <button class="btn cdi-btn-default">查找</button>
+                                </div>
+                            </th>
+                            <th style="width: 20px;"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td style="width: 25px; border:none;"></td>
+                            <td style="width: 70px;">
+                                <span class="id">{{listItem.id}}</span>
+                            </td>
+                            <td style="width: 133px;">
+                                <span class="code">{{listItem.userGroup }}</span>
+                            </td>
+                            <td style="width: 115px;">
+                                <span class="date">2014-10-10</span>
+                            </td>
+                            <td style="width: 220px;">
+                                <span class="name">{{listItem.name}}</span>
+                                <span class="tel">电话: {{listItem.phone}}</span>
+                            </td>
+                            <td>
+                                <div class="optionContainer" style="padding: 0;">
+                                    <button class="btn cdi-btn-default"  ng-click="userDetails(1)">详细介绍</button>
+                                    <div style="width: 13px;height: 25px;float: right;"></div>
+
+                                </div>
+                            </td>
+                            <td style="width: 20px; border:none;"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="paginationContainer">
+                    <pagination direction-links="false" total-items="currentNumber" ng-model="currentPage" ng-change="pageChanged()" items-per-page="10"></pagination>
+                </div>
+
+                <div class="pagerContainer2">
+                    <pager total-items="currentNumber" ng-model="currentPage" items-per-page="10" ng-change="pageChanged()" previous-text="<" next-text=">"></pager>
+                </div>
+            </tab>
+            <tab class="sub">
+                <tab-heading>
+                    <span class="name">系统管理员</span>
+                </tab-heading>
+
+                <div class="tableTitle">共 100 个注册用户</div>
+                <div class="tableContainer">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th style="width: 25px;"></th>
+                            <th style="width: 70px;">用户ID</td>
+                            <th style="width: 142px;">用户类型</td>
+                            <th style="width: 106px;">注册日期</td>
+                            <th style="width: 220px;">基本信息</td>
+                            <th>
+                                <div class="btn-group-head">
+                                    <button class="btn cdi-btn-default">查找</button>
+                                </div>
+                            </th>
+                            <th style="width: 20px;"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td style="width: 25px; border:none;"></td>
+                            <td style="width: 70px;">
+                                <span class="id">{{listItem.id}}</span>
+                            </td>
+                            <td style="width: 133px;">
+                                <span class="code">{{listItem.userGroup }}</span>
+                            </td>
+                            <td style="width: 115px;">
+                                <span class="date">2014-10-10</span>
+                            </td>
+                            <td style="width: 220px;">
+                                <span class="name">{{listItem.name}}</span>
+                                <span class="tel">电话: {{listItem.phone}}</span>
+                            </td>
+                            <td>
+                                <div class="optionContainer" style="padding: 0;">
+                                    <button class="btn cdi-btn-default" ng-click="userDetails(1)">详细介绍</button>
+                                    <div style="width: 13px;height: 25px;float: right;"></div>
+
+                                </div>
+                               
+                            </td>
+                            <td style="width: 20px; border:none;"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="paginationContainer">
+                    <pagination direction-links="false" total-items="currentNumber" ng-model="currentPage" ng-change="pageChanged()" items-per-page="10"></pagination>
+                </div>
+
+                <div class="pagerContainer2">
+                    <pager total-items="currentNumber" ng-model="currentPage" items-per-page="10" ng-change="pageChanged()" previous-text="<" next-text=">"></pager>
+                </div>
+            </tab>
+        </tabset>
+    </div>
+</tab>
+<tab name="">
+    <tab-heading class="spaces">
+        <span class="title">实验课程管理</span>
+        <span class="info">配置实验和课程关系</span>
+    </tab-heading>
+    <div class="command-content-container spaces" style="background-color: #f1f1f1;">
+        <tabset vertical="true" type="pills">
+            <tab>
+                <tab-heading>
+                    <span class="name">全部实验室</span>
+                </tab-heading>
+
+                <div class="tableTitle">共 个注册用户</div>
+                <div class="tableContainer">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th style="width: 25px;"></th>
+                            <th style="width: 70px;">实验室编号
+                            </td>
+                            <th style="width: 142px;">类型
+                            </td>
+                            <th style="width: 106px;">管理员
+                            </td>
+                            <th style="width: 220px;">基本信息
+                            </td>
+                            <th>
+                                <div class="btn-group-head">
+                                    <button class="btn cdi-btn-default">查找</button>
+                                </div>
+                            </th>
+                            <th style="width: 20px;"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td style="width: 25px; border:none;"></td>
+                            <td style="width: 70px;">
+                                <span class="id"></span>
+                            </td>
+                            <td style="width: 133px;">
+                                <span class="code"></span>
+                            </td>
+                            <td style="width: 115px;">
+                                <span class="date"></span>
+                            </td>
+                            <td style="width: 220px;">
+                                <span class="name"></span>
+                                <span class="tel">电话: fsfas</span>
+                            </td>
+                            <td>
+                                <div class="optionContainer" style="padding: 0;">
+                                    <button class="btn btn cdi-btn-default">详细介绍</button>
+                                    <div style="width: 13px;height: 25px;float: right;"></div>
+                                    
+                                </div>
+                            </td>
+                            <td style="width: 20px; border:none;"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="paginationContainer">
+                    <pagination direction-links="false" total-items="currentNumber" ng-model="currentPage" ng-change="pageChanged()" items-per-page="10"></pagination>
+                </div>
+
+                <div class="pagerContainer2">
+                    <pager total-items="currentNumber" ng-model="currentPage" items-per-page="10" ng-change="pageChanged()" previous-text="<" next-text=">"></pager>
+                </div>
+            </tab>
+            <tab>
+                <tab-heading>
+                    <span class="name">全部实验</span>
+                </tab-heading>
+
+                <div class="tableTitle">共 个注册用户</div>
+                <div class="tableContainer">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th style="width: 25px;"></th>
+                            <th style="width: 70px;">用户ID
+                            </td>
+                            <th style="width: 142px;">用户类型
+                            </td>
+                            <th style="width: 106px;">注册日期
+                            </td>
+                            <th style="width: 220px;">基本信息
+                            </td>
+                            <th>
+                                <div class="btn-group-head">
+                                    <button class="btn cdi-btn-default">查找</button>
+                                </div>
+                            </th>
+                            <th style="width: 20px;"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td style="width: 25px; border:none;"></td>
+                            <td style="width: 70px;">
+                                <span class="id"></span>
+                            </td>
+                            <td style="width: 133px;">
+                                <span class="code"></span>
+                            </td>
+                            <td style="width: 115px;">
+                                <span class="date"></span>
+                            </td>
+                            <td style="width: 220px;">
+                                <span class="name"></span>
+                                <span class="tel">电话: fsfas</span>
+                            </td>
+                            <td>
+                                <div class="optionContainer" style="padding: 0;">
+                                    <button class="btn btn cdi-btn-default">详细介绍</button>
+                                    <div style="width: 13px;height: 25px;float: right;"></div>
+                                    <button class="btn cdi-btn-default"></button>
+                                </div>
+                            </td>
+                            <td style="width: 20px; border:none;"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="paginationContainer">
+                    <pagination direction-links="false" total-items="currentNumber" ng-model="currentPage" ng-change="pageChanged()" items-per-page="10"></pagination>
+                </div>
+
+                <div class="pagerContainer2">
+                    <pager total-items="currentNumber" ng-model="currentPage" items-per-page="10" ng-change="pageChanged()" previous-text="<" next-text=">"></pager>
+                </div>
+            </tab>
+            <tab>
+                <tab-heading>
+                    <span class="name">全部课程</span>
+                </tab-heading>
+
+                <div class="tableTitle">共 个注册用户</div>
+                <div class="tableContainer">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th style="width: 25px;"></th>
+                            <th style="width: 70px;">用户ID
+                            </td>
+                            <th style="width: 142px;">用户类型
+                            </td>
+                            <th style="width: 106px;">注册日期
+                            </td>
+                            <th style="width: 220px;">基本信息
+                            </td>
+                            <th>
+                                <div class="btn-group-head">
+                                    <button class="btn cdi-btn-default">查找</button>
+                                </div>
+                            </th>
+                            <th style="width: 20px;"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td style="width: 25px; border:none;"></td>
+                            <td style="width: 70px;">
+                                <span class="id"></span>
+                            </td>
+                            <td style="width: 133px;">
+                                <span class="code"></span>
+                            </td>
+                            <td style="width: 115px;">
+                                <span class="date"></span>
+                            </td>
+                            <td style="width: 220px;">
+                                <span class="name"></span>
+                                <span class="tel">电话: fsfas</span>
+                            </td>
+                            <td>
+                                <div class="optionContainer" style="padding: 0;">
+                                    <button class="btn btn cdi-btn-default">详细介绍</button>
+                                    <div style="width: 13px;height: 25px;float: right;"></div>
+                                    <button class="btn cdi-btn-default"></button>
+                                </div>
+                            </td>
+                            <td style="width: 20px; border:none;"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="paginationContainer">
+                    <pagination direction-links="false" total-items="currentNumber" ng-model="currentPage" ng-change="pageChanged()" items-per-page="10"></pagination>
+                </div>
+
+                <div class="pagerContainer2">
+                    <pager total-items="currentNumber" ng-model="currentPage" items-per-page="10" ng-change="pageChanged()" previous-text="<" next-text=">"></pager>
+                </div>
+            </tab>
+        </tabset>
+    </div>
+</tab>
+
+<tab name="">
+    <tab-heading class="reservation">
+        <span class="title">实验课程排布</span>
+        <span class="info">配置课程相关实验排列</span>
+    </tab-heading>
+    <div class="command-content-container spaces" style="background-color: #f1f1f1;">
+        <tabset vertical="true" type="pills">
+            <tab>
+                <tab-heading>
+                    <span class="name">全部实验室</span>
+                </tab-heading>
+
+                <div class="tableTitle">共 个注册用户</div>
+                <div class="tableContainer">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th style="width: 25px;"></th>
+                            <th style="width: 70px;">用户ID
+                            </td>
+                            <th style="width: 142px;">用户类型
+                            </td>
+                            <th style="width: 106px;">注册日期
+                            </td>
+                            <th style="width: 220px;">基本信息
+                            </td>
+                            <th>
+                                <div class="btn-group-head">
+                                    <button class="btn cdi-btn-default">查找</button>
+                                </div>
+                            </th>
+                            <th style="width: 20px;"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td style="width: 25px; border:none;"></td>
+                            <td style="width: 70px;">
+                                <span class="id"></span>
+                            </td>
+                            <td style="width: 133px;">
+                                <span class="code"></span>
+                            </td>
+                            <td style="width: 115px;">
+                                <span class="date"></span>
+                            </td>
+                            <td style="width: 220px;">
+                                <span class="name"></span>
+                                <span class="tel">电话: fsfas</span>
+                            </td>
+                            <td>
+                                <div class="optionContainer" style="padding: 0;">
+                                    <button class="btn btn cdi-btn-default">详细介绍</button>
+                                    <div style="width: 13px;height: 25px;float: right;"></div>
+                                    <button class="btn cdi-btn-default"></button>
+                                </div>
+                            </td>
+                            <td style="width: 20px; border:none;"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="paginationContainer">
+                    <pagination direction-links="false" total-items="currentNumber" ng-model="currentPage" ng-change="pageChanged()" items-per-page="10"></pagination>
+                </div>
+
+                <div class="pagerContainer2">
+                    <pager total-items="currentNumber" ng-model="currentPage" items-per-page="10" ng-change="pageChanged()" previous-text="<" next-text=">"></pager>
+                </div>
+            </tab>
+            <tab>
+                <tab-heading>
+                    <span class="name">全部实验</span>
+                </tab-heading>
+
+                <div class="tableTitle">共 个注册用户</div>
+                <div class="tableContainer">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th style="width: 25px;"></th>
+                            <th style="width: 70px;">用户ID
+                            </td>
+                            <th style="width: 142px;">用户类型
+                            </td>
+                            <th style="width: 106px;">注册日期
+                            </td>
+                            <th style="width: 220px;">基本信息
+                            </td>
+                            <th>
+                                <div class="btn-group-head">
+                                    <button class="btn cdi-btn-default">查找</button>
+                                </div>
+                            </th>
+                            <th style="width: 20px;"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td style="width: 25px; border:none;"></td>
+                            <td style="width: 70px;">
+                                <span class="id"></span>
+                            </td>
+                            <td style="width: 133px;">
+                                <span class="code"></span>
+                            </td>
+                            <td style="width: 115px;">
+                                <span class="date"></span>
+                            </td>
+                            <td style="width: 220px;">
+                                <span class="name"></span>
+                                <span class="tel">电话: fsfas</span>
+                            </td>
+                            <td>
+                                <div class="optionContainer" style="padding: 0;">
+                                    <button class="btn btn cdi-btn-default">详细介绍</button>
+                                    <div style="width: 13px;height: 25px;float: right;"></div>
+                                    <button class="btn cdi-btn-default"></button>
+                                </div>
+                            </td>
+                            <td style="width: 20px; border:none;"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="paginationContainer">
+                    <pagination direction-links="false" total-items="currentNumber" ng-model="currentPage" ng-change="pageChanged()" items-per-page="10"></pagination>
+                </div>
+
+                <div class="pagerContainer2">
+                    <pager total-items="currentNumber" ng-model="currentPage" items-per-page="10" ng-change="pageChanged()" previous-text="<" next-text=">"></pager>
+                </div>
+            </tab>
+            <tab>
+                <tab-heading>
+                    <span class="name">全部课程</span>
+                </tab-heading>
+
+                <div class="tableTitle">共 个注册用户</div>
+                <div class="tableContainer">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th style="width: 25px;"></th>
+                            <th style="width: 70px;">用户ID
+                            </td>
+                            <th style="width: 142px;">用户类型
+                            </td>
+                            <th style="width: 106px;">注册日期
+                            </td>
+                            <th style="width: 220px;">基本信息
+                            </td>
+                            <th>
+                                <div class="btn-group-head">
+                                    <button class="btn cdi-btn-default">查找</button>
+                                </div>
+                            </th>
+                            <th style="width: 20px;"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td style="width: 25px; border:none;"></td>
+                            <td style="width: 70px;">
+                                <span class="id"></span>
+                            </td>
+                            <td style="width: 133px;">
+                                <span class="code"></span>
+                            </td>
+                            <td style="width: 115px;">
+                                <span class="date"></span>
+                            </td>
+                            <td style="width: 220px;">
+                                <span class="name"></span>
+                                <span class="tel">电话: fsfas</span>
+                            </td>
+                            <td>
+                                <div class="optionContainer" style="padding: 0;">
+                                    <button class="btn btn cdi-btn-default">详细介绍</button>
+                                    <div style="width: 13px;height: 25px;float: right;"></div>
+                                    <button class="btn cdi-btn-default"></button>
+                                </div>
+                            </td>
+                            <td style="width: 20px; border:none;"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="paginationContainer">
+                    <pagination direction-links="false" total-items="currentNumber" ng-model="currentPage" ng-change="pageChanged()" items-per-page="10"></pagination>
+                </div>
+
+                <div class="pagerContainer2">
+                    <pager total-items="currentNumber" ng-model="currentPage" items-per-page="10" ng-change="pageChanged()" previous-text="<" next-text=">"></pager>
+                </div>
+            </tab>
+        </tabset>
+    </div>
+</tab>
+
+<tab name="">
+    <tab-heading class="cdiweb">
+        <span class="title">申请审核</span>
+        <span class="info">审核实验室预定申请</span>
+    </tab-heading>
+    <div class="command-content-container user" style="background-color: #f1f1f1;">
+        <tabset vertical="true" type="pills">
+            <tab>
+                <tab-heading>
+                    <span class="name">全部实验室</span>
+                </tab-heading>
+
+                <div class="tableTitle">共 个注册用户</div>
+                <div class="tableContainer">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th style="width: 25px;"></th>
+                            <th style="width: 70px;">用户ID
+                            </td>
+                            <th style="width: 142px;">用户类型
+                            </td>
+                            <th style="width: 106px;">注册日期
+                            </td>
+                            <th style="width: 220px;">基本信息
+                            </td>
+                            <th>
+                                <div class="btn-group-head">
+                                    <button class="btn cdi-btn-default">查找</button>
+                                </div>
+                            </th>
+                            <th style="width: 20px;"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td style="width: 25px; border:none;"></td>
+                            <td style="width: 70px;">
+                                <span class="id"></span>
+                            </td>
+                            <td style="width: 133px;">
+                                <span class="code"></span>
+                            </td>
+                            <td style="width: 115px;">
+                                <span class="date"></span>
+                            </td>
+                            <td style="width: 220px;">
+                                <span class="name"></span>
+                                <span class="tel">电话: fsfas</span>
+                            </td>
+                            <td>
+                                <div class="optionContainer" style="padding: 0;">
+                                    <button class="btn btn cdi-btn-default">详细介绍</button>
+                                    <div style="width: 13px;height: 25px;float: right;"></div>
+                                    <button class="btn cdi-btn-default"></button>
+                                </div>
+                            </td>
+                            <td style="width: 20px; border:none;"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="paginationContainer">
+                    <pagination direction-links="false" total-items="currentNumber" ng-model="currentPage" ng-change="pageChanged()" items-per-page="10"></pagination>
+                </div>
+
+                <div class="pagerContainer2">
+                    <pager total-items="currentNumber" ng-model="currentPage" items-per-page="10" ng-change="pageChanged()" previous-text="<" next-text=">"></pager>
+                </div>
+            </tab>
+            <tab class="sub">
+                <tab-heading>
+                    <span class="name">教师申请</span>
+                </tab-heading>
+
+                <div class="tableTitle">共 个注册用户</div>
+                <div class="tableContainer">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th style="width: 25px;"></th>
+                            <th style="width: 70px;">用户ID
+                            </td>
+                            <th style="width: 142px;">用户类型
+                            </td>
+                            <th style="width: 106px;">注册日期
+                            </td>
+                            <th style="width: 220px;">基本信息
+                            </td>
+                            <th>
+                                <div class="btn-group-head">
+                                    <button class="btn cdi-btn-default">查找</button>
+                                </div>
+                            </th>
+                            <th style="width: 20px;"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td style="width: 25px; border:none;"></td>
+                            <td style="width: 70px;">
+                                <span class="id"></span>
+                            </td>
+                            <td style="width: 133px;">
+                                <span class="code"></span>
+                            </td>
+                            <td style="width: 115px;">
+                                <span class="date"></span>
+                            </td>
+                            <td style="width: 220px;">
+                                <span class="name"></span>
+                                <span class="tel">电话: fsfas</span>
+                            </td>
+                            <td>
+                                <div class="optionContainer" style="padding: 0;">
+                                    <button class="btn btn cdi-btn-default">详细介绍</button>
+                                    <div style="width: 13px;height: 25px;float: right;"></div>
+                                    <button class="btn cdi-btn-default"></button>
+                                </div>
+                            </td>
+                            <td style="width: 20px; border:none;"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="paginationContainer">
+                    <pagination direction-links="false" total-items="currentNumber" ng-model="currentPage" ng-change="pageChanged()" items-per-page="10"></pagination>
+                </div>
+
+                <div class="pagerContainer2">
+                    <pager total-items="currentNumber" ng-model="currentPage" items-per-page="10" ng-change="pageChanged()" previous-text="<" next-text=">"></pager>
+                </div>
+            </tab>
+            <tab class="sub">
+                <tab-heading>
+                    <span class="name">学生申请</span>
+                </tab-heading>
+
+                <div class="tableTitle">共 个注册用户</div>
+                <div class="tableContainer">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th style="width: 25px;"></th>
+                            <th style="width: 70px;">用户ID
+                            </td>
+                            <th style="width: 142px;">用户类型
+                            </td>
+                            <th style="width: 106px;">注册日期
+                            </td>
+                            <th style="width: 220px;">基本信息
+                            </td>
+                            <th>
+                                <div class="btn-group-head">
+                                    <button class="btn cdi-btn-default">查找</button>
+                                </div>
+                            </th>
+                            <th style="width: 20px;"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td style="width: 25px; border:none;"></td>
+                            <td style="width: 70px;">
+                                <span class="id"></span>
+                            </td>
+                            <td style="width: 133px;">
+                                <span class="code"></span>
+                            </td>
+                            <td style="width: 115px;">
+                                <span class="date"></span>
+                            </td>
+                            <td style="width: 220px;">
+                                <span class="name"></span>
+                                <span class="tel">电话: fsfas</span>
+                            </td>
+                            <td>
+                                <div class="optionContainer" style="padding: 0;">
+                                    <button class="btn btn cdi-btn-default">详细介绍</button>
+                                    <div style="width: 13px;height: 25px;float: right;"></div>
+                                    <button class="btn cdi-btn-default"></button>
+                                </div>
+                            </td>
+                            <td style="width: 20px; border:none;"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="paginationContainer">
+                    <pagination direction-links="false" total-items="currentNumber" ng-model="currentPage" ng-change="pageChanged()" items-per-page="10"></pagination>
+                </div>
+
+                <div class="pagerContainer2">
+                    <pager total-items="currentNumber" ng-model="currentPage" items-per-page="10" ng-change="pageChanged()" previous-text="<" next-text=">"></pager>
+                </div>
+            </tab>
+        </tabset>
+    </div>
+</tab>
+</tabset>
+</div>
+</div>

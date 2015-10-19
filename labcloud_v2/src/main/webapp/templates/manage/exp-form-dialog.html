@@ -1,0 +1,113 @@
+<div type="user-info-dialog">
+    <div class="btnGroup">
+        <button class="btn cdi-btn-default left" ng-click="cancel()">取消</button>
+        <button class="btn cdi-btn-blue right btn-save" ng-click="save()">保存</button>
+        <div class="title">编辑实验</div>
+    </div>
+    <div >
+        <div class="content user-info" style="margin-top:10px;">
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;">实验编号*</div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <input type="text" name="name" ng-model="data.number" class="right form-control"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;">实验名称*</div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <input type="text" ng-model="data.name" class="right form-control"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;">实验最少人数</div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <input type="number" ng-model="data.minGrpStuCnt" class="right form-control"/>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;">实验最大人数</div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <input type="number" ng-model="data.maxGrpStuCnt" class="right form-control"/>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;">虚拟实验链接</div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <input type="text" ng-model="data.virtualExpLink" class="right form-control"/>
+                </div>
+            </div>
+        </div>
+
+       <!--  <div class="slider2" style="margin-top: 16px;"></div>
+        
+        <div class="content user-info" style="margin-top:10px;">
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;">上传实验学生名单</div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <input type="file" class="right form-control"/>
+                </div>
+            </div>
+        </div> -->
+        <div class="slider2" style="margin-top: 16px;"></div>
+        
+        <div class="content" ng-show="data.id != null">
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;vertical-align: top;padding-top: 7px;">支持该实验的实验室</div>
+                <div class="tableContainer ng-scope">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th style="width: 25px;"></th>
+                                <th style="width: 70px;">编号
+                                </th>
+                                <th style="width: 142px;">实验室名
+                                </th>
+                                <th style="width: 90px;">
+                                </th>
+                                
+                                <th style="width: 20px;"></th>
+                            </tr>
+                        </thead>
+                            <tr ng-repeat="lab in expLabs">
+                                <td style="width: 25px; border:none;"></td>
+                                <td style="width: 70px;">
+                                    <span class="id">{{lab.number}}</span>
+                                </td>
+                                <td style="width: 142px;">
+                                    <span class="code">{{lab.name}}</span>
+                                </td>
+                                <th style="width: 90px;">
+                                    <button class="btn cdi-btn-grey btn-danger"
+                                    ng-click="remove(lab)">移除</button>
+                                </th>
+                                <td style="width: 20px; border:none;"></td>
+                            </tr>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="btn-group-head">
+                    <button class="btn cdi-btn-default" ng-click="addLab()"
+                     style="width:100px;">添加实验室</button>
+                    <div style="width: 5px;height: 25px;float: right;"></div>
+                    <select id="lab-experiments-select" style="float:right;"
+                     ng-model="selected.lab"
+                     ng-options="lab.name for lab in selected.labs track by lab.id">
+                    </select>
+                </div>
+                <br>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;"></div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <span class="red">{{message}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

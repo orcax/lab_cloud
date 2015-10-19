@@ -1,0 +1,483 @@
+<lab-header></lab-header>
+<div class="container">
+    <div class="command-nav-container">
+        <tabset>
+            <tab name="">
+                <tab-heading class="users" >
+                    <span class="title">用户账户</span>
+                    <span class="info">管理用户权限和资料</span>
+                </tab-heading>
+                <div class="command-content-container user" style="background-color: #f1f1f1;">
+                    <tabset vertical="true" type="pills">
+                        <tab disabled="true">
+                            <tab-heading>
+                                <span class="name">账户类别</span>
+                            </tab-heading>
+                        </tab>
+
+                        <tab class="sub" active="true" ng-click="loadUser('ADMIN')" active="true">
+                            <tab-heading>
+                                <span class="name">系统管理员</span>
+                            </tab-heading>
+
+                            <div class="tableContainer">
+                                <table class="table filterTable">
+                                    <thead>
+                                        <tr class="op-tr">
+                                            <th style="width: 15px;"></th>
+                                            <th style="width: 400px;">
+                                                <!--  <button class="btn cdi-btn-default">删除选中</button>
+                                            -->
+                                        </th>
+                                        <th style="width: 250px;">
+                                            <input type="text" class="form-control" placeholder="请输入工号或姓名" ng-model="accountMap.ADMIN.searchText"/>
+                                        </th>
+                                        <th>
+                                            <div class="btn-group-head">
+                                                <button class="btn cdi-btn-default" ng-click="search('ADMIN')">搜索</button>
+                                            </div>
+                                        </th>
+                                        <th ng-show="!accountMap.ADMIN.listShow">
+                                            <div class="btn-group-head">
+                                                <button class="btn cdi-btn-default" ng-click="clearSearch('ADMIN')" >返回</button>
+                                            </div>
+                                        </th>
+
+                                        <th style="width: 10px;"></th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="cdi-pager">
+
+                            <pager total-items="accountMap.ADMIN.totalItemNum" ng-model="accountMap.ADMIN.currPage" ng-change="pageChanged('ADMIN')" next-text="下一页" previous-text="上一页" ></pager>
+
+                            <span class="pager-text">
+                                共 {{ accountMap.ADMIN.totalItemNum}} 个管理员, &nbsp;当前第 {{ accountMap.ADMIN.currPage }} 页  共 {{ accountMap.ADMIN.totalPageNum}}  页
+                            </span>
+
+                        </div>
+                        <div class="tableContainer">
+                            <table class="table" ng-show="accountMap.ADMIN.listShow">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 25px;"></th>
+                                        <th style="width: 120px;">工号</th>
+                                        <th style="width: 142px;">名字</th>
+                                        <th style="width: 150px;">角色</th>
+                                        <th style="width: 200px;">职位</th>
+
+                                        <th>
+                                            <span style="line-height:28px;">&nbsp;&nbsp;&nbsp;&nbsp;用户管理</span>
+                                            <div class="btn-group-head">
+
+                                                <button class="btn btn-default" ng-click="form('ADMIN')">添加管理员</button>
+                                            </div>
+                                        </th>
+                                        <th style="width: 20px;"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="admin in accountMap.ADMIN.currList">
+                                        <td style="width: 25px; border:none;"></td>
+                                        <td style="width: 120px;">
+                                            <span class="id">{{admin.number}}</span>
+                                        </td>
+                                        <td style="width: 133px;">
+                                            <span class="code">{{admin.name }}</span>
+                                        </td>
+                                        <td style="width: 133px;">
+                                            <span class="code">{{admin.role |role }}</span>
+                                        </td>
+                                        <td style="width: 220px;">
+                                            <span class="date">{{admin.title}}</span>
+                                        </td>
+                                        <td style="width: 250px;">
+                                            <button  class="btn cdi-btn-default" ng-click="form('ADMIN',admin)"> <i class="icon-pencil"></i>
+                                                编辑
+                                            </button>
+
+                                            <button  class="btn cdi-btn-default" ng-click="resetPassword(admin)">修改密码</button>
+                                        </td>
+
+                                        <td style="width: 20px; border:none;"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="table" ng-show="!accountMap.ADMIN.listShow">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 25px;"></th>
+                                        <th style="width: 120px;">工号</th>
+                                        <th style="width: 142px;">姓名</th>
+                                        <th style="width: 150px;">角色</th>
+                                        <th style="width: 200px;">职务</th>
+
+                                        <th>
+                                            <span style="line-height:28px;">&nbsp;&nbsp;&nbsp;&nbsp;用户管理</span>
+                                            <div class="btn-group-head">
+
+                                                <button class="btn btn-default" ng-click="form('ADMIN')">添加管理员</button>
+                                            </div>
+                                        </th>
+                                        <th style="width: 20px;"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="admin in accountMap.ADMIN.searchList">
+                                        <td style="width: 25px; border:none;"></td>
+                                        <td style="width: 120px;">
+                                            <span class="id">{{admin.number}}</span>
+                                        </td>
+                                        <td style="width: 133px;">
+                                            <span class="code">{{admin.name }}</span>
+                                        </td>
+                                        <td style="width: 133px;">
+                                            <span class="code">{{admin.role|role }}</span>
+                                        </td>
+                                        <td style="width: 220px;">
+                                            <span class="date">{{admin.title}}</span>
+                                        </td>
+                                        <td style="width: 250px;">
+                                            <button  class="btn cdi-btn-default" ng-click="form('ADMIN',admin)"> <i class="icon-pencil"></i>
+                                                编辑
+                                            </button>
+
+                                            <button  class="btn cdi-btn-default" ng-click="resetPassword(admin)">修改密码</button>
+                                        </td>
+
+                                        <td style="width: 20px; border:none;"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </tab>
+
+                    <tab class="sub" ng-click="loadUser('TEACHER')" >
+                        <tab-heading>
+                            <span class="name">教师</span>
+                        </tab-heading>
+
+                        <div class="tableContainer">
+                            <table class="table filterTable">
+                                <thead>
+                                    <tr class="op-tr">
+                                        <th style="width: 15px;"></th>
+                                        <th style="width: 400px;">
+                                            <!--  <button class="btn cdi-btn-default">删除选中</button>
+                                        -->
+                                    </th>
+                                    <th style="width: 250px;">
+                                        <input type="text" class="form-control" placeholder="请输入工号或姓名" ng-model="accountMap.TEACHER.searchText"/>
+                                    </th>
+                                    <th>
+                                        <div class="btn-group-head">
+                                            <button class="btn cdi-btn-default" ng-click="search('TEACHER')">搜索</button>
+                                        </div>
+                                    </th>
+                                    <th ng-show="!accountMap.TEACHER.listShow">
+                                        <div class="btn-group-head">
+                                            <button class="btn cdi-btn-default" ng-click="clearSearch('TEACHER')" >返回</button>
+                                        </div>
+                                    </th>
+                                    <th style="width: 10px;"></th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="cdi-pager">
+
+                        <pager total-items="accountMap.TEACHER.totalItemNum" ng-model="accountMap.TEACHER.currPage" ng-change="pageChanged('TEACHER')" next-text="下一页" previous-text="上一页" ></pager>
+
+                        <span class="pager-text">
+                            共 {{ accountMap.TEACHER.totalItemNum}} 个教师, &nbsp;当前第 {{ accountMap.TEACHER.currPage }} 页  共 {{ accountMap.TEACHER.totalPageNum}}  页
+                        </span>
+
+                    </div>
+                    <div class="tableContainer">
+                        <table class="table" ng-show="accountMap.TEACHER.listShow">
+                            <thead>
+                                <tr>
+                                    <th style="width: 25px;"></th>
+                                    <th style="width: 100px;">工号</th>
+                                    <th style="width: 110px;">姓名</th>
+                                    <th style="width: 130px;">角色</th>
+                                    <th style="width: 110px;">性别</th>
+                                    <th style="width: 250px;">&nbsp;&nbsp;&nbsp;&nbsp;用户管理</th>
+                                    <th>
+                                        <div class="btn-group-head">
+                                            <button class="btn cdi-btn-default" ng-click="form('TEACHER')">添加教师</button>
+                                        </div>
+                                    </th>
+                                    <th style="width: 20px;"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="teacher in accountMap.TEACHER.currList">
+                                    <td style="width: 25px; border:none;"></td>
+                                    <td style="width: 100px;">
+                                        <span class="id">{{teacher.number}}</span>
+                                    </td>
+                                    <td style="width: 110px;">
+                                        <span class="code">{{teacher.name }}</span>
+                                    </td>
+                                    <td style="width: 130px;">
+                                        <span class="code">{{teacher.role |role }}</span>
+                                    </td>
+                                    <td style="width: 110px;">
+
+                                        <span class="name">{{teacher.gender | genderFilter }}</span>
+                                    </td>
+                                    <td style="width: 250px;">
+                                        <button  class="btn cdi-btn-default" ng-click="deleteUser(teacher)">删除</button>
+
+                                        <button  class="btn cdi-btn-default" ng-click="form('TEACHER',teacher)">
+                                            <i class="icon-pencil"></i>
+                                            编辑
+                                        </button>
+
+                                        <button  class="btn cdi-btn-default" ng-click="resetPassword(teacher)">修改密码</button>
+
+                                    </td>
+                                    <td></td>
+                                    <td style="width: 20px; border:none;"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table class="table" ng-show="!accountMap.TEACHER.listShow">
+                            <thead>
+                                <tr>
+                                    <th style="width: 25px;"></th>
+                                    <th style="width: 100px;">用户ID</th>
+                                    <th style="width: 110px;">用户姓名</th>
+                                    <th style="width: 130px;">角色</th>
+                                    <th style="width: 110px;">性别</th>
+                                    <th style="width: 250px;">&nbsp;&nbsp;&nbsp;&nbsp;用户管理</th>
+                                    <th>
+                                        <div class="btn-group-head">
+                                            <button class="btn cdi-btn-default" ng-click="form('TEACHER')">添加教师</button>
+                                        </div>
+                                    </th>
+                                    <th style="width: 20px;"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="teacher in accountMap.TEACHER.searchList">
+                                    <td style="width: 25px; border:none;"></td>
+                                    <td style="width: 100px;">
+                                        <span class="id">{{teacher.number}}</span>
+                                    </td>
+                                    <td style="width: 110px;">
+                                        <span class="code">{{teacher.name }}</span>
+                                    </td>
+                                    <td style="width: 130px;">
+                                        <span class="code">{{teacher.role }}</span>
+                                    </td>
+                                    <td style="width: 110px;">
+
+                                        <span class="name">{{teacher.gender | genderFilter }}</span>
+                                    </td>
+                                    <td style="width: 250px;">
+                                        <button  class="btn cdi-btn-default" ng-click="deleteUser(teacher)">删除</button>
+
+                                        <button  class="btn cdi-btn-default" ng-click="form('TEACHER',teacher)">
+                                            <i class="icon-pencil"></i>
+                                            编辑
+                                        </button>
+
+                                        <button  class="btn cdi-btn-default" ng-click="resetPassword(teacher)">修改密码</button>
+
+                                    </td>
+                                    <td></td>
+                                    <td style="width: 20px; border:none;"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </tab>
+
+                <tab class="sub" ng-click="loadUser('STUDENT')">
+                    <tab-heading>
+                        <span class="name">学生</span>
+                    </tab-heading>
+
+                    <div class="tableContainer">
+                        <table class="table filterTable">
+                            <thead>
+                                <tr class="op-tr">
+                                    <th style="width: 15px;"></th>
+                                    <th style="width: 400px;">
+                                        <!--  <button class="btn cdi-btn-default">删除选中</button>
+                                    -->
+                                </th>
+                                <th style="width: 250px;">
+                                    <input type="text" class="form-control" placeholder="请输入学号或姓名" ng-model="accountMap.STUDENT.searchText"/>
+                                </th>
+                                <th>
+                                    <div class="btn-group-head">
+                                        <button class="btn cdi-btn-default" ng-click="search('STUDENT')" >搜索</button>
+                                    </div>
+                                </th>
+                                <th ng-show="!accountMap.STUDENT.listShow">
+                                    <div class="btn-group-head">
+                                        <button class="btn cdi-btn-default" ng-click="clearSearch('STUDENT')" >返回</button>
+                                    </div>
+                                </th>
+                                <th style="width: 10px;"></th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="cdi-pager">
+
+                    <pager total-items="accountMap.STUDENT.totalItemNum" ng-model="accountMap.STUDENT.currPage" ng-change="pageChanged('STUDENT')" next-text="下一页" previous-text="上一页" ></pager>
+
+                    <span class="pager-text">
+                        共 {{ accountMap.STUDENT.totalItemNum}} 个学生, &nbsp;当前第 {{ accountMap.STUDENT.currPage }} 页  共 {{ accountMap.STUDENT.totalPageNum}}  页
+                    </span>
+
+                </div>
+                <div class="tableContainer">
+
+                    <table class="table" ng-show="accountMap.STUDENT.listShow">
+                        <thead>
+                            <tr>
+                                <th style="width: 25px;"></th>
+                                <th style="width: 100px;">学号</th>
+                                <th style="width: 100px;">姓名</th>
+                                <th style="width: 106px;">年级</th>
+                                <th style="width: 106px;">专业</th>
+                                <th style="width: 150px;">邮箱</th>
+
+                                <th style="width: 330px;">
+                                    <div class="btn-group-head">
+                                        <button class="btn cdi-btn-default" ng-click="form('STUDENT')">添加学生</button>
+                                    </div>
+                                </th>
+                                <th style="width: 25px;"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="stu in accountMap.STUDENT.currList">
+                                <td style="width: 30px; border:none;"></td>
+                                <td style="width: 100px;">
+                                    <span class="id">{{stu.number}}</span>
+                                </td>
+                                <td style="width: 100px;">
+                                    <span class="code">{{stu.name }}</span>
+                                </td>
+                                <td style="width: 106px;">
+                                    <span class="date">{{stu.grade }}</span>
+                                </td>
+                                <td style="width: 106px;">
+                                    <span class="date">{{stu.major }}</span>
+                                </td>
+                                <td style="width: 150px;">
+                                    <span class="tel">{{stu.email}}</span>
+                                </td>
+                                <td style="width: 330px;">
+                                    <button  class="btn cdi-btn-default" ng-click="deleteUser(stu)">删除</button>
+                                    <button  class="btn cdi-btn-default" ng-click="form('STUDENT',stu)">
+                                        <i class="icon-pencil"></i>
+                                        编辑
+                                    </button>
+                                    <button  class="btn cdi-btn-default" ng-click="resetPassword(stu)">修改密码</button>
+
+                                </td>
+
+                                <td style="width: 20px; border:none;"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <table class="table" ng-show="!accountMap.STUDENT.listShow">
+                        <thead>
+                            <tr>
+                                <th style="width: 25px;"></th>
+                                <th style="width: 100px;">学号</th>
+                                <th style="width: 100px;">姓名</th>
+                                <th style="width: 106px;">年级</th>
+                                <th style="width: 106px;">专业</th>
+                                <th style="width: 150px;">邮箱</th>
+
+                                <th style="width: 330px;">
+                                    <div class="btn-group-head">
+                                        <button class="btn cdi-btn-default" ng-click="form('STUDENT')">添加学生</button>
+                                    </div>
+                                </th>
+                                <th style="width: 25px;"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="stu in accountMap.STUDENT.searchList">
+                                <td style="width: 30px; border:none;"></td>
+                                <td style="width: 100px;">
+                                    <span class="id">{{stu.number}}</span>
+                                </td>
+                                <td style="width: 100px;">
+                                    <span class="code">{{stu.name }}</span>
+                                </td>
+                                <td style="width: 106px;">
+                                    <span class="date">{{stu.grade }}</span>
+                                </td>
+                                <td style="width: 106px;">
+                                    <span class="date">{{stu.major }}</span>
+                                </td>
+                                <td style="width: 150px;">
+                                    <span class="tel">{{stu.email}}</span>
+                                </td>
+                                <td style="width: 330px;">
+                                    <button  class="btn cdi-btn-default" ng-click="deleteUser(stu)">删除</button>
+                                    <button  class="btn cdi-btn-default" ng-click="form('STUDENT',stu)">
+                                        <i class="icon-pencil"></i>
+                                        编辑
+                                    </button>
+                                    <button  class="btn cdi-btn-default" ng-click="resetPassword(stu)">修改密码</button>
+
+                                </td>
+
+                                <td style="width: 20px; border:none;"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </tab>
+
+        </tabset>
+    </div>
+</tab>
+<tab name="">
+    <tab-heading class="spaces" ui-sref="labmanage">
+        <span class="title">实验资源</span>
+        <span class="info">实验/实验室/课程</span>
+    </tab-heading>
+</tab>
+<tab name="">
+    <tab-heading class="spaces class" ui-sref="semestermanage">
+        <span class="title">学期班级</span>
+        <span class="info">学期设置和班级设置</span>
+    </tab-heading>
+</tab>
+<tab name="">
+    <tab-heading class="reservation" ui-sref="coursemanage">
+        <span class="title">实验日程计划</span>
+        <span class="info">实验计划和日程表</span>
+    </tab-heading>
+</tab>
+<tab>
+    <tab-heading class="cdiweb verify" ui-sref="applymanage">
+        <span class="title">预约审批</span>
+        <span class="info">实验预约审批</span>
+    </tab-heading>
+</tab>
+</tabset>
+</div>
+</div>
+
+<lab-footer></lab-footer>

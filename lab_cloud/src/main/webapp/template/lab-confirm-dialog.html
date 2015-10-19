@@ -1,0 +1,19 @@
+<div class="question" style="height:150px;background-color:#C8C8C8;">
+	<div class="content">
+		<div class="row">
+			<div class="cell" style="width:20%;height:100px;"></div>
+			<div class="cell text" style="width:60%;height:100px;">
+			
+				<p class="text-danger"><h4>{{data.text}}</h4></p>
+
+			</div>
+			<div class="cell" style="width:20%;height:100px;"></div>
+		</div>
+	</div>
+	<div class="btnGroup" style="padding-left:10%;padding-right:10%;">
+		<!-- <a href="javascript:void(0);" class="link left default" ng-click="cancel()">{{data.cancelBtnText}}</a>
+		<a href="javascript:void(0);" class="link right danger" ng-click="confirm()">{{data.confirmBtnText}}</a> -->
+		<button type="button" class="btn btn-danger left" ng-click="cancel()" style="margin-bottom:20px;">{{data.cancelBtnText}}</button>
+		<button type="button" class="btn right btn-danger" ng-click="confirm()">{{data.confirmBtnText}}</button>
+	</div>
+</div>

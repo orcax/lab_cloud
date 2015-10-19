@@ -1,0 +1,139 @@
+<lab-header></lab-header>
+<div class="container">
+	<div class="command-nav-container">
+		<tabset>
+			<tab name="">
+				<tab-heading class="users" ng-click="tabHref('/lab-user-manage')">
+					<span class="title">用户管理</span>
+					<span class="info">管理用户权限和资料</span>
+				</tab-heading>
+			</tab>
+			<tab name="" ng-click="tabHref('/lab-manage')">
+				<tab-heading class="spaces">
+					<span class="title">实验课程管理</span>
+					<span class="info">配置实验和课程关系</span>
+				</tab-heading>
+			</tab>
+
+			<tab name="" active="true">
+				<tab-heading class="reservation" >
+					<span class="title">实验课程排布</span>
+					<span class="info">配置课程相关实验排列</span>
+				</tab-heading>
+
+				<div class="command-content-container user" style="background-color: #f1f1f1;">
+					<tabset vertical="true" type="pills nav-calendar">
+						<tab class="sub" ng-repeat="lab in currentLabList" active="lab.active" ng-click="changeLab(lab)">
+							<tab-heading>
+								<span class="name">{{lab.labName}}</span>
+							</tab-heading>
+							<div class="tableTitle calendarTitle">
+								<span>
+									<!-- <select>
+									<option value="1" selected>选择日期</option>
+								</select>
+								-->
+							</span>
+							<span style="float:right">
+								<button class="btn cdi-btn-default" ng-click="lastWeek()">上一周</button>
+								第
+								<select ng-model="weekConfig.selected" ng-options="m.week for m in weeks" ng-change="changeWeek()"></select>
+								周
+								<button class="btn cdi-btn-default" ng-click="nextWeek()">下一周</button>
+							</span>
+						</div>
+						<div class="tableContainer calendarContainer" ng-if="lab.active==true">
+							<table class="table">
+								<thead>
+									<tr>
+										<th style="width: 25px;"></th>
+										<th style="width: 40px;"></th>
+										<th ng-repeat="day in currentWeekList" style="text-align: center; width: 100px;">
+											{{day.date.getMonth() + 1}}月{{day.date.getDate()}}日 {{day.date.getDay()|weekDayFilter}}
+										</th>
+										<th style="width: 20px;"></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="slots in slotList">
+										<td style="width: 5px; border:none;"></td>
+										<td style="width: 40px;border-bottom:1px solid #cecece;">
+											<span class="name">{{slots.slot}}</span>
+										</td>
+										<td ng-repeat="entity in slots.list" style="width: 100px;height:140px;border:1px solid #cecece;" 
+                class="{{entity.status | calendarTdClass}}" >
+											<div ng-if="(entity.status)=='OPEN'">
+												<button class="btn btn-link" ng-click="order(entity)">点击预定</button>
+												<br>
+												<button class="btn btn-link" ng-click="openStReservation(entity)">开启学生预定</button>
+												<br>	
+												<button class="btn btn-link" ng-click="openCloseReservation(entity,0)">关闭预定</button>
+											</div>
+											<div ng-if="(entity.status)=='APPROVED' &&  (entity.type) == 'CLASS'">
+												<button class="btn btn-link" ng-click="order_details(entity.reservation,entity.experiment)" disabled="" >已成功预约</button>
+												<br>
+												<div class="order-details">
+													<span>
+														{{entity.reservation.clazz.course.courseName}}
+													</span>
+													<br>
+													<span>{{entity.reservation.clazz.classNumber}}</span>
+													<br>
+													<span>
+														{{entity.reservation.reserver.name}}
+													</span>
+													<br>
+													<span>{{entity.experiment.experimentName}}</span>
+												</div>
+											</div>
+											<div ng-if="(entity.status)=='APPROVED' &&  (entity.type) == 'STUDENT'">
+												<button class="btn btn-link" ng-click="viewStudentList(entity)" >已开放学生预约</button>
+												<br>
+												<div class="order-details">
+													<span class="">点击查看详情</span>
+													<br>
+													<br>
+													<span>{{entity.experiment.experimentName}}</span>
+												</div>
+											</div>
+											<div ng-if="(entity.status)=='PENDING'">
+												<button class="btn btn-link" ng-click="loadVerifyConsole(entity.reservation)">已提交预约</button>
+												<br>
+												<div class="order-details">
+													<span>
+														{{entity.reservation.clazz.course.courseName}}
+													</span>
+													<br>
+													<span>{{entity.reservation.clazz.classNumber}}</span>
+													<br>
+													<span>
+														{{entity.reservation.reserver.name}}
+													</span>
+													<br>
+													<span>{{entity.experiment.experimentName}}</span>
+												</div>
+											</div>
+											<div ng-if="(entity.status)=='CLOSED'">
+												<button class="btn btn-link" ng-click="openCloseReservation(entity,1)">点击开启</button>
+												<div class="order-details">
+													<span>该实验室处于关闭状态</span>
+												</div>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							</div>
+						</tab>
+					</tabset>
+				</div>
+			</tab>
+			<tab>
+				<tab-heading class="cdiweb" ng-click="tabHref('/lab-apply-manage')">
+					<span class="title">申请审核</span>
+					<span class="info">审核实验室预定申请</span>
+				</tab-heading>
+			</tab>
+		</tabset>
+	</div>
+</div>

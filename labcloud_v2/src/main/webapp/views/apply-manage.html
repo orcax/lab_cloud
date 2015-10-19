@@ -1,0 +1,150 @@
+<lab-header></lab-header>
+<div class="container">
+  <div class="command-nav-container">
+    <tabset>
+      <tab name="">
+        <tab-heading class="users" ui-sref="usermanage">
+          <span class="title">用户账户</span>
+          <span class="info">管理用户权限和资料</span>
+        </tab-heading>
+      </tab>
+      <tab name="">
+        <tab-heading class="spaces" ui-sref="labmanage">
+          <span class="title">实验资源</span>
+          <span class="info">实验/实验室/课程</span>
+        </tab-heading>
+
+      </tab>
+      <tab name="" ui-sref="semestermanage">
+        <tab-heading class="spaces class">
+          <span class="title">学期班级</span>
+          <span class="info">学期设置和班级开设</span>
+        </tab-heading>
+      </tab>
+      <tab name="">
+        <tab-heading class="reservation" ui-sref="coursemanage">
+          <span class="title">实验日程计划</span>
+          <span class="info">实验计划日程表</span>
+        </tab-heading>
+      </tab>
+
+      <tab active="true">
+        <tab-heading class="cdiweb verify">
+          <span class="title">
+            预约审批
+            <label class="label label-success pull-right" style="margin-top:5px;">{{unVerifyCount}}</label>
+          </span>
+          <span class="info">实验预约审批</span>
+        </tab-heading>
+        <div class="command-content-container user" style="background-color: #f1f1f1;">
+          <tabset vertical="true" type="pills nav-calendar">
+
+            <tab class="sub">
+              <tab-heading>
+                <span class="name row">
+                  班级预约审核
+                  <label class="label label-success pull-right" style="margin-top:5px;">{{unVerifyCount}}</label>
+                </span>
+
+              </tab-heading>
+              <!-- <div class="tableTitle ">该分类共 {{map.totalItemNum}} 个审核项目</div>
+            -->
+            <div class="tableContainer" style="width:900px;">
+              <table class="table filterTable">
+                <thead>
+                  <tr class="op-tr">
+                    <th style="width: 15px;"></th>
+                    <th style="width: 400px;">
+                      <span  style="color:#fff;">预约状态:</span>
+                      &nbsp;&nbsp;
+                      <select ng-options="e.value for e in filters track by e.status" ng-model="map.status" ng-change="changeScope()"></select>
+                    </th>
+                    <th style="width: 250px;">
+                      <!-- <input type="text" class="form-control" placeholder="请输入预约号"/>
+                      -->
+                    </th>
+                    <th>
+                      <div class="btn-group-head">
+                        <!-- <button class="btn cdi-btn-default" >预约号</button>
+                      -->
+                    </div>
+                  </th>
+                  <th style="width: 10px;"></th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+          <div class="cdi-pager" style="width:900px;">
+
+            <pager total-items="map.totalItemNum" ng-model="map.currentPage" ng-change="pageChanged()" next-text="下一页" previous-text="上一页" ></pager>
+
+            <span class="pager-text" style="padding-left:30px;">
+              共 {{ map.totalItemNum}} 个记录, &nbsp;当前第 {{ map.currentPage }} 页  共 {{ map.totalPageNum}}  页
+            </span>
+
+          </div>
+          <div class="tableContainer" style="width:900px;">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th style="width: 25px;"></th>
+                  <th style="width: 90px;">预约号</th>
+                  <th style="width: 90px;">日期</th>
+                  <th style="width: 80px;">实验时段</th>
+
+                  <th style="width: 100px;">班级编号</th>
+                  <th style="width: 80px;">任课教师</th>
+                  <th style="width: 80px;">实验室</th>
+                  <th style="width: 100px;">实验任务</th>
+                  <th style="width: 170px;"></th>
+                  <th style="width: 20px;"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="entity in map.reservations">
+                  <td style="width: 25px; border:none;"></td>
+                  <td style="width: 70px;">
+                    <span class="code">{{entity.id | reservationNumber }}</span>
+                  </td>
+                  <td style="width: 70px;">
+                    <span class="code">{{entity.applyDate }}</span>
+                  </td>
+                  <td style="width: 100px;">
+                    <span class="name">{{entity.slot.title }}</span>
+                  </td>
+
+                  <td style="width: 100px;">
+                    <span class="name">{{entity.clazz.number}}</span>
+                  </td>
+                  <td style="width: 100px;">
+                    <span class="name">{{entity.clazz.teacher.name}}</span>
+                  </td>
+                  <td style="width: 100px;">
+                    <span class="name">{{entity.lab.name}}</span>
+                  </td>
+                  <td style="width: 115px;">
+                    <span class="name">{{entity.experiment.name}}</span>
+                  </td>
+                  <td >
+                    <div class="optionContainer" style="padding: 0;">
+                      <button class="btn btn cdi-btn-default" ng-click="form(entity)" ng-if="entity.status == 'APPROVED'">详细信息</button>
+                      <button class="btn btn cdi-btn-default" ng-click="verifyApp(entity)" ng-if="entity.status == 'PENDING'">审核</button>
+                      <div style="width: 13px;height: 25px;float: right;"></div>
+                      <button class="btn cdi-btn-grey btn-danger" ng-click="rejectApp(entity)" ng-if="entity.status == 'PENDING'">拒绝</button>
+                    </div>
+                  </td>
+                  <td style="width: 20px; border:none;"></td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </tab>
+
+      </tabset>
+    </div>
+  </tab>
+</tabset>
+</div>
+</div>
+<lab-footer></lab-footer>

@@ -1,0 +1,181 @@
+    <div type="user-info-dialog" style="width=700px;padding-bottom:30px;">
+        <div class="btnGroup">
+            <button class="btn cdi-btn-blue right btn-save" ng-click="save()">确定</button>
+            <div class="title">实验记录</div>
+        </div>
+        <div class="content">
+            <h2  style="text-align:center;">{{data.experimentName}}</h2>
+
+            <div style="text-align:center;">
+                <h5>{{data.semesterName}}</h5>
+                <h5>课程: {{data.courseName}}</h5>
+                <h5>学号: {{data.studentNumber}}</h5>
+                <h5>姓名: {{data.studentName}}</h5>
+            </div>
+
+            <h4>实验数据</h4>
+
+            <table class="table table-bordered scroll-table"  style="height:140px; border-bottom: 0px; border-left: 0px;">
+                <thead>
+                    <tr>
+                        <th style="width: 100px;">实验日期</th>
+                        <th style="width: 100px;">实验名称</th>
+                        <th style="width: 142px;">实验文件</th>
+                        <th style="width: 110px;">操作</th>
+                    </tr>
+                </thead>
+                <tbody style="height:100px;">
+                    <tr ng-repeat="dt in data.expDataList">
+
+                        <td style="width: 100px;">
+                            <span class="id">{{dt.create_time | date:'yyyy-MM-dd'}}</span>
+                        </td>
+                        <td style="width: 100px;">
+                            <span class="code">{{data.experimentName}}</span>
+                        </td>
+
+                        <td style="width: 142px;">
+                            <span class="id">{{dt.path | filePathFilter}}</span>
+                        </td>
+                        <td style="width: 110px;">
+                            <span class="id">
+                                <a href="{{dt.path}}" target="_blank">下载</a>
+                            </span>
+                        </td>
+
+                    </tr>
+
+                </tbody>
+            </table>
+
+            <h4>实验文档</h4>
+
+            <table class="table table-bordered scroll-table"  style="height:140px; border-bottom: 0px; border-left: 0px;" >
+                <thead>
+                    <tr>
+                        <th style="width: 100px;">实验日期</th>
+                        <th style="width: 100px;">实验名称</th>
+                        <th style="width: 142px;">文件名</th>
+                        <th style="width: 110px;">操作</th>
+                    </tr>
+                </thead>
+                <tbody  style="height:100px;">
+                    <tr ng-repeat="report in data.reports">
+
+                        <td style="width: 100px;">
+                            <span class="id">{{report.create_time | date:'yyyy-MM-dd'}}</span>
+                        </td>
+                        <td style="width: 100px;">
+                            <span class="code">{{data.experimentName}}</span>
+                        </td>
+
+                        <td style="width: 142px;">
+                            <span class="id">{{report.filename}}</span>
+                        </td>
+                        <td style="width: 110px;">
+                            <span class="id">
+                                <button class="btn cdi-btn-default cdi-btn-dark-blue" ng-click="download(report.filename)">下载</button>
+                            </span>
+                        </td>
+
+                    </tr>
+
+                    <tr ng-repeat="report in data.xlss">
+
+                        <td style="width: 100px;">
+                            <span class="id">{{report.create_time | date:'yyyy-MM-dd'}}</span>
+                        </td>
+                        <td style="width: 100px;">
+                            <span class="code">{{data.experimentName}}</span>
+                        </td>
+
+                        <td style="width: 142px;">
+                            <span class="id">{{report.filename}}</span>
+                        </td>
+                        <td style="width: 110px;">
+                            <span class="id">
+                                <button class="btn cdi-btn-default cdi-btn-dark-blue" ng-click="download2(report)">下载</button>
+                            </span>
+                        </td>
+
+                    </tr>
+
+                </tbody>
+            </table>
+
+            <h4>实验报告</h4>
+
+            <table class="table table-bordered scroll-table"  style="height:140px; border-bottom: 0px; border-left: 0px;" >
+                <thead>
+                    <tr>
+                        <th style="width: 100px;">实验日期</th>
+                        <th style="width: 100px;">实验名称</th>
+                        <th style="width: 142px;">文件名</th>
+                        <th style="width: 110px;">操作</th>
+                    </tr>
+                </thead>
+                <tbody  style="height:100px;">
+                    <tr ng-repeat="homework in data.homeworks">
+
+                        <td style="width: 100px;">
+                            <span class="id">{{homework.create_time | date:'yyyy-MM-dd'}}</span>
+                        </td>
+                        <td style="width: 100px;">
+                            <span class="code">{{data.experimentName}}</span>
+                        </td>
+
+                        <td style="width: 142px;">
+                            <span class="id">{{homework.path | filePathFilter}}</span>
+                        </td>
+                        <td style="width: 110px;">
+                            <span class="id">
+                                <a href="{{homework.path}}" target="_blank">下载</a>
+                            </span>
+                        </td>
+
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+        <div>
+            <div class="content user-info" style="margin-top:10px;">
+
+                <div class="row">
+                    <div class="cell title" style="width: 37%;height: 50px;">实验分数</div>
+                    <div class="cell" style="width: 63%;height: 50px;">
+                        <input type="text" class="right form-control"  ng-model="data.experimentRecord" readonly/>    
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="cell title" style="width: 37%;height: 50px;">实验评语</div>
+                    <div class="cell" style="width: 63%;height: 50px;">
+                        <textarea ng-model="data.experimentComment" class="right form-control" readonly></textarea>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="slider2" style="margin-top: 16px;"></div>
+
+            <div class="content">
+                <div class="row">
+                    <div class="cell title" style="width: 37%;height: 50px;"></div>
+                    <div class="cell" style="width: 63%;height: 50px;">
+                        <span class="red">{{message}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <h4>实验图片</h4>
+            <ul class="exp-image-ul">
+                <li class="exp-image-li" ng-repeat="photo in data.photos">
+                    <img class="exp-image" src="{{photo.path}}" alt=""/>    
+                </li>
+
+            </ul>
+        </div>
+    </div>

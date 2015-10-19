@@ -1,0 +1,58 @@
+<div type="user-info-dialog">
+    <div class="btnGroup">
+        <button class="btn cdi-btn-default left" ng-click="cancel()">取消</button>
+        <button class="btn cdi-btn-blue right btn-save" ng-click="save()">确认添加</button>
+        <div class="title">添加实验</div>
+    </div>
+    <div >
+        <div class="content user-info" style="margin-top:10px;">
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;">实验编号</div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <input type="text" name="name" ng-model="data.experimentNumber" class="right form-control"/>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;">实验名称</div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <input type="text" ng-model="data.experimentName" class="right form-control"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;">实验最少人数</div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <input type="number" ng-model="data.minimumStudent" class="right form-control"/>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;">实验最大人数</div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <input type="number" ng-model="data.maximumStudent" class="right form-control"/>
+                </div>
+            </div>
+
+            <!-- <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;">描述</div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <textarea ng-model="data.desc" class="right form-control">
+                    </textarea> 
+                </div>
+            </div> -->
+            
+        </div>
+        
+
+        <div class="slider2" style="margin-top: 16px;"></div>
+        
+        <div class="content">
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;"></div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <span class="red">{{message}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

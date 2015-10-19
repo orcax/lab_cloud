@@ -1,0 +1,82 @@
+<div class="portal-page-wrapper">
+	<div class="portal-page-content">
+
+		<div ng-if="userType == 'STUDENT'">
+			<div class="portal-page-title">开放预约的实验</div>
+			<div class="portal-page-sub-title" style="margin-bottom: 30px;">共3个</div>
+
+			<div class="portal-reservation-item" ng-repeat="res in resList">
+				<div class="reservation-name">{{res.name}}</div>
+				<div class="reservation-item" ng-repeat="item in res.items">
+					<div>
+						<span class="reservation-date">{{item.date | date : 'yyyy-MM-dd'}}</span>
+						<span class="reservation-week">(本周二)</span>
+						<span class="reservation-class-time">{{item.classTime}}</span>
+					</div>
+					<div>
+						<span class="reservation-place">{{item.place}}</span>
+					</div>
+					<span class="reservation-status" ng-if="!item.status">已被预约</span>
+					<a href="javascript:;" ng-if="item.status" class="portal-button portal-button-default reservation-button">我要预约</a>
+				</div>
+			</div>
+		</div>
+
+		<div ng-if="userType == 'TEACHER'">
+			<div class="portal-page-title">我要预约</div>
+			<div class="portal-page-sub-title" style="margin-bottom: 30px;">当前学期：2014~2015第二学期</div>
+
+			<table class="portal-reservation-table" style="margin-top: 25px;">
+				<tbody>
+					<tr>
+						<td class="reservation-label">预约日期</td>
+						<td>
+							<input type="text" class="form-control reservation-input" portal-datepicker date="reservation.date">
+						</td>
+					</tr>
+					<tr>
+						<td class="reservation-label">时间</td>
+						<td>
+							<input type="text" class="form-control reservation-input" portal-timepicker time="reservation.time">
+						</td>
+					</tr>
+					<tr>
+						<td class="reservation-label">实验</td>
+						<td>
+							<select class="form-control reservation-select">
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td class="reservation-label">班级</td>
+						<td>
+							<select class="form-control reservation-select">
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td class="reservation-label">预约人数</td>
+						<td style="padding-top: 10px;">
+							<input type="text" class="form-control reservation-input people-num">&nbsp;&nbsp;人
+							<div class="reservation-tip">大于零的整数</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="reservation-label">备注</td>
+						<td style="padding-top: 10px;">
+							<textarea class="form-control reservation-area" rows="5"></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td style="padding-top: 50px;">
+							<a href="javascript:;" class="portal-button portal-button-primary" style="margin-right: 20px;">提交</a>
+							<a href="javascript:;" class="portal-button portal-button-cancel">取消</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+	</div>
+</div>

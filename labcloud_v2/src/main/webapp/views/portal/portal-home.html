@@ -1,0 +1,108 @@
+<div class="portal-page-wrapper">
+	<div class="portal-page-content">
+		<div ng-if="userType == 'STUDENT'">
+			<div class="portal-page-title">我的实验</div>
+
+			<tabset class="portal-page-tabs home" style="margin-top: 25px;">
+		    <tab>
+		    	<tab-heading>我预约的实验&nbsp;&nbsp;<span>3</span></tab-heading>
+		    	<div class="portal-exp-item" ng-repeat="exp in expList" ng-click="onClickExp($index)">
+		    		<div class="exp-title">{{exp.title}}</div>
+		    		<div>
+		    			<span class="exp-date">{{exp.date | date : 'yyyy-MM-dd'}}</span>
+		    			<span class="exp-week">(本周二)</span>
+		    			<span class="exp-class-time">{{exp.classTime}}</span>
+		    			<span>&nbsp;&bull;&nbsp;</span>
+		    			<span class="exp-place">{{exp.place}}</span>
+		    		</div>
+		    		<div>
+		    			<span class="exp-class-number">{{exp.classNumber}}</span>
+		    			<span>-</span>
+		    			<span class="exp-teacher">{{exp.teacher}}</span>
+		    		</div>
+		    		<div class="exp-link"><a href="javascript:;">查看虚拟实验</a></div>
+		    	</div>
+		    </tab>
+
+		    <tab>
+		    	<tab-heading>教师实验&nbsp;&nbsp;<span>2</span></tab-heading>
+		    	<div class="portal-exp-item" ng-repeat="exp in expList">
+		    		<div class="exp-title">{{exp.title}}</div>
+		    		<div>
+		    			<span class="exp-date">{{exp.date | date : 'yyyy-MM-dd'}}</span>
+		    			<span class="exp-week">(本周二)</span>
+		    			<span class="exp-class-time">{{exp.classTime}}</span>
+		    			<span>&nbsp;&bull;&nbsp;</span>
+		    			<span class="exp-place">{{exp.place}}</span>
+		    		</div>
+		    		<div>
+		    			<span class="exp-class-number">{{exp.classNumber}}</span>
+		    			<span>-</span>
+		    			<span class="exp-teacher">{{exp.teacher}}</span>
+		    		</div>
+		    		<div class="exp-link"><a href="javascript:;">查看虚拟实验</a></div>
+		    	</div>
+		    </tab>
+		  </tabset>
+
+		  <div class="portal-page-buttons">
+		  	<a href="javascript:;" class="portal-button portal-button-default" ng-click="onClickView($event);">查看更多实验</a>
+		  </div>
+	  </div>
+
+	  <div ng-if="userType == 'TEACHER'">
+	  	<div class="portal-page-title">我的预约</div>
+
+	  	<div class="portal-page-options home teacher">
+	  		<div class="select-container">
+		  		<select class="form-control" ng-model="sortType" ng-options="sortTypeItem.name for sortTypeItem in sortTypeList track by sortTypeItem.value">
+					</select>
+				</div>
+
+				<div class="checkbox-container">
+					<div class="checkbox">
+				    <label>
+				      <input type="checkbox"> 隐藏已过期的预约
+				    </label>
+				  </div>
+				</div>
+				
+				<div class="clearfix"></div>
+	  	</div>
+
+	  	<tabset class="portal-page-tabs home" style="margin-top: 25px;">
+		    <tab>
+		    	<tab-heading>预约成功&nbsp;&nbsp;<span>3</span></tab-heading>
+		    	<div class="portal-exp-item" ng-repeat="exp in expList" ng-click="onClickExp($index)">
+		    		<div class="exp-title">{{exp.title}}</div>
+		    		<div>
+		    			<span class="exp-date">{{exp.date | date : 'yyyy-MM-dd'}}</span>
+		    			<span class="exp-week">(本周二)</span>
+		    			<span class="exp-class-time">{{exp.classTime}}</span>
+		    			<span>&nbsp;&bull;&nbsp;</span>
+		    			<span class="exp-place">{{exp.place}}</span>
+		    		</div>
+		    		<div>
+		    			<span class="exp-class-number">{{exp.classNumber}}</span>
+		    			<span>-</span>
+		    			<span class="exp-teacher">{{exp.teacher}}</span>
+		    		</div>
+		    		<div class="exp-link cancel"><a href="javascript:;" ng-click="onClickCancel($event);">取消预约</a></div>
+		    	</div>
+		    </tab>
+
+		    <tab>
+		    	<tab-heading>待审核&nbsp;&nbsp;<span>2</span></tab-heading>
+		    </tab>
+
+		    <tab>
+		    	<tab-heading>预约失效&nbsp;&nbsp;<span>2</span></tab-heading>
+		    </tab>
+		  </tabset>
+
+		  <div class="portal-page-buttons">
+		  	<a href="javascript:;" class="portal-button portal-button-default">查看更多实验</a>
+		  </div>
+	  </div>
+	</div>
+</div>

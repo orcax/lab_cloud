@@ -1,0 +1,76 @@
+<div type="user-info-dialog">
+    <div class="btnGroup">
+        <button class="btn cdi-btn-default left" ng-click="cancel()">取消</button>
+        <div class="title">实验配置</div>
+    </div>
+    <div >
+        <div class="content user-info" style="margin-top:10px;">
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;">实验室编号</div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <input disabled="disabled" type="text" name="name" ng-model="data.labNumber" class="right form-control"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;">实验室名称</div>
+                <div class="cell" style="width: 63%;height: 50px;">
+                    <input disabled="disabled" type="text" ng-model="data.labName" class="right form-control"/>
+                </div>
+            </div>
+            
+            
+        </div>
+        <div class="slider2" style="margin-top: 16px;"></div>
+        
+        <div class="content">
+            <div class="row">
+                <div class="cell title" style="width: 37%;height: 50px;"></div>
+                <div class="tableContainer ng-scope">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th style="width: 25px;"></th>
+                                <th style="width: 142px;">实验编号
+                                </th>
+                                <th style="width: 142px;">实验名称
+                                </th>
+                                <th>
+                                    <div class="btn-group-head">
+                                        <div style="width: 5px;height: 25px;float: right;"></div>
+                                        <!-- <button class="btn cdi-btn-default">查找</button> -->
+                                    </div>
+                                </th>
+                                <th style="width: 20px;"></th>
+                            </tr>
+                        </thead>
+                            <tr ng-repeat="exp in data.experiments">
+                                <td style="width: 25px; border:none;"></td>
+                                <td style="width: 70px;">
+                                    <span class="id">{{exp.experimentNumber}}</span>
+                                </td>
+                                <td style="width: 142px;">
+                                    <span class="code">{{exp.experimentName}}</span>
+                                </td>
+                                <td>
+                                    <div class="optionContainer" style="padding: 0;">
+                                        <button class="btn cdi-btn-grey btn-danger" ng-click="removeExperimentOfLab(data, exp)">移除</button>
+                                    </div>
+                                </td>
+                                <td style="width: 20px; border:none;"></td>
+                            </tr>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="btn-group-head">
+                    <button class="btn cdi-btn-default" ng-click="addExperimentForLab(data)">添加实验</button>
+                    <div style="width: 5px;height: 25px;float: right;"></div>
+                    <select id="lab-experiments-select" style="float:right;">
+                        <option expid="{{instance.id}}" expno="{{instance.experimentNumber}}" expna="{{instance.experimentName}}" ng-repeat="instance in currentExperimentList">实验{{instance.experimentNumber}}: {{instance.experimentName}}</option>
+                    </select>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+</div>

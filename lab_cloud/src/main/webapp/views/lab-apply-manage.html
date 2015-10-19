@@ -1,0 +1,126 @@
+<lab-header></lab-header>
+<div class="container">
+	<div class="command-nav-container">
+		<tabset>
+			<tab name="">
+				<tab-heading class="users" ng-click="tabHref('/lab-user-manage')">
+					<span class="title">用户管理</span>
+					<span class="info">管理用户权限和资料</span>
+				</tab-heading>
+			</tab>
+			<tab name="" ng-click="tabHref('/lab-manage')">
+				<tab-heading class="spaces">
+					<span class="title">实验课程管理</span>
+					<span class="info">配置实验和课程关系</span>
+				</tab-heading>
+			</tab>
+
+			<tab name="">
+				<tab-heading class="reservation" ng-click="tabHref('/lab-course-arrangement')">
+					<span class="title">实验课程排布</span>
+					<span class="info">配置课程相关实验排列</span>
+				</tab-heading>
+			</tab>
+
+			<tab  active="true">
+				<tab-heading class="cdiweb">
+					<span class="title">申请审核</span>
+					<span class="info">审核实验室预定申请</span>
+				</tab-heading>
+				<div class="command-content-container user" style="background-color: #f1f1f1;">
+					<tabset vertical="true" type="pills">
+
+						<tab class="sub">
+							<tab-heading>
+								<span class="name">班级预约</span>
+							</tab-heading>
+							<div class="tableTitle">该分类共 {{totalCount}} 个审核项目</div>
+							<div class="tableTitle row" style="padding-top:5px;font-size: 14px;">
+								<div class="col-md-6" style="padding-left:0px;">
+									<input type="checkbox" ng-model="isAll.curr" ng-change="changeScope()"> 包含已审核记录</input>
+							</div>
+							<div>
+								<span>起始:</span>
+								<input type="date" ng-model="filterDate.startDate" datepicker-popup="{{format}}" class="lb_datepicker" is-open="opened"  datepicker-options="dateOptions" ng-required="true"
+								style="height:24px;"/>
+								<span>结束:</span>
+								<input type="date" ng-model="filterDate.endDate" datepicker-popup="{{format}}" class="lb_datepicker" is-open="opened"  datepicker-options="dateOptions" ng-required="true" style="height:24px;"/>
+							</div>
+						</div>
+						
+
+						<div class="tableContainer">
+							<table class="table">
+								<thead>
+									<tr>
+										<th style="width: 25px;"></th>
+										<th style="width: 106px;">日期</td>
+										<th style="width: 142px;">实验时段</td>
+										<th style="width: 106px;">课程</td>
+										<th style="width: 106px;">班级</td>
+										<th style="width: 106px;">任课教师</td>
+										<th style="width: 106px;">实验室</td>
+										<th style="width: 106px;">实验任务</td>
+										<!-- <th>
+										<div class="btn-group-head">
+											<button class="btn cdi-btn-default">查找</button>
+										</div>
+									</th>
+									-->
+									<th style="width: 20px;"></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="entity in reservationList">
+									<td style="width: 25px; border:none;"></td>
+									<td style="width: 70px;">
+										<span class="date">{{entity.date | date:'yyyy-MM-dd'}}</span>
+									</td>
+									<td style="width: 133px;">
+										<span class="name">{{entity.slot | labSlotFilter}}</span>
+									</td>
+									<td style="width: 115px;">
+										<span class="name">{{entity.course}}</span>
+									</td>
+									<td style="width: 115px;">
+										
+									<span class="name">{{entity.class}}</span>
+								</td>
+								<td style="width: 115px;">
+									<span class="name">{{entity.teacher}}</span>
+								</td>
+								<td style="width: 115px;">
+									<span class="name">{{entity.labName}}</span>
+								</td>
+								<td style="width: 115px;">
+
+									<span class="name">{{entity.experimentName}}</span>
+								</td>
+								<td style="width: 80px;">
+									<div class="optionContainer" style="padding: 0;">
+										<button class="btn btn cdi-btn-default" ng-click="loadDetails(entity)" ng-if="entity.status == 'PENDING'">审核</button>
+										<button class="btn btn cdi-btn-default" ng-if="entity.status == 'APPROVED'" readonly="">已同意</button>
+										<button class="btn btn cdi-btn-default" ng-if="entity.status == 'REJECTED'" readonly="">已拒绝</button>
+									</div>
+								</td>
+								<td style="width: 20px; border:none;"></td>
+							</tr>
+
+						</tbody>
+					</table>
+				</div>
+				<div class="paginationContainer">
+					<pagination direction-links="false" total-items="totalCount" ng-model="currentPage.currentPage" ng-change="pageChanged()" items-per-page="8"></pagination>
+				</div>
+
+				<div class="pagerContainer2">
+					<pager total-items="totalCount" ng-model="currentPage.currentPage" items-per-page="8" ng-change="pageChanged()" previous-text="<" next-text=">"></pager>
+				</div>
+			</tab>
+
+		</tabset>
+	</div>
+</tab>
+</tabset>
+</div>
+</div>
